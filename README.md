@@ -1,4 +1,4 @@
-# Muvigram-ios
+# Muvigram
 <p align="center">
   <img src="https://github.com/Muvigram/Muvigram-ios/blob/master/Asset/muvigram_readme.jpg" width="100%">
 </p>
