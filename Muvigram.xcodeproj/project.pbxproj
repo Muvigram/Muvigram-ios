@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */; };
+		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
+		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
+		2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */; };
+		2B6919621DEE98A7005EE1D7 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */; };
+		2B6919641DEE98C2005EE1D7 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6919631DEE98C2005EE1D7 /* MusicViewController.swift */; };
+		2B6919661DEE9CE5005EE1D7 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6919651DEE9CE5005EE1D7 /* PreviewView.swift */; };
+		2B84A7991DEE6D8A001E0E14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84A7981DEE6D8A001E0E14 /* AppDelegate.swift */; };
+		2B84A7A21DEE6D8A001E0E14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B84A7A01DEE6D8A001E0E14 /* Main.storyboard */; };
+		2B84A7A71DEE6D8A001E0E14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B84A7A51DEE6D8A001E0E14 /* LaunchScreen.storyboard */; };
+		2B84A7B51DEE700A001E0E14 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84A7B41DEE700A001E0E14 /* MainPageViewController.swift */; };
+		2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9B6AC01E0277DF0020C06D /* Assets.xcassets */; };
+		2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */; };
+		2B9D1D471E07608400270A11 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9D1D461E07608400270A11 /* ShareViewController.swift */; };
+		2BA15A7C1E0D190E009C7994 /* MvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA15A7B1E0D190E009C7994 /* MvpView.swift */; };
+		2BA15A801E0D1B9F009C7994 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA15A7F1E0D1B9F009C7994 /* BasePresenter.swift */; };
+		2BAD08221E109790004F94BE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08211E109790004F94BE /* DataManager.swift */; };
+		2BAD08251E10980E004F94BE /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08241E10980E004F94BE /* MusicService.swift */; };
+		2BAD08271E10998E004F94BE /* MusicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08261E10998E004F94BE /* MusicPresenter.swift */; };
+		2BAD08291E1099D4004F94BE /* MusicMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08281E1099D4004F94BE /* MusicMvpView.swift */; };
+		2BAD08351E10D61C004F94BE /* CameraPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08341E10D61C004F94BE /* CameraPresenter.swift */; };
+		2BAD08371E10D66A004F94BE /* CameraMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08361E10D66A004F94BE /* CameraMvpView.swift */; };
+		2BAD08391E10ED90004F94BE /* CameraPresenterWithStackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08381E10ED90004F94BE /* CameraPresenterWithStackbar.swift */; };
+		2BAD083B1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */; };
+		2BE87BBC1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */; };
+		2BE87BBE1E1A09D00006F962 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBD1E1A09D00006F962 /* VideoService.swift */; };
+		C5C4C415CCAC91F11FF3CCF5 /* Pods_Muvigram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		186FD50051A8B5BCE5B10245 /* Pods-Muvigram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muvigram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram.debug.xcconfig"; sourceTree = "<group>"; };
+		2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumButton.swift; sourceTree = "<group>"; };
+		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
+		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
+		2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		2B6919631DEE98C2005EE1D7 /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		2B6919651DEE9CE5005EE1D7 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		2B84A7951DEE6D8A001E0E14 /* Muvigram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muvigram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B84A7981DEE6D8A001E0E14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2B84A7A11DEE6D8A001E0E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2B84A7A61DEE6D8A001E0E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2B84A7A81DEE6D8A001E0E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B84A7B41DEE700A001E0E14 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		2B9B6AC01E0277DF0020C06D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Silence_15_sec.mp3; sourceTree = "<group>"; };
+		2B9D1D461E07608400270A11 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		2BA15A7B1E0D190E009C7994 /* MvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MvpView.swift; sourceTree = "<group>"; };
+		2BA15A7F1E0D1B9F009C7994 /* BasePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
+		2BAD08211E109790004F94BE /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		2BAD08241E10980E004F94BE /* MusicService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
+		2BAD08261E10998E004F94BE /* MusicPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPresenter.swift; sourceTree = "<group>"; };
+		2BAD08281E1099D4004F94BE /* MusicMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicMvpView.swift; sourceTree = "<group>"; };
+		2BAD08341E10D61C004F94BE /* CameraPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenter.swift; sourceTree = "<group>"; };
+		2BAD08361E10D66A004F94BE /* CameraMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMvpView.swift; sourceTree = "<group>"; };
+		2BAD08381E10ED90004F94BE /* CameraPresenterWithStackbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithStackbar.swift; sourceTree = "<group>"; };
+		2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithMusicPlay.swift; sourceTree = "<group>"; };
+		2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithVideoThumbnail.swift; sourceTree = "<group>"; };
+		2BE87BBD1E1A09D00006F962 /* VideoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muvigram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E532916B3091F97B301407B /* Pods-Muvigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muvigram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2B84A7921DEE6D8A001E0E14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5C4C415CCAC91F11FF3CCF5 /* Pods_Muvigram.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B61ADCC1E124BCA00AB09D8 /* Lanch */ = {
+			isa = PBXGroup;
+			children = (
+				2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */,
+			);
+			name = Lanch;
+			sourceTree = "<group>";
+		};
+		2B69195B1DEE9708005EE1D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2B6919651DEE9CE5005EE1D7 /* PreviewView.swift */,
+				2B3CA7791DEFF72600430EF7 /* StackBar.swift */,
+				2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2B69195F1DEE986F005EE1D7 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */,
+				2B6919631DEE98C2005EE1D7 /* MusicViewController.swift */,
+				2BAD08261E10998E004F94BE /* MusicPresenter.swift */,
+				2BAD08281E1099D4004F94BE /* MusicMvpView.swift */,
+			);
+			name = Music;
+			sourceTree = "<group>";
+		};
+		2B84A78C1DEE6D8A001E0E14 = {
+			isa = PBXGroup;
+			children = (
+				2B84A7971DEE6D8A001E0E14 /* Muvigram */,
+				2B84A7961DEE6D8A001E0E14 /* Products */,
+				BD29141C9497FB07A8CA5C09 /* Pods */,
+				49A6BF3E90D4B7E44FFF19EE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2B84A7961DEE6D8A001E0E14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B84A7951DEE6D8A001E0E14 /* Muvigram.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2B84A7971DEE6D8A001E0E14 /* Muvigram */ = {
+			isa = PBXGroup;
+			children = (
+				2B84A7AF1DEE6EAE001E0E14 /* Classes */,
+				2B84A7AE1DEE6E7B001E0E14 /* Resource */,
+			);
+			path = Muvigram;
+			sourceTree = "<group>";
+		};
+		2B84A7AE1DEE6E7B001E0E14 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */,
+				2B84A7A01DEE6D8A001E0E14 /* Main.storyboard */,
+				2B9B6AC01E0277DF0020C06D /* Assets.xcassets */,
+				2B84A7A51DEE6D8A001E0E14 /* LaunchScreen.storyboard */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		2B84A7AF1DEE6EAE001E0E14 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2B61ADCC1E124BCA00AB09D8 /* Lanch */,
+				2B69195B1DEE9708005EE1D7 /* View */,
+				2BAD08201E10977E004F94BE /* Data */,
+				2BA15A7A1E0D1845009C7994 /* Base */,
+				2B9D1D441E075E9D00270A11 /* Share */,
+				2B69195F1DEE986F005EE1D7 /* Music */,
+				2B84A7B61DEE714C001E0E14 /* Camera */,
+				2B84A7B11DEE6F7F001E0E14 /* Other */,
+				2B84A7B01DEE6F3A001E0E14 /* Main */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		2B84A7B01DEE6F3A001E0E14 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2B84A7B41DEE700A001E0E14 /* MainPageViewController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		2B84A7B11DEE6F7F001E0E14 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				2B84A7B31DEE6FA5001E0E14 /* System */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		2B84A7B31DEE6FA5001E0E14 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				2B84A7981DEE6D8A001E0E14 /* AppDelegate.swift */,
+				2B84A7A81DEE6D8A001E0E14 /* Info.plist */,
+			);
+			name = System;
+			sourceTree = "<group>";
+		};
+		2B84A7B61DEE714C001E0E14 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */,
+				2BAD08381E10ED90004F94BE /* CameraPresenterWithStackbar.swift */,
+				2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */,
+				2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */,
+				2BAD08341E10D61C004F94BE /* CameraPresenter.swift */,
+				2BAD08361E10D66A004F94BE /* CameraMvpView.swift */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		2B9D1D441E075E9D00270A11 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				2B9D1D461E07608400270A11 /* ShareViewController.swift */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
+		2BA15A7A1E0D1845009C7994 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2BA15A7B1E0D190E009C7994 /* MvpView.swift */,
+				2BA15A7F1E0D1B9F009C7994 /* BasePresenter.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		2BAD08201E10977E004F94BE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2BAD08231E1097F1004F94BE /* local */,
+				2BAD08211E109790004F94BE /* DataManager.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		2BAD08231E1097F1004F94BE /* local */ = {
+			isa = PBXGroup;
+			children = (
+				2BAD08241E10980E004F94BE /* MusicService.swift */,
+				2BE87BBD1E1A09D00006F962 /* VideoService.swift */,
+			);
+			name = local;
+			sourceTree = "<group>";
+		};
+		49A6BF3E90D4B7E44FFF19EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD29141C9497FB07A8CA5C09 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				186FD50051A8B5BCE5B10245 /* Pods-Muvigram.debug.xcconfig */,
+				8E532916B3091F97B301407B /* Pods-Muvigram.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B84A7941DEE6D8A001E0E14 /* Muvigram */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B84A7AB1DEE6D8A001E0E14 /* Build configuration list for PBXNativeTarget "Muvigram" */;
+			buildPhases = (
+				9C40E1BADECE2A1CDE4FDF28 /* [CP] Check Pods Manifest.lock */,
+				2B84A7911DEE6D8A001E0E14 /* Sources */,
+				2B84A7921DEE6D8A001E0E14 /* Frameworks */,
+				2B84A7931DEE6D8A001E0E14 /* Resources */,
+				1F713585F133586526DF20DA /* [CP] Embed Pods Frameworks */,
+				FCCF3862592DB81C8CABA9AD /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Muvigram;
+			productName = Muvigram;
+			productReference = 2B84A7951DEE6D8A001E0E14 /* Muvigram.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2B84A78D1DEE6D8A001E0E14 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = com.estsoft;
+				TargetAttributes = {
+					2B84A7941DEE6D8A001E0E14 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 5ELQH5H3HB;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2B84A7901DEE6D8A001E0E14 /* Build configuration list for PBXProject "Muvigram" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2B84A78C1DEE6D8A001E0E14;
+			productRefGroup = 2B84A7961DEE6D8A001E0E14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2B84A7941DEE6D8A001E0E14 /* Muvigram */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2B84A7931DEE6D8A001E0E14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B84A7A71DEE6D8A001E0E14 /* LaunchScreen.storyboard in Resources */,
+				2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */,
+				2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */,
+				2B84A7A21DEE6D8A001E0E14 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F713585F133586526DF20DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C40E1BADECE2A1CDE4FDF28 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FCCF3862592DB81C8CABA9AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B84A7911DEE6D8A001E0E14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BAD08271E10998E004F94BE /* MusicPresenter.swift in Sources */,
+				2BE87BBE1E1A09D00006F962 /* VideoService.swift in Sources */,
+				2BAD08351E10D61C004F94BE /* CameraPresenter.swift in Sources */,
+				2BAD08391E10ED90004F94BE /* CameraPresenterWithStackbar.swift in Sources */,
+				2B6919661DEE9CE5005EE1D7 /* PreviewView.swift in Sources */,
+				2BAD08221E109790004F94BE /* DataManager.swift in Sources */,
+				2BAD08251E10980E004F94BE /* MusicService.swift in Sources */,
+				2BAD08291E1099D4004F94BE /* MusicMvpView.swift in Sources */,
+				2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */,
+				2BAD08371E10D66A004F94BE /* CameraMvpView.swift in Sources */,
+				2BA15A7C1E0D190E009C7994 /* MvpView.swift in Sources */,
+				2BE87BBC1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift in Sources */,
+				2B6919641DEE98C2005EE1D7 /* MusicViewController.swift in Sources */,
+				2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */,
+				2B84A7B51DEE700A001E0E14 /* MainPageViewController.swift in Sources */,
+				2B84A7991DEE6D8A001E0E14 /* AppDelegate.swift in Sources */,
+				2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */,
+				2B9D1D471E07608400270A11 /* ShareViewController.swift in Sources */,
+				2B6919621DEE98A7005EE1D7 /* CameraViewController.swift in Sources */,
+				2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */,
+				2BAD083B1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift in Sources */,
+				2BA15A801E0D1B9F009C7994 /* BasePresenter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2B84A7A01DEE6D8A001E0E14 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B84A7A11DEE6D8A001E0E14 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2B84A7A51DEE6D8A001E0E14 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B84A7A61DEE6D8A001E0E14 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2B84A7A91DEE6D8A001E0E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B84A7AA1DEE6D8A001E0E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2B84A7AC1DEE6D8A001E0E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 186FD50051A8B5BCE5B10245 /* Pods-Muvigram.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5ELQH5H3HB;
+				INFOPLIST_FILE = Muvigram/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.estsoft.Muvigram;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		2B84A7AD1DEE6D8A001E0E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E532916B3091F97B301407B /* Pods-Muvigram.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5ELQH5H3HB;
+				INFOPLIST_FILE = Muvigram/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.estsoft.Muvigram;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B84A7901DEE6D8A001E0E14 /* Build configuration list for PBXProject "Muvigram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B84A7A91DEE6D8A001E0E14 /* Debug */,
+				2B84A7AA1DEE6D8A001E0E14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B84A7AB1DEE6D8A001E0E14 /* Build configuration list for PBXNativeTarget "Muvigram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B84A7AC1DEE6D8A001E0E14 /* Debug */,
+				2B84A7AD1DEE6D8A001E0E14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2B84A78D1DEE6D8A001E0E14 /* Project object */;
+}

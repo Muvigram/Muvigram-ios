@@ -1,0 +1,43 @@
+PODS:
+  - Permission/Camera (2.0.2):
+    - Permission/Core
+  - Permission/Core (2.0.2)
+  - Permission/MediaLibrary (2.0.2):
+    - Permission/Core
+  - Permission/Microphone (2.0.2):
+    - Permission/Core
+  - Permission/Notifications (2.0.2):
+    - Permission/Core
+  - Permission/Photos (2.0.2):
+    - Permission/Core
+  - RxCocoa (3.0.1):
+    - RxSwift (~> 3.0)
+  - RxSwift (3.0.1)
+  - SCWaveformView (2.0.6)
+  - Swinject (2.0.0-beta.2)
+  - SwinjectStoryboard (1.0.0-beta.2):
+    - Swinject (= 2.0.0-beta.2)
+
+DEPENDENCIES:
+  - Permission/Camera
+  - Permission/MediaLibrary
+  - Permission/Microphone
+  - Permission/Notifications
+  - Permission/Photos
+  - RxCocoa (~> 3.0)
+  - RxSwift (~> 3.0)
+  - SCWaveformView
+  - Swinject (= 2.0.0-beta.2)
+  - SwinjectStoryboard (= 1.0.0-beta.2)
+
+SPEC CHECKSUMS:
+  Permission: c4e0890cabf0871acfc2700d45bde7d935b2559f
+  RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
+  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
+  SCWaveformView: 78b3503675aafcdaf9c283d68cb45c9fc735af87
+  Swinject: 69a893192efa9f2cc44be79ef423d04d571b6af9
+  SwinjectStoryboard: b52b45821a50386ef604c3cd098f8029a50a268d
+
+PODFILE CHECKSUM: 29c3ca47b6b3597609735a0b68cb030fe819e389
+
+COCOAPODS: 1.1.1
