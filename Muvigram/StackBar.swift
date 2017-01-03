@@ -106,10 +106,10 @@ class StackBar: UIView {
         }
         
         // Make sure the recording is completed for the minimum recording time
-        if self.xOfcureentStackCoord >= self.xOfminimumShootingLine {
+        if self.xOfcureentStackCoord < self.xOfminimumShootingLine + 1.0 ,self.xOfcureentStackCoord >= self.xOfminimumShootingLine {
             // Pass minimum shooting conditions
             self.delegate?.minimumRecordingtimeComplete?()
-        } else {
+        } else if self.xOfcureentStackCoord < self.xOfminimumShootingLine {
             self.delegate?.minimumRecordingtimeLess?()
         }
     }

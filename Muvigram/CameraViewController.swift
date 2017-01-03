@@ -71,8 +71,7 @@ final class CameraViewController: UIViewController {
         
         // Stop recording
         let recordButtonRecordingStopEvent = recordBtn.rx.controlEvent(
-            [UIControlEvents.touchUpInside, UIControlEvents.touchDragOutside,UIControlEvents.touchCancel, UIControlEvents.touchDragExit,
-             UIControlEvents.touchUpOutside])
+            [UIControlEvents.touchUpInside, UIControlEvents.touchDragOutside,UIControlEvents.touchCancel, UIControlEvents.touchUpOutside])
         
         presenter.recordButtonStopRecordEvent(event: recordButtonRecordingStopEvent)
         
@@ -419,7 +418,7 @@ extension CameraViewController: StackBarCurrentDelegate {
 }
 
 extension CameraViewController: CameraMvpView {
-    func videoEditButtonEnableWithStackBarStatus(status: Bool) {
+    func videoEditComplateButtonEnableWithStackBarStatus(status: Bool) {
         guard videoEditComplateBtn.isEnabled != status else {
             return
         }

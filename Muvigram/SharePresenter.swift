@@ -14,8 +14,7 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
 
     private let dataManager: DataManager
     private let bag = DisposeBag()
-    
-    var videoUrl: URL!
+    private var videoUrl: URL!
     
     // @inject
     init(dataManager: DataManager) {
@@ -44,5 +43,4 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                     .addDisposableTo(self.bag)
         }.addDisposableTo(bag)
     }
-   
 }

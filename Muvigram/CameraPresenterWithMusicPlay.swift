@@ -22,7 +22,7 @@ extension CameraPresenter where T:CameraMvpView {
         // Now that your music is reset, let it know it's the first time you're playing it.
         self.isRecordingModeFirstRun = true
         // Disable recording complete button because music is newly selected
-        self.view?.videoEditButtonEnableWithStackBarStatus(status: false)
+        self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: false)
         
         if let artwork = item.artwork {
             self.view?.musicAlbumImageReplace(albumImage: artwork.image(at: CGSize(width: 40, height: 40))!)

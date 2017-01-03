@@ -16,6 +16,7 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     // Observer removal role
     internal let bag = DisposeBag()
     internal var isRecordingModeFirstRun = true
+    internal var isStackBarPassminimumRecordingCondition = false
     internal var isCompleateRecored: Bool = false
     public let dataManager: DataManager
     let mp3Path = Bundle.main.path(forResource: "Silence_15_sec", ofType: "mp3")
@@ -246,6 +247,9 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
             .debounce(1.0, scheduler: MainScheduler.instance)
             .bindNext { [unowned self] in
                 self.view?.partialRecordingComplete()
+                if self.isStackBarPassminimumRecordingCondition {
+                    self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: true)
+                }
         }.addDisposableTo(bag)
     }
     
@@ -266,6 +270,9 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
                     }
                     self.view?.partialRecordingStarted()
                     self.view?.controllerViewisHidden(true, isRecord: true)
+                    
+                    self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: false)
+                    
                 }
         }.addDisposableTo(bag)
     }

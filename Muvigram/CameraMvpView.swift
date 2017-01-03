@@ -14,7 +14,7 @@ protocol CameraMvpView: Mvpview {
     
     func popButtonHidden(status: Bool)
     
-    func videoEditButtonEnableWithStackBarStatus(status: Bool)
+    func videoEditComplateButtonEnableWithStackBarStatus(status: Bool)
     
     func popButtonPositionChangeWithStackBarStatus(buttonImage: UIImage, buttonPosition: CGRect)
     
