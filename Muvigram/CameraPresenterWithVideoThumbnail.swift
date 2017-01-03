@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import RxSwift
 
 extension CameraPresenter where T:CameraMvpView {
     func loadVideos() {
-        self.dataManager.syncLastVideoThumbnail()
+        self.dataManager.getLastVideoThumbnail()
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { image in
                 self.view?.setlibraryButtonImage(image)
             }, onError: { (error) in

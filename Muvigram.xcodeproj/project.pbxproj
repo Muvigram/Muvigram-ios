@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2CB2401E1B44980034F219 /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB23F1E1B44980034F219 /* SharePresenter.swift */; };
+		2B2CB2421E1B45A60034F219 /* ShareMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */; };
 		2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */; };
 		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
 		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		186FD50051A8B5BCE5B10245 /* Pods-Muvigram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muvigram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram.debug.xcconfig"; sourceTree = "<group>"; };
+		2B2CB23F1E1B44980034F219 /* SharePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
+		2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareMvpView.swift; sourceTree = "<group>"; };
 		2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumButton.swift; sourceTree = "<group>"; };
 		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
 		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				2B9D1D461E07608400270A11 /* ShareViewController.swift */,
+				2B2CB23F1E1B44980034F219 /* SharePresenter.swift */,
+				2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */,
 			);
 			name = Share;
 			sourceTree = "<group>";
@@ -285,7 +291,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = com.estsoft;
 				TargetAttributes = {
 					2B84A7941DEE6D8A001E0E14 = {
@@ -391,8 +397,10 @@
 				2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */,
 				2BAD08371E10D66A004F94BE /* CameraMvpView.swift in Sources */,
 				2BA15A7C1E0D190E009C7994 /* MvpView.swift in Sources */,
+				2B2CB2401E1B44980034F219 /* SharePresenter.swift in Sources */,
 				2BE87BBC1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift in Sources */,
 				2B6919641DEE98C2005EE1D7 /* MusicViewController.swift in Sources */,
+				2B2CB2421E1B45A60034F219 /* ShareMvpView.swift in Sources */,
 				2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */,
 				2B84A7B51DEE700A001E0E14 /* MainPageViewController.swift in Sources */,
 				2B84A7991DEE6D8A001E0E14 /* AppDelegate.swift in Sources */,

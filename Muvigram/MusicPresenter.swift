@@ -25,7 +25,7 @@ class MusicPresenter<T: MusicMvpView>: BasePresenter<T> {
     
     // Request a music list from dataManager and update it in the view.
     public func loadMusics() {
-        dataManager.syncMusics()
+        dataManager.getMusics()
             .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
             .observeOn(MainScheduler.instance)
             .subscribe(

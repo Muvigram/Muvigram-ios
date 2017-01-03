@@ -22,11 +22,15 @@ class DataManager {
         self.videoService = videoService
     }
     
-    public func syncMusics() -> Observable<MPMediaItem> {
+    public func getMusics() -> Observable<MPMediaItem> {
         return musicService.getMusics()
     }
     
-    public func syncLastVideoThumbnail() -> Observable<UIImage> {
+    public func getLastVideoThumbnail() -> Observable<UIImage> {
         return videoService.getLastVideoThumbnail().asObservable()
+    }
+    
+    public func saveVideoWithUrl(url: URL) -> Observable<Void> {
+        return videoService.saveVideoWithURL(url: url)
     }
 }

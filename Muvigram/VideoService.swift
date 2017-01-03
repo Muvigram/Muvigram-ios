@@ -29,4 +29,21 @@ class VideoService {
         }
         return subject
     }
+    
+    public func saveVideoWithURL(url: URL) -> PublishSubject<Void> {
+        let subject = PublishSubject<Void>()
+        if let videoData = NSData(contentsOf: url) {
+            PHPhotoLibrary.shared().performChanges({
+                videoData.write(toFile: url.path, atomically: true);
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+            }, completionHandler: { success, error in
+                if success {
+                    subject.onCompleted()
+                } else {
+                    subject.onError(error!)
+                }
+            })
+        }
+        return subject
+    }
 }

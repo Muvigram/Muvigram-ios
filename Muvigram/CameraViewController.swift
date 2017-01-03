@@ -33,6 +33,7 @@ final class CameraViewController: UIViewController {
     
     // @inject
     public var presenter: CameraPresenter<CameraViewController>!
+    public var shardViewController: ShareViewController!
     
     // Session
     private enum SessionSetupResult {
@@ -55,7 +56,6 @@ final class CameraViewController: UIViewController {
         super.viewDidLoad()
         // Music Unselected music files are replaced with no sound. // OK
         presenter.viewDidLoad()
-        
         presenter.loadVideos()
         
         addObserver()
@@ -69,12 +69,11 @@ final class CameraViewController: UIViewController {
             self.congfigureSession()
         }
         
-        // Combines multiple events to indicate the state of the button being pressed
-        // If the user presses the button consecutively, only the last value within 500ms
-        // of the generated events is used.
-        
         // Stop recording
-        let recordButtonRecordingStopEvent = recordBtn.rx.controlEvent([UIControlEvents.touchUpInside, UIControlEvents.touchDragOutside, UIControlEvents.touchCancel, UIControlEvents.touchDragExit, UIControlEvents.touchUpOutside])
+        let recordButtonRecordingStopEvent = recordBtn.rx.controlEvent(
+            [UIControlEvents.touchUpInside, UIControlEvents.touchDragOutside,UIControlEvents.touchCancel, UIControlEvents.touchDragExit,
+             UIControlEvents.touchUpOutside])
+        
         presenter.recordButtonStopRecordEvent(event: recordButtonRecordingStopEvent)
         
         // Start recording
@@ -540,11 +539,10 @@ extension CameraViewController: CameraMvpView {
         
         // Merge video files and receive callbacks upon completion.
         self.presenter.margeAudioandVideoFiles() { (margeVideoUrl) in
-            let shareViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
-            shareViewController.videofileUrl = margeVideoUrl
+            self.shardViewController.videofileUrl = margeVideoUrl
             indicator.stopAnimating()
             contrainer.removeFromSuperview()
-            self.present(shareViewController, animated: true, completion: nil)
+            self.present(self.shardViewController, animated: true, completion: nil)
         }
     }
     

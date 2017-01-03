@@ -30,17 +30,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CameraPresenter<CameraViewController>(dataManager: r.resolve(DataManager.self)!)
         }
         
+        container.register(SharePresenter.self) { r in
+            SharePresenter<ShareViewController>(dataManager: r.resolve(DataManager.self)!)
+        }
+        
         // Views
+        container.registerForStoryboard(ShareViewController.self) { r, c in
+            let presenter = r.resolve(SharePresenter<ShareViewController>.self)!
+            presenter.attachView(view: c)
+            c.presenter = presenter
+        }
+        
         container.registerForStoryboard(MusicViewController.self) { r, c in
             let presenter = r.resolve(MusicPresenter<MusicViewController>.self)!
             presenter.attachView(view: c)
             c.presenter = presenter
         }
-        container.registerForStoryboard(CameraViewController.self) { r, c in
-            let presenter = r.resolve(CameraPresenter<CameraViewController>.self)!
-            presenter.attachView(view: c)
-            c.presenter = presenter
-        }
+        
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -51,6 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         let bundle = Bundle(for: LaunchViewController.self)
         let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: bundle, container: container)
+        
+        // Views
+        container.registerForStoryboard(CameraViewController.self) { r, c in
+            let presenter = r.resolve(CameraPresenter<CameraViewController>.self)!
+            presenter.attachView(view: c)
+            c.presenter = presenter
+            c.shardViewController = storyBoard.instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
+        }
         
         container.registerForStoryboard(MainPageViewController.self) { r, c in
             c.orderedViewControllers = [storyBoard.instantiateViewController(withIdentifier: "MusicViewController"),
