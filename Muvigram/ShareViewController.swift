@@ -12,11 +12,11 @@ import AVFoundation
 
 class ShareViewController: UIViewController {
     
-    var videofileUrl: URL?
+    var videoUrlArray: [URL]!
+    var musicTimeStampArray: [CMTime]!
+    var musicUrl: URL!
+
     var player: AVPlayer?
-    
-    public var videoUrlArray: [URL]!
-    public var musicTimeStampArray: [CMTime]!
     
     // @inject
     public var presenter: SharePresenter<ShareViewController>!
@@ -24,7 +24,8 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad(url: videofileUrl!)
+        
+        self.presenter.encodeVideofileForMargins(videoUrlArray: videoUrlArray, musicTimeStampArray: musicTimeStampArray, musicUrl: musicUrl)
         
         let saveButtonEvent = saveButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.saveButtonClickEvent(event: saveButtonEvent)
@@ -33,6 +34,27 @@ class ShareViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
         print("deinit")
+    }
+    
+}
+
+extension ShareViewController: ShareMvpView {
+    // Called when encodeVideofileForMargins () is finished
+    func playVideo(mergedVideofileUrl: URL?) {
+        if let videofileUrl = mergedVideofileUrl {
+            player = AVPlayer(url: videofileUrl)
+            let playerLayer = AVPlayerLayer(player: player)
+            playerLayer.bounds = self.view.bounds
+            playerLayer.frame = CGRect(x: 0, y: 0, width: self.view.layer.frame.width, height: self.view.layer.frame.height)
+            
+            self.view.layer.insertSublayer(playerLayer, at: 0)
+            player?.play()
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { [unowned self] _  in
+                self.player?.seek(to: kCMTimeZero, completionHandler: { _ in
+                    self.player?.play()
+                })
+            }
+        }
     }
     
     // Create loading indicator
@@ -61,33 +83,6 @@ class ShareViewController: UIViewController {
         loadingView.addSubview(actInd)
         container.addSubview(loadingView)
         uiView.addSubview(container)
-        
-        // Show indicator
-        //let (indicator, contrainer) = self.createActivityIndicatory(uiView: self.view)
-        //indicator.startAnimating()
-
-        //indicator.stopAnimating()
-        //contrainer.removeFromSuperview()
         return (actInd, container)
-    }
-}
-
-extension ShareViewController: ShareMvpView {
-    //CameraViewController plays the merged video file.
-    func playVideo() {
-        if let videofileUrl = videofileUrl {
-            player = AVPlayer(url: videofileUrl)
-            let playerLayer = AVPlayerLayer(player: player)
-            playerLayer.bounds = self.view.bounds
-            playerLayer.frame = CGRect(x: 0, y: 0, width: self.view.layer.frame.width, height: self.view.layer.frame.height)
-            
-            self.view.layer.insertSublayer(playerLayer, at: 0)
-            player?.play()
-            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { [unowned self] _  in
-                self.player?.seek(to: kCMTimeZero, completionHandler: { _ in
-                    self.player?.play()
-                })
-            }
-        }
     }
 }

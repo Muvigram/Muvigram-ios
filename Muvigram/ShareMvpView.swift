@@ -7,7 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ShareMvpView: Mvpview {
-    func playVideo()
+    
+    func playVideo(mergedVideofileUrl: URL?)
+    
+    func createActivityIndicatory(uiView: UIView) -> (UIActivityIndicatorView, UIView)
+    
 }

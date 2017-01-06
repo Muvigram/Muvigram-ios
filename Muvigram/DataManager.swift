@@ -27,19 +27,17 @@ class DataManager {
     }
     
     public func getLastVideoThumbnail() -> Observable<UIImage> {
-        return videoService.getLastVideoThumbnail().asObservable()
+        return videoService.getLastVideoThumbnail()
     }
     
     public func saveVideoWithUrl(url: URL) -> Observable<Void> {
         return videoService.saveVideoWithURL(url: url)
     }
     
-    public func encodeVideofileForMargins(videoUrlArray: inout [URL],
-                                          musicTimeStampArray: inout [CMTime],
+    public func encodeVideofileForMargins(videoUrlArray: [URL],
+                                          musicTimeStampArray: [CMTime],
                                           musicUrl: URL) -> Observable<URL> {
-        return videoService.encodeVideofileForMargins(&videoUrlArray,
-                                                      &musicTimeStampArray,
-                                                      musicUrl).asObservable()
+        return videoService.encodeVideofileForMargins(videoUrlArray, musicTimeStampArray, musicUrl)
     }
     
     public func clearUnnecessaryfilesForMusicAndVideo(videoUrlArray: inout [URL], musicTimeStampArray: inout [CMTime]) {

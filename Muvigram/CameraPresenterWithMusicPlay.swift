@@ -40,6 +40,7 @@ extension CameraPresenter where T:CameraMvpView {
         self.view?.setWaveformViewAsset(asset: musicAsset)
         self.view?.setWaveformViewPrecision()
         
+        
         var duration = CMTimeMakeWithSeconds( 1.0 * CMTimeGetSeconds(self.view!.getWaveformViewAssetDuration()), 100000)
         
         self.view?.setWaveformViewTimeRange(range: CMTimeRangeMake(CMTimeMakeWithSeconds(0, 10000), duration))

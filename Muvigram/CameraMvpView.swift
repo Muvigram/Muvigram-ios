@@ -50,7 +50,7 @@ protocol CameraMvpView: Mvpview {
     
     func scrollExclusiveOr(_ enabled: Bool)
     
-    func videoRecordingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime])
+    func videoRecordingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime], musicUrl: URL)
     
     func controllerViewisHidden(_ hidden: Bool, isRecord: Bool)
     

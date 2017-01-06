@@ -73,12 +73,14 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     
     internal func viewWillAppear() {
         self.isCompleateRecored = false
-        // MARK clearMusicAndVideo()
+        clearMusicAndVideo()
     }
     
     internal func clearMusicAndVideo(){
-        // MARK self.dataManager.clearUnnecessaryfilesForMusicAndVideo(videoUrlArray: &videoUrlArray,
-                                                               //musicTimeStampArray: &musicTimeStampArray)
+        DispatchQueue.global().async { [unowned self] in
+            self.dataManager.clearUnnecessaryfilesForMusicAndVideo(videoUrlArray: &self.videoUrlArray,
+                                                                   musicTimeStampArray: &self.musicTimeStampArray)
+        }
     }
 
     internal func capture(didFinishRecordingToOutputFileAt outputFileURL: URL!) {
@@ -87,7 +89,8 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
         self.view?.recordButtonEnabled(enabled: true)
         
         if self.isCompleateRecored {
-            self.view?.videoRecordingFinalized(videoUrlArray: videoUrlArray, musicTimeStampArray: musicTimeStampArray)
+            self.view?.videoRecordingFinalized(videoUrlArray: videoUrlArray,
+                                               musicTimeStampArray: musicTimeStampArray, musicUrl: self.musicUrl!)
         }
     }
     
@@ -180,7 +183,8 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
         event.debounce(0.3, scheduler: MainScheduler.instance)
              .bindNext{
                 self.view?.videoRecordingFinalized(videoUrlArray: self.videoUrlArray,
-                                                   musicTimeStampArray: self.musicTimeStampArray)
+                                                   musicTimeStampArray: self.musicTimeStampArray,
+                                                   musicUrl: self.musicUrl!)
              }.addDisposableTo(bag)
     }
     

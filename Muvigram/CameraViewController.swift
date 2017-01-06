@@ -96,7 +96,7 @@ final class CameraViewController: UIViewController {
         super.viewWillAppear(animated)
         // Initialize the state each time the CameraViewController appears on the screen again.
         self.stackBar.clearStack()
-        // MARK presenter.viewWillAppear()
+        presenter.viewWillAppear()
         
         sessionQueue.async {
             switch self.setupResult {
@@ -504,9 +504,10 @@ extension CameraViewController: CameraMvpView {
         NotificationCenter.default.post( name: NSNotification.Name("recordStatusChange"), object: nil, userInfo: ["isBeingShot": enabled])
     }
     
-    func videoRecordingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime]) {
+    func videoRecordingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime], musicUrl: URL) {
         shardViewController.videoUrlArray = videoUrlArray
         shardViewController.musicTimeStampArray = musicTimeStampArray
+        shardViewController.musicUrl = musicUrl
         self.present(self.shardViewController, animated: true, completion: nil)
     }
     
