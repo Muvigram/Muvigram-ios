@@ -48,7 +48,7 @@ extension CameraPresenter where T:CameraMvpView {
     }
     
     internal func stackBarPop() {
-        self.deleteVideofilesTemporary()
+        self.dataManager.deleteVideofilesTemporary(videoUrlArray: &videoUrlArray, musicTimeStampArray: &musicTimeStampArray, player: &recordingModePlayer!)
     }
     
     internal func stackBarStop() {

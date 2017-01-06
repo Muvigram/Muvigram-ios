@@ -15,6 +15,9 @@ class ShareViewController: UIViewController {
     var videofileUrl: URL?
     var player: AVPlayer?
     
+    public var videoUrlArray: [URL]!
+    public var musicTimeStampArray: [CMTime]!
+    
     // @inject
     public var presenter: SharePresenter<ShareViewController>!
     @IBOutlet var saveButton: UIButton!
@@ -30,6 +33,42 @@ class ShareViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
         print("deinit")
+    }
+    
+    // Create loading indicator
+    func createActivityIndicatory(uiView: UIView) -> (UIActivityIndicatorView, UIView) {
+        let container: UIView = UIView()
+        container.frame = uiView.frame
+        container.center = uiView.center
+        container.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.0)
+        
+        let loadingView: UIView = UIView()
+        
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = uiView.center
+        loadingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: CGFloat(0.5))
+        
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+        
+        actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        actInd.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        
+        actInd.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2);
+        loadingView.addSubview(actInd)
+        container.addSubview(loadingView)
+        uiView.addSubview(container)
+        
+        // Show indicator
+        //let (indicator, contrainer) = self.createActivityIndicatory(uiView: self.view)
+        //indicator.startAnimating()
+
+        //indicator.stopAnimating()
+        //contrainer.removeFromSuperview()
+        return (actInd, container)
     }
 }
 

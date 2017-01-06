@@ -24,13 +24,13 @@ class LaunchViewController: UIViewController {
     private func requestPermissionAccess() {
         func showAlert(_ permission: Permission, _ title: String) {
             let alert = permission.prePermissionAlert
-            alert.title = title
+            alert.title = "Please allow access to your \(title)"
             alert.message = nil
             alert.cancel = "Cancel"
             alert.settings = "Settings"
         }
         
-        func requestAccess(permission: Permission, title: String, _ complete: @escaping () -> Void) {
+        func requestAccess(_ permission: Permission, title: String, _ complete: @escaping () -> Void) {
                 showAlert(permission, title)
                 permission.request{ status in
                     switch status {
@@ -38,15 +38,15 @@ class LaunchViewController: UIViewController {
                         complete()
                         break
                     default:
-                        requestAccess(permission: permission, title: title, complete)
-                        }
+                        requestAccess(permission, title: title, complete)
                     }
+                }
             }
         
-        requestAccess(permission: .camera, title: "Please allow access to your camera") {
-            requestAccess(permission: .mediaLibrary, title: "Please allow access to your mediaLibrary") {
-                requestAccess(permission: .microphone, title: "Please allow access to your microphone") {
-                    requestAccess(permission: .photos, title: "Please allow access to your photos") {
+        requestAccess(.camera, title: "camera") {
+            requestAccess(.mediaLibrary, title: "mediaLibrary") {
+                requestAccess(.microphone, title: "microphone") {
+                    requestAccess(.photos, title: "photos") {
                         DispatchQueue.main.async { self.present(self.mainViewController, animated: true, completion: nil) }
                     }
                 }

@@ -27,19 +27,19 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     }
     
     // A stack of music taken by the user
-    internal var musicCurrentTimeStack = [CMTime]() {
+    internal var musicTimeStampArray = [CMTime]() {
         didSet {
-            if musicCurrentTimeStack.isEmpty {
+            if musicTimeStampArray.isEmpty {
                 self.isRecordingModeFirstRun = true
             }
         }
     }
     
     // A stack of video taken by the user
-    internal var videoFileUrlStack = [URL]() {
+    internal var videoUrlArray = [URL]() {
         didSet {
-            self.view?.scrollExclusiveOr(videoFileUrlStack.isEmpty)
-            if videoFileUrlStack.isEmpty {
+            self.view?.scrollExclusiveOr(videoUrlArray.isEmpty)
+            if videoUrlArray.isEmpty {
                 DispatchQueue.main.sync {
                     self.view?.switchCameraButtonEnabled(enabled: true)
                     if musicUrl?.path != mp3Path! {
@@ -73,137 +73,21 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     
     internal func viewWillAppear() {
         self.isCompleateRecored = false
-        self.cleanVideoandMusicStack()
+        // MARK clearMusicAndVideo()
     }
     
-    internal func deleteVideofilesTemporary() {
-        guard !videoFileUrlStack.isEmpty else {
-            return
-        }
-        DispatchQueue.global().async {
-            let stackTopFilePath = self.videoFileUrlStack.popLast()?.path
-            self.removeVideoFile(outputFilePath: stackTopFilePath!)
-            
-            // Changes the stack bar to the time of the previously recorded video.
-            _ = self.musicCurrentTimeStack.popLast()
-            if let lastTime = self.musicCurrentTimeStack.last, self.musicCurrentTimeStack.count >= 2 {
-                self.recordingModePlayer?.seek(to: lastTime)
-            } else {
-                _ = self.musicCurrentTimeStack.popLast()
-            }
-        }
+    internal func clearMusicAndVideo(){
+        // MARK self.dataManager.clearUnnecessaryfilesForMusicAndVideo(videoUrlArray: &videoUrlArray,
+                                                               //musicTimeStampArray: &musicTimeStampArray)
     }
-    
-    internal func cleanVideoandMusicStack() {
-        DispatchQueue.global().async {
-            for videoFileUrl in self.videoFileUrlStack {
-                self.removeVideoFile(outputFilePath: videoFileUrl.path)
-            }
-            self.musicCurrentTimeStack.removeAll()
-            self.videoFileUrlStack.removeAll()
-        }
-    }
-    
-    internal func removeVideoFile(outputFilePath: String) {
-        let path = outputFilePath
-        if FileManager.default.fileExists(atPath: path) {
-            do {
-                try FileManager.default.removeItem(atPath: path)
-            }
-            catch {
-                print("Could not remove file at path: \(path)")
-            }
-        }
-    }
-    
-    // Merging video files.
-    internal func margeAudioandVideoFiles(compleate: @escaping (URL) -> Void) {
-        DispatchQueue.global().async { [unowned self] in
-            let compostion = AVMutableComposition()
-            let trackVideo: AVMutableCompositionTrack
-                = compostion.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
-            let trackAudio: AVMutableCompositionTrack
-                = compostion.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: CMPersistentTrackID())
-            var insertTime = kCMTimeZero
-            
-            // 비디오를 가로로 돌려줍니다.
-            trackVideo.preferredTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2));
-            
-            print(self.videoFileUrlStack.count)
-            print(self.musicCurrentTimeStack.count)
-            
-            for time in self.musicCurrentTimeStack {
-                print("\(CMTimeGetSeconds(time))")
-            }
-            
-            let audeoAsset = AVURLAsset(url: self.musicUrl!)
-            let audios = audeoAsset.tracks(withMediaType: AVMediaTypeAudio)
-            let assetTrackAudio = audios.first!
-            
-            for (idx, videoUrl) in self.videoFileUrlStack.enumerated() {
-                let videoAsset = AVURLAsset(url: videoUrl)
-                let tracks = videoAsset.tracks(withMediaType: AVMediaTypeVideo)
-                
-                if tracks.count > 0 {
-                    do {
-                        
-                        let duration = CMTime(seconds: CMTimeGetSeconds(self.musicCurrentTimeStack[idx+1]) - CMTimeGetSeconds(self.musicCurrentTimeStack[idx]), preferredTimescale: 2000000000)
-                        
-                        let assetTrackVedio = tracks.first!
-                        try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, duration),
-                                                       of: assetTrackVedio, at: insertTime)
-                        
-                        try trackAudio.insertTimeRange(CMTimeRangeMake(self.musicCurrentTimeStack[idx], duration),
-                                                       of: assetTrackAudio, at: insertTime)
-                        
-                        print("idx -> \(idx)")
-                        print("music time ->   #1       \(CMTimeGetSeconds(duration))")
-                        print("video time ->   #3       \(CMTimeGetSeconds(duration))")
-                        
-                        // 병합 시작 위치 갱신
-                        insertTime = CMTimeAdd(insertTime, duration)
-                    } catch {
-                        print("mergeVideoFile insertTimeRange error")
-                    }
-                }
-            }
-            
-            // 병합한 비디오가 쓰여질 경로 지정
-            let combinedVideoName = UUID().uuidString
-            let combinedVideoFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((combinedVideoName as NSString).appendingPathExtension("mov")!)
-            let combinedVideoUrl = URL(fileURLWithPath: combinedVideoFilePath)
-            
-            // 병합한 비디오 쓰기
-            if let exportSession = AVAssetExportSession(asset: compostion, presetName: AVAssetExportPresetHighestQuality){
-                
-                exportSession.outputURL = combinedVideoUrl
-                exportSession.outputFileType = AVFileTypeMPEG4
-                exportSession.exportAsynchronously(completionHandler: {
-                    switch exportSession.status {
-                    case .failed:
-                        print("failed\(exportSession.error)")
-                    case .cancelled:
-                        print("cancelled\(exportSession.error)")
-                    default:
-                        // 병합한 비디오파일을 쓰는 것에 성공하였다면 완료 호출
-                        DispatchQueue.main.sync {
-                            compleate(combinedVideoUrl)
-                        }
-                        // 임시 파일 삭제
-                        self.cleanVideoandMusicStack()
-                    }
-                })
-            }
-        }
-    }
-    
+
     internal func capture(didFinishRecordingToOutputFileAt outputFileURL: URL!) {
         // Saved shot path
-        videoFileUrlStack.append(outputFileURL)
+        videoUrlArray.append(outputFileURL)
         self.view?.recordButtonEnabled(enabled: true)
         
         if self.isCompleateRecored {
-            self.view?.videoRecordingFinalized()
+            self.view?.videoRecordingFinalized(videoUrlArray: videoUrlArray, musicTimeStampArray: musicTimeStampArray)
         }
     }
     
@@ -220,8 +104,8 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
             self.isbuttonPressed = false
             if self.recordingModePlayer?.timeControlStatus == .playing {
                 self.view?.recordButtonEnabled(enabled: false)
-                let curRecordedTime = CMTimeGetSeconds(self.recordingModePlayer!.currentTime()) - CMTimeGetSeconds(self.musicCurrentTimeStack.last!)
-                let cumulativeDuration = CMTimeGetSeconds((self.recordingModePlayer?.currentTime())!) - CMTimeGetSeconds(self.musicCurrentTimeStack.first!)
+                let curRecordedTime = CMTimeGetSeconds(self.recordingModePlayer!.currentTime()) - CMTimeGetSeconds(self.musicTimeStampArray.last!)
+                let cumulativeDuration = CMTimeGetSeconds((self.recordingModePlayer?.currentTime())!) - CMTimeGetSeconds(self.musicTimeStampArray.first!)
                 
                 if cumulativeDuration > 14.0 {
                     let time = DispatchTime.now() + 15.0 - cumulativeDuration
@@ -270,7 +154,6 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
                     }
                     self.view?.partialRecordingStarted()
                     self.view?.controllerViewisHidden(true, isRecord: true)
-                    
                     self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: false)
                     
                 }
@@ -296,12 +179,13 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     internal func videoEditComplateButtonEvent(event: ControlEvent<Void>) {
         event.debounce(0.3, scheduler: MainScheduler.instance)
              .bindNext{
-                self.view?.videoRecordingFinalized()
+                self.view?.videoRecordingFinalized(videoUrlArray: self.videoUrlArray,
+                                                   musicTimeStampArray: self.musicTimeStampArray)
              }.addDisposableTo(bag)
     }
     
     internal func isVidioFileUrlEmpty() -> Bool {
-        return self.videoFileUrlStack.isEmpty
+        return self.videoUrlArray.isEmpty
     }
 }
 
