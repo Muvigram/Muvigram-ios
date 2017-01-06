@@ -244,7 +244,7 @@ final class CameraViewController: UIViewController {
     }
     
     func cleanVideoandMusicStack() { // OK
-        self.presenter.cleanVideoandMusicStack()
+        self.presenter.clearMusicAndVideo()
     }
     
     // Camera Change
@@ -321,34 +321,7 @@ final class CameraViewController: UIViewController {
         presenter.selectMusicfromList(item: item)
     }
     
-    // Create loading indicator
-    fileprivate func createActivityIndicatory(uiView: UIView) -> (UIActivityIndicatorView, UIView) {
-        let container: UIView = UIView()
-        container.frame = uiView.frame
-        container.center = uiView.center
-        container.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.0)
-        
-        let loadingView: UIView = UIView()
-        
-        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        loadingView.center = uiView.center
-        loadingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: CGFloat(0.5))
-        
-        loadingView.clipsToBounds = true
-        loadingView.layer.cornerRadius = 10
-        
-        let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
-        
-        actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        actInd.activityIndicatorViewStyle =
-            UIActivityIndicatorViewStyle.whiteLarge
-        
-        actInd.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2);
-        loadingView.addSubview(actInd)
-        container.addSubview(loadingView)
-        uiView.addSubview(container)
-        return (actInd, container)
-    }
+   
     
     @IBAction func testShow(_ sender: Any) {
         self.presenter.touchTestShow()
@@ -531,18 +504,11 @@ extension CameraViewController: CameraMvpView {
         NotificationCenter.default.post( name: NSNotification.Name("recordStatusChange"), object: nil, userInfo: ["isBeingShot": enabled])
     }
     
-    func videoRecordingFinalized() {
-        // Show indicator
-        let (indicator, contrainer) = self.createActivityIndicatory(uiView: self.view)
-        indicator.startAnimating()
-        
-        // Merge video files and receive callbacks upon completion.
-        self.presenter.margeAudioandVideoFiles() { (margeVideoUrl) in
-            self.shardViewController.videofileUrl = margeVideoUrl
-            indicator.stopAnimating()
-            contrainer.removeFromSuperview()
-            self.present(self.shardViewController, animated: true, completion: nil)
-        }
+    func videoRecordingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime], musicUrl: URL) {
+        shardViewController.videoUrlArray = videoUrlArray
+        shardViewController.musicTimeStampArray = musicTimeStampArray
+        shardViewController.musicUrl = musicUrl
+        self.present(self.shardViewController, animated: true, completion: nil)
     }
     
      // Hides the view according to the recording or interval selection.

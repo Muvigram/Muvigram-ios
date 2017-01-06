@@ -75,15 +75,12 @@ class AlbumButton: UIButton {
             innerWidthAndHeight = 14.0
         }
         
-    
         let innerRectangle = CGRect(x: frame.size.width / 2 - innerWidthAndHeight/2,
                                     y: frame.size.height / 2 - innerWidthAndHeight/2,
                                     width: innerWidthAndHeight,
                                     height: innerWidthAndHeight)
         context?.addEllipse(in: innerRectangle)
         context?.fillPath()
-        
-        
     }
 
 }

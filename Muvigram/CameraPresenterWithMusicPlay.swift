@@ -118,21 +118,21 @@ extension CameraPresenter where T:CameraMvpView {
     // Called when playing music for the first time.
     internal func playMusicOnRecording() {
         DispatchQueue.global().async { [unowned self] in
-            self.musicCurrentTimeStack.removeAll()
+            self.musicTimeStampArray.removeAll()
             
             // Set intervals and play music using music url.
             self.recordingModePlayer?.seek(to: self.musicInputTime, completionHandler: {_ in
                 self.recordingModePlayer?.play()
             })
             self.isRecordingModeFirstRun = false
-            self.musicCurrentTimeStack.append(self.musicInputTime)
+            self.musicTimeStampArray.append(self.musicInputTime)
         }
     }
     
     // Stop music
     internal func stopMusic() {
         self.recordingModePlayer?.pause()
-        self.musicCurrentTimeStack.append((self.recordingModePlayer?.currentTime())!)
+        self.musicTimeStampArray.append((self.recordingModePlayer?.currentTime())!)
     }
     
     internal func modifyPlayerPause() {
