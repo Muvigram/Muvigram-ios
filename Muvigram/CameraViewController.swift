@@ -13,6 +13,8 @@ import Permission
 import MediaPlayer
 import RxSwift
 import RxCocoa
+import Swinject
+import SwinjectStoryboard
 import SCWaveformView
 
 final class CameraViewController: UIViewController {
@@ -94,10 +96,14 @@ final class CameraViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        shardViewController = nil
+        
         // Initialize the state each time the CameraViewController appears on the screen again.
         self.stackBar.clearStack()
+        self.cleanVideoandMusicStack()
         presenter.viewWillAppear()
-        
+        viewInitialization()
         sessionQueue.async {
             switch self.setupResult {
             case .success:
@@ -505,6 +511,9 @@ extension CameraViewController: CameraMvpView {
     }
     
     func videoRecordingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime], musicUrl: URL) {
+      
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        shardViewController = appDelegate.newShareViewControllerInstance()
         shardViewController.videoUrlArray = videoUrlArray
         shardViewController.musicTimeStampArray = musicTimeStampArray
         shardViewController.musicUrl = musicUrl

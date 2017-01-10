@@ -13,7 +13,7 @@ class BasePresenter<T: Mvpview> {
 
     init() {
     }
-    
+    // inject
     public func attachView(view: T) {
         self.view = view
     }

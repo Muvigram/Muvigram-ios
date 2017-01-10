@@ -27,7 +27,6 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                                           musicTimeStampArray: [CMTime],
                                           musicUrl: URL) {
         
-        
         let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
         indicator.startAnimating()
         self.dataManager.encodeVideofileForMargins(videoUrlArray: videoUrlArray,
@@ -46,11 +45,17 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                 self.removeVideoWithPaths(videoUrlArray: videoUrlArray)
             }).addDisposableTo(bag)
     }
+    
+    internal func homeButtonClickEvent(event: ControlEvent<Void>) {
+        event.debounce(0.5, scheduler: MainScheduler.instance)
+            .bindNext {
+                self.view?.dimissShareViewController()
+        }.addDisposableTo(bag)
+    }
  
     internal func saveButtonClickEvent(event: ControlEvent<Void>) {
-        event
-            .debounce(1.0, scheduler: MainScheduler.instance)
-            .bindNext { [unowned self] in
+        event.debounce(0.5, scheduler: MainScheduler.instance)
+             .bindNext { [unowned self] in
                 self.dataManager.saveVideoWithUrl(url: self.videoUrl)
                     .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
                     .observeOn(MainScheduler.instance)

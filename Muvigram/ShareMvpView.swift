@@ -15,4 +15,5 @@ protocol ShareMvpView: Mvpview {
     
     func createActivityIndicatory(uiView: UIView) -> (UIActivityIndicatorView, UIView)
     
+    func dimissShareViewController()
 }
