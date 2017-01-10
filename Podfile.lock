@@ -1,4 +1,7 @@
 PODS:
+  - CTAssetsPickerController (3.3.1):
+    - PureLayout (~> 3.0.0)
+  - ICGVideoTrimmer (1.1)
   - Permission/Camera (2.0.2):
     - Permission/Core
   - Permission/Core (2.0.2)
@@ -10,6 +13,7 @@ PODS:
     - Permission/Core
   - Permission/Photos (2.0.2):
     - Permission/Core
+  - PureLayout (3.0.2)
   - RxCocoa (3.0.1):
     - RxSwift (~> 3.0)
   - RxSwift (3.0.1)
@@ -19,6 +23,8 @@ PODS:
     - Swinject (= 2.0.0-beta.2)
 
 DEPENDENCIES:
+  - CTAssetsPickerController (~> 3.3.0)
+  - ICGVideoTrimmer
   - Permission/Camera
   - Permission/MediaLibrary
   - Permission/Microphone
@@ -31,13 +37,16 @@ DEPENDENCIES:
   - SwinjectStoryboard (= 1.0.0-beta.2)
 
 SPEC CHECKSUMS:
+  CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
+  ICGVideoTrimmer: 1f54de0595af56af2a406f20cdb33c1c440d15cd
   Permission: c4e0890cabf0871acfc2700d45bde7d935b2559f
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
   SCWaveformView: 78b3503675aafcdaf9c283d68cb45c9fc735af87
   Swinject: 69a893192efa9f2cc44be79ef423d04d571b6af9
   SwinjectStoryboard: b52b45821a50386ef604c3cd098f8029a50a268d
 
-PODFILE CHECKSUM: 29c3ca47b6b3597609735a0b68cb030fe819e389
+PODFILE CHECKSUM: 84609c3be33804a2dfadd7984e20401cb1dc2da0
 
 COCOAPODS: 1.1.1

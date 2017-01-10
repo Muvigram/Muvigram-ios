@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hVv-uy-ndH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hVv-uy-ndH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -75,14 +75,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlH-Cx-URA">
                                                     <rect key="frame" x="3" y="10" width="282" height="36"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나비잠 (Sweet Dream)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thO-au-8f9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="282" height="19.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thO-au-8f9">
+                                                            <rect key="frame" x="0.0" y="0.0" width="282" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김희철X민경훈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OO3-0R-3Ob">
-                                                            <rect key="frame" x="0.0" y="21" width="274" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OO3-0R-3Ob">
+                                                            <rect key="frame" x="0.0" y="36" width="274" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.53725490196078429" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -177,6 +177,9 @@
                                             <constraint firstAttribute="height" constant="45" id="keA-Q5-hRd"/>
                                         </constraints>
                                         <state key="normal" image="goLibrary"/>
+                                        <connections>
+                                            <action selector="accessLibraryAction:" destination="3lT-vI-3wa" eventType="touchUpInside" id="jCe-rd-IuY"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ZF-uM-nN2">
                                         <rect key="frame" x="0.0" y="580" width="375" height="1"/>
@@ -311,6 +314,108 @@
             </objects>
             <point key="canvasLocation" x="-214.49275362318843" y="2.4456521739130435"/>
         </scene>
+        <!--Music Editor View Controller-->
+        <scene sceneID="obl-pP-GWD">
+            <objects>
+                <viewController storyboardIdentifier="myMusic" id="l0x-Zv-w0I" customClass="MusicEditorViewController" customModule="Muvigram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BRR-ho-RPL"/>
+                        <viewControllerLayoutGuide type="bottom" id="oLX-jq-qCj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iLM-80-v7y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aL-my-0Y8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Music" id="Tvh-dQ-deN">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="AQm-Za-3kg">
+                                            <connections>
+                                                <segue destination="08p-P9-IPU" kind="showDetail" identifier="editorSegue" id="jC9-3Z-KUp"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QGS-Gm-nIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-215" y="684"/>
+        </scene>
+        <!--Editor View Controller-->
+        <scene sceneID="dlm-HL-R3v">
+            <objects>
+                <viewController id="08p-P9-IPU" customClass="EditorViewController" customModule="Muvigram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BlB-as-MsQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="UFg-nU-Ne2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oBq-lV-LQM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3pe-9x-VzB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-VJ-BHI">
+                                        <rect key="frame" x="251" y="163" width="42" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZt-lb-UWF">
+                                <rect key="frame" x="0.0" y="597" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y4D-DO-Smz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xk-ps-uEt">
+                                <rect key="frame" x="319" y="542" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SWn-lb-3Va">
+                                <rect key="frame" x="319" y="487" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vRo-dq-EYu">
+                                <rect key="frame" x="319" y="36" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87N-S2-9eZ">
+                                <rect key="frame" x="319" y="91" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.66541666377112052" green="1" blue="0.53160453377384476" alpha="0.5056988441780822" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="bottomLabelView" destination="KZt-lb-UWF" id="pxm-lD-lg4"/>
+                        <outlet property="cancelView" destination="SWn-lb-3Va" id="uKp-CS-iC7"/>
+                        <outlet property="doneView" destination="87N-S2-9eZ" id="E2W-V1-KUo"/>
+                        <outlet property="homeView" destination="vRo-dq-EYu" id="rhH-Zm-jFO"/>
+                        <outlet property="insertView" destination="7xk-ps-uEt" id="IcI-96-Cho"/>
+                        <outlet property="resultVideoView" destination="y4D-DO-Smz" id="Z2a-c3-Zte"/>
+                        <outlet property="timeControlView" destination="Rzk-VJ-BHI" id="HSa-Yk-dxT"/>
+                        <outlet property="videoView" destination="3pe-9x-VzB" id="qcX-yd-8bL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qd-1n-nzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653.60000000000002" y="685.90704647676171"/>
+        </scene>
         <!--ShareViewController-->
         <scene sceneID="vZD-y8-sG0">
             <objects>
@@ -370,6 +475,6 @@
         <image name="noneRecord" width="466" height="466"/>
         <image name="recoed" width="189" height="192"/>
         <image name="save" width="100" height="100"/>
-        <image name="test_cover" width="1000" height="1000"/>
+        <image name="test_cover" width="442" height="536"/>
     </resources>
 </document>

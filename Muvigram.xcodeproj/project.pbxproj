@@ -35,6 +35,16 @@
 		2BAD083B1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */; };
 		2BE87BBC1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */; };
 		2BE87BBE1E1A09D00006F962 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBD1E1A09D00006F962 /* VideoService.swift */; };
+		653ED1EF1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1EE1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift */; };
+		653ED1F31E24B6F100271C78 /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1F21E24B6F100271C78 /* VideosInfo.swift */; };
+		653ED1F51E24B95B00271C78 /* MusicEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1F41E24B95B00271C78 /* MusicEditorViewController.swift */; };
+		653ED1F71E24B9F900271C78 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1F61E24B9F900271C78 /* EditorViewController.swift */; };
+		653ED1F91E24BB5600271C78 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED1F81E24BB5600271C78 /* CoreMedia.framework */; };
+		653ED1FB1E24BB5E00271C78 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED1FA1E24BB5E00271C78 /* QuartzCore.framework */; };
+		653ED1FD1E24BB6700271C78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED1FC1E24BB6700271C78 /* AVFoundation.framework */; };
+		653ED1FF1E24BB6D00271C78 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED1FE1E24BB6D00271C78 /* AVKit.framework */; };
+		653ED2011E24BB7800271C78 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED2001E24BB7800271C78 /* MediaPlayer.framework */; };
+		653ED2031E24C14F00271C78 /* audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 653ED2021E24C14F00271C78 /* audio.mp3 */; };
 		C5C4C415CCAC91F11FF3CCF5 /* Pods_Muvigram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +80,16 @@
 		2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithMusicPlay.swift; sourceTree = "<group>"; };
 		2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithVideoThumbnail.swift; sourceTree = "<group>"; };
 		2BE87BBD1E1A09D00006F962 /* VideoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		653ED1EE1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewControllerWithVideoPicker.swift; sourceTree = "<group>"; };
+		653ED1F21E24B6F100271C78 /* VideosInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInfo.swift; sourceTree = "<group>"; };
+		653ED1F41E24B95B00271C78 /* MusicEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicEditorViewController.swift; sourceTree = "<group>"; };
+		653ED1F61E24B9F900271C78 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
+		653ED1F81E24BB5600271C78 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		653ED1FA1E24BB5E00271C78 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		653ED1FC1E24BB6700271C78 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		653ED1FE1E24BB6D00271C78 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		653ED2001E24BB7800271C78 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		653ED2021E24C14F00271C78 /* audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = audio.mp3; path = ../../../../../Downloads/audio.mp3; sourceTree = "<group>"; };
 		7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muvigram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E532916B3091F97B301407B /* Pods-Muvigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muvigram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +99,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653ED2011E24BB7800271C78 /* MediaPlayer.framework in Frameworks */,
+				653ED1FF1E24BB6D00271C78 /* AVKit.framework in Frameworks */,
+				653ED1FD1E24BB6700271C78 /* AVFoundation.framework in Frameworks */,
+				653ED1FB1E24BB5E00271C78 /* QuartzCore.framework in Frameworks */,
+				653ED1F91E24BB5600271C78 /* CoreMedia.framework in Frameworks */,
 				C5C4C415CCAC91F11FF3CCF5 /* Pods_Muvigram.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +181,7 @@
 		2B84A7AF1DEE6EAE001E0E14 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				653ED1F11E24B6D400271C78 /* Editor */,
 				2B61ADCC1E124BCA00AB09D8 /* Lanch */,
 				2B69195B1DEE9708005EE1D7 /* View */,
 				2BAD08201E10977E004F94BE /* Data */,
@@ -198,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */,
+				653ED1EE1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift */,
 				2BAD08381E10ED90004F94BE /* CameraPresenterWithStackbar.swift */,
 				2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */,
 				2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */,
@@ -247,9 +274,25 @@
 		49A6BF3E90D4B7E44FFF19EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				653ED2001E24BB7800271C78 /* MediaPlayer.framework */,
+				653ED1FE1E24BB6D00271C78 /* AVKit.framework */,
+				653ED1FC1E24BB6700271C78 /* AVFoundation.framework */,
+				653ED1FA1E24BB5E00271C78 /* QuartzCore.framework */,
+				653ED1F81E24BB5600271C78 /* CoreMedia.framework */,
 				7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		653ED1F11E24B6D400271C78 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				653ED1F21E24B6F100271C78 /* VideosInfo.swift */,
+				653ED1F41E24B95B00271C78 /* MusicEditorViewController.swift */,
+				653ED1F61E24B9F900271C78 /* EditorViewController.swift */,
+				653ED2021E24C14F00271C78 /* audio.mp3 */,
+			);
+			name = Editor;
 			sourceTree = "<group>";
 		};
 		BD29141C9497FB07A8CA5C09 /* Pods */ = {
@@ -296,7 +339,7 @@
 				TargetAttributes = {
 					2B84A7941DEE6D8A001E0E14 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 5ELQH5H3HB;
+						DevelopmentTeam = NB287XY7UT;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -328,6 +371,7 @@
 				2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */,
 				2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */,
 				2B84A7A21DEE6D8A001E0E14 /* Main.storyboard in Resources */,
+				653ED2031E24C14F00271C78 /* audio.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,15 +445,19 @@
 				2BE87BBC1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift in Sources */,
 				2B6919641DEE98C2005EE1D7 /* MusicViewController.swift in Sources */,
 				2B2CB2421E1B45A60034F219 /* ShareMvpView.swift in Sources */,
+				653ED1F31E24B6F100271C78 /* VideosInfo.swift in Sources */,
 				2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */,
 				2B84A7B51DEE700A001E0E14 /* MainPageViewController.swift in Sources */,
 				2B84A7991DEE6D8A001E0E14 /* AppDelegate.swift in Sources */,
 				2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */,
+				653ED1F51E24B95B00271C78 /* MusicEditorViewController.swift in Sources */,
 				2B9D1D471E07608400270A11 /* ShareViewController.swift in Sources */,
 				2B6919621DEE98A7005EE1D7 /* CameraViewController.swift in Sources */,
 				2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */,
+				653ED1EF1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift in Sources */,
 				2BAD083B1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift in Sources */,
 				2BA15A801E0D1B9F009C7994 /* BasePresenter.swift in Sources */,
+				653ED1F71E24B9F900271C78 /* EditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,10 +584,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5ELQH5H3HB;
+				DEVELOPMENT_TEAM = NB287XY7UT;
 				INFOPLIST_FILE = Muvigram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estsoft.Muvigram;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.estsoft.muvigram-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -552,10 +601,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5ELQH5H3HB;
+				DEVELOPMENT_TEAM = NB287XY7UT;
 				INFOPLIST_FILE = Muvigram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estsoft.Muvigram;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.estsoft.muvigram-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

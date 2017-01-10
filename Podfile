@@ -15,6 +15,9 @@ pod 'RxCocoa',    '~> 3.0'
 pod "SCWaveformView"
 pod 'Swinject', '2.0.0-beta.2'
 pod 'SwinjectStoryboard', '1.0.0-beta.2'
+pod 'CTAssetsPickerController',  '~> 3.3.0'
+pod 'ICGVideoTrimmer'
+
   # Pods for Muvigram
 
 end
