@@ -193,6 +193,3 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     }
 }
 
-
-
-

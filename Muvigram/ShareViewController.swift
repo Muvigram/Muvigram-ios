@@ -20,7 +20,8 @@ class ShareViewController: UIViewController {
     
     // @inject
     public var presenter: SharePresenter<ShareViewController>!
-    @IBOutlet var saveButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var homeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +30,21 @@ class ShareViewController: UIViewController {
         
         let saveButtonEvent = saveButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.saveButtonClickEvent(event: saveButtonEvent)
+        
+        let homeButtonEvent = homeButton.rx.controlEvent(UIControlEvents.touchUpInside)
+        presenter.homeButtonClickEvent(event: homeButtonEvent)
+        
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
         print("deinit")
+        //NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @IBAction func homeClick(_ sender: Any) {
+        presenter = nil
+        dimissShareViewController()
     }
     
 }
@@ -41,6 +52,7 @@ class ShareViewController: UIViewController {
 extension ShareViewController: ShareMvpView {
     // Called when encodeVideofileForMargins () is finished
     func playVideo(mergedVideofileUrl: URL?) {
+        
         if let videofileUrl = mergedVideofileUrl {
             player = AVPlayer(url: videofileUrl)
             let playerLayer = AVPlayerLayer(player: player)
@@ -84,5 +96,9 @@ extension ShareViewController: ShareMvpView {
         container.addSubview(loadingView)
         uiView.addSubview(container)
         return (actInd, container)
+    }
+    
+    func dimissShareViewController() {
+        self.dismiss(animated: false, completion: nil);
     }
 }

@@ -323,18 +323,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLg-UK-u0X">
-                                <rect key="frame" x="170" y="318" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5jZ-Io-ijw">
+                                <rect key="frame" x="309" y="20" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Lc0-mw-Tn6"/>
+                                    <constraint firstAttribute="width" secondItem="5jZ-Io-ijw" secondAttribute="height" multiplier="1:1" id="oBq-dD-BEc"/>
+                                    <constraint firstAttribute="width" constant="50" id="rAV-OF-ptW"/>
+                                </constraints>
+                                <state key="normal" image="home"/>
+                                <connections>
+                                    <action selector="homeClick:" destination="BBB-1v-fE6" eventType="touchUpInside" id="au0-1M-ljD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLg-UK-u0X">
+                                <rect key="frame" x="309" y="84" width="50" height="50"/>
+                                <state key="normal" image="save"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tLg-UK-u0X" firstAttribute="centerY" secondItem="ZFA-Il-J6m" secondAttribute="centerY" id="aEH-HU-wuV"/>
-                            <constraint firstItem="tLg-UK-u0X" firstAttribute="centerX" secondItem="ZFA-Il-J6m" secondAttribute="centerX" id="u6i-tD-Q3a"/>
+                            <constraint firstItem="tLg-UK-u0X" firstAttribute="height" secondItem="5jZ-Io-ijw" secondAttribute="height" id="0SQ-pb-d6J"/>
+                            <constraint firstItem="tLg-UK-u0X" firstAttribute="width" secondItem="5jZ-Io-ijw" secondAttribute="height" multiplier="1:1" id="JkU-bg-1wZ"/>
+                            <constraint firstItem="tLg-UK-u0X" firstAttribute="top" secondItem="5jZ-Io-ijw" secondAttribute="bottom" constant="14" id="Vbs-h0-GTb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tLg-UK-u0X" secondAttribute="trailing" id="fuN-Jk-pAW"/>
+                            <constraint firstItem="5jZ-Io-ijw" firstAttribute="trailing" secondItem="ZFA-Il-J6m" secondAttribute="trailingMargin" id="gLR-sb-rUH"/>
+                            <constraint firstItem="tLg-UK-u0X" firstAttribute="width" secondItem="5jZ-Io-ijw" secondAttribute="width" id="us3-Ax-4dy"/>
+                            <constraint firstItem="5jZ-Io-ijw" firstAttribute="top" secondItem="dAS-21-dRN" secondAttribute="bottom" id="vk3-5X-Ej1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="homeButton" destination="5jZ-Io-ijw" id="tEr-Zf-97o"/>
                         <outlet property="saveButton" destination="tLg-UK-u0X" id="xti-Ab-5MV"/>
                     </connections>
                 </viewController>
@@ -348,8 +366,10 @@
         <image name="cameraChange" width="32" height="32"/>
         <image name="compleateRecord" width="30" height="30"/>
         <image name="goLibrary" width="438" height="351"/>
+        <image name="home" width="100" height="100"/>
         <image name="noneRecord" width="466" height="466"/>
         <image name="recoed" width="189" height="192"/>
+        <image name="save" width="100" height="100"/>
         <image name="test_cover" width="1000" height="1000"/>
     </resources>
 </document>
