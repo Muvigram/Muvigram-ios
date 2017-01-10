@@ -78,5 +78,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = storyBoard.instantiateInitialViewController()
         return true
     }
+    
+    func newShareViewControllerInstance() -> ShareViewController {
+        let bundle = Bundle(for: LaunchViewController.self)
+        let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: bundle, container: container)
+        return storyBoard.instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
+    }
+    
 }
 

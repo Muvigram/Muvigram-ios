@@ -41,7 +41,6 @@ class DataManager {
     }
     
     public func clearUnnecessaryfilesForMusicAndVideo(videoUrlArray: inout [URL], musicTimeStampArray: inout [CMTime]) {
-    
         videoService.clearUnnecessaryfilesForMusicAndVideo(&videoUrlArray, &musicTimeStampArray)
     
     }
