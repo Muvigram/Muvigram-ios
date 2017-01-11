@@ -56,15 +56,19 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
     internal func saveButtonClickEvent(event: ControlEvent<Void>) {
         event.debounce(0.5, scheduler: MainScheduler.instance)
              .bindNext { [unowned self] in
+                let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
+                indicator.startAnimating()
                 self.dataManager.saveVideoWithUrl(url: self.videoUrl)
                     .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
                     .observeOn(MainScheduler.instance)
                     .subscribe(
-                        onError: { error in
+                      onError: { error in
                             print(error.localizedDescription)
                     },
-                        onCompleted: {
-                            print("completed")
+                      onCompleted: {
+                            indicator.stopAnimating()
+                            contrainer.removeFromSuperview()
+                            self.view?.showCompleteDialog()
                     })
                     .addDisposableTo(self.bag)
         }.addDisposableTo(bag)

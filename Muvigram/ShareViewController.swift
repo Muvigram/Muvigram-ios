@@ -8,7 +8,9 @@
 
 import UIKit
 import RxSwift
+import PopupDialog
 import AVFoundation
+
 
 class ShareViewController: UIViewController {
     
@@ -38,8 +40,8 @@ class ShareViewController: UIViewController {
     
     deinit {
         print("deinit")
-        //NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        
     }
     
     @IBAction func homeClick(_ sender: Any) {
@@ -61,10 +63,10 @@ extension ShareViewController: ShareMvpView {
             
             self.view.layer.insertSublayer(playerLayer, at: 0)
             player?.play()
-            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { [unowned self] _  in
-                self.player?.seek(to: kCMTimeZero, completionHandler: { _ in
-                    self.player?.play()
-                })
+            
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem, queue: nil) { [unowned self] _  in
+                self.player?.seek(to: kCMTimeZero)
+                self.player?.play()
             }
         }
     }
@@ -100,5 +102,9 @@ extension ShareViewController: ShareMvpView {
     
     func dimissShareViewController() {
         self.dismiss(animated: false, completion: nil);
+    }
+    
+    func showCompleteDialog() {
+        self.present(PopupDialog(title: "Save is complete.", message: ""), animated: true, completion: nil)
     }
 }

@@ -388,7 +388,9 @@ extension CameraViewController: StackBarCurrentDelegate {
     }
     
     func minimumRecordingtimeComplete() {
+        
         presenter.minimumRecordingtimeComplete()
+        
     }
     
     func minimumRecordingtimeLess() {

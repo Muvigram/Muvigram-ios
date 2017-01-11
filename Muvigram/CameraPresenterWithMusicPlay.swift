@@ -62,6 +62,8 @@ extension CameraPresenter where T:CameraMvpView {
     internal func musicSectionSelectionPlayback() {
         DispatchQueue.global().async { [unowned self] in
             
+            var isPause = false
+            
             if let url = self.musicUrl {
                 self.modifyModePlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
                 self.modifyModePlayer?.seek(to: self.musicInputTime)
@@ -70,21 +72,23 @@ extension CameraPresenter where T:CameraMvpView {
                 let actualMusicEndSec = CMTimeGetSeconds((self.modifyModePlayer?.currentItem?.asset.duration)!)
                 
                 self.modifyModePlayer?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 60), queue: DispatchQueue.main, using: { (time) in
+                        let currentMusicSec = CMTimeGetSeconds(time)
+                        let endMusicSec = CMTimeGetSeconds(self.musicOutputTime)
                     
-                    let currentMusicSec = CMTimeGetSeconds(time)
-                    let endMusicSec = CMTimeGetSeconds(self.musicOutputTime)
-                    
-                    if currentMusicSec >= endMusicSec || currentMusicSec >= actualMusicEndSec {
-                        self.view?.setWaveformViewProgress(time: self.musicInputTime)
-                        self.modifyModePlayer?.pause()
-                        self.modifyModePlayer?.seek(to: self.musicInputTime, completionHandler: { _ in
-                            self.modifyModePlayer?.play()
-                        })
-                    } else {
-                        self.view?.setWaveformViewProgress(time: time)
-                    }
+                        if currentMusicSec >= endMusicSec || currentMusicSec >= actualMusicEndSec {
+                            if !isPause {
+                                isPause = true
+                                self.modifyModePlayer?.pause()
+                                self.modifyModePlayer?.seek(to: self.musicInputTime, completionHandler: { _ in
+                                    self.view?.setWaveformViewProgress(time: self.musicInputTime)
+                                    self.modifyModePlayer?.play()
+                                    isPause = false
+                                })
+                            }
+                        } else {
+                            self.view?.setWaveformViewProgress(time: time)
+                        }
                 })
-                
             } else {
                 print("No music files")
             }
@@ -136,13 +140,13 @@ extension CameraPresenter where T:CameraMvpView {
     }
     
     internal func modifyPlayerPause() {
-        modifyModePlayer?.pause()
+        self.modifyModePlayer?.pause()
     }
     
     internal func modifyPlayerPlay() {
-        modifyModePlayer?.seek(to: self.musicInputTime, completionHandler: { _ in
-            self.modifyModePlayer?.play()
-        })
+            self.modifyModePlayer?.seek(to: self.musicInputTime, completionHandler: { _ in
+                self.modifyModePlayer?.play()
+            })
     }
     
     internal func setModifyPlayerRange(_ range: CMTimeRange, end: CMTime) {

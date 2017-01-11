@@ -10,6 +10,7 @@ pod 'Permission/Notifications'
 pod 'Permission/MediaLibrary'
 pod ‘Permission/Microphone’
 pod ‘Permission/Photos’
+pod 'PopupDialog', '~> 0.5'
 pod 'RxSwift',    '~> 3.0'
 pod 'RxCocoa',    '~> 3.0'
 pod "SCWaveformView"

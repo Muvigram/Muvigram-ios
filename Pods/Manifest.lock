@@ -10,6 +10,7 @@ PODS:
     - Permission/Core
   - Permission/Photos (2.0.2):
     - Permission/Core
+  - PopupDialog (0.5.0)
   - RxCocoa (3.0.1):
     - RxSwift (~> 3.0)
   - RxSwift (3.0.1)
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - Permission/Microphone
   - Permission/Notifications
   - Permission/Photos
+  - PopupDialog (~> 0.5)
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
   - SCWaveformView
@@ -32,12 +34,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Permission: c4e0890cabf0871acfc2700d45bde7d935b2559f
+  PopupDialog: 9890441b81105b9076757af2afe2b037be682f3e
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
   SCWaveformView: 78b3503675aafcdaf9c283d68cb45c9fc735af87
   Swinject: 69a893192efa9f2cc44be79ef423d04d571b6af9
   SwinjectStoryboard: b52b45821a50386ef604c3cd098f8029a50a268d
 
-PODFILE CHECKSUM: 29c3ca47b6b3597609735a0b68cb030fe819e389
+PODFILE CHECKSUM: 4c97f52c7f6f44dfef3ce51c4fa187ab578036da
 
 COCOAPODS: 1.1.1

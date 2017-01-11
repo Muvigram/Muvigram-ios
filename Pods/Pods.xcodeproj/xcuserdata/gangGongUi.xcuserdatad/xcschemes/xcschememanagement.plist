@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PopupDialog.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>RxCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,32 +52,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>21A8CC04DFC071ADE7BC3761A96A48CF</key>
+		<key>2AA87C04C814876154FA15FE44FD882F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F1D0FE63C20D64E3446B7B7BD047771</key>
+		<key>42AC08FE9E10C137F8F4021AF00E6A0D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>75E6A2CCAD7256AFE27CE629C5326555</key>
+		<key>6D54B8E0A9A4A726BBC5B7ECBE115686</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9A89C2962A62AB2125A833695931B72F</key>
+		<key>7314B8E33849632FFB469E1BA3F44C64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B76AC97AD7F6B27C3EA37FCBB6895CC9</key>
+		<key>87A31618B4DC24B53EFA2FC73BC0A7E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA696A962E93BAC1A8C6CA4A0D1DAD7F</key>
+		<key>C12DD440706E0566CBDED70BC788DC01</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E664116794CFCA98E704788C4BB946CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

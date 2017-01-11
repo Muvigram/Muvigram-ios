@@ -58,7 +58,6 @@ extension CameraPresenter where T:CameraMvpView {
         self.view?.controllerViewisHidden(false, isRecord: false)
     }
     internal func minimumRecordingtimeComplete() {
-        self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: true)
         self.isStackBarPassminimumRecordingCondition = true
     }
     
