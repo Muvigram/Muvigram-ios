@@ -74,6 +74,11 @@
     return _minLength ?: 3;
 }
 
+- (CGFloat)stackedTime
+{
+    return _stackedTime ?: 0;
+}
+
 - (void)resetSubviews
 {
     [self setBackgroundColor:[UIColor blackColor]];
@@ -138,7 +143,9 @@
     [self addSubview:self.leftOverlayView];
 
     // add right overlay view
-    CGFloat rightViewFrameX = CGRectGetWidth(self.frameView.frame) < CGRectGetWidth(self.frame) ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth;
+    //here
+//    CGFloat rightViewFrameX = CGRectGetWidth(self.frameView.frame) < CGRectGetWidth(self.frame) ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth;
+    CGFloat rightViewFrameX = CGRectGetWidth(self.frameView.frame) < CGRectGetWidth(self.frame) ? CGRectGetMaxX(self.frameView.frame) - self.widthPerSecond*self.stackedTime : CGRectGetWidth(self.frame) - self.thumbWidth - self.widthPerSecond*self.stackedTime ;
     self.rightOverlayView = [[UIView alloc] initWithFrame:CGRectMake(rightViewFrameX, 0, self.overlayWidth, CGRectGetHeight(self.frameView.frame))];
     if (self.rightThumbImage) {
         self.rightThumbView = [[ICGThumbView alloc] initWithFrame:CGRectMake(0, 0, self.thumbWidth, CGRectGetHeight(self.frameView.frame)) thumbImage:self.rightThumbImage];
@@ -179,6 +186,7 @@
             CGPoint center = self.leftOverlayView.center;
             
             CGFloat newLeftViewMidX = center.x += deltaX;;
+            //Here
             CGFloat maxWidth = CGRectGetMinX(self.rightOverlayView.frame) - (self.minLength * self.widthPerSecond);
             CGFloat newLeftViewMinX = newLeftViewMidX - self.overlayWidth/2;
             if (newLeftViewMinX < self.thumbWidth - self.overlayWidth) {
@@ -217,8 +225,13 @@
             CGPoint center = self.rightOverlayView.center;
             
             CGFloat newRightViewMidX = center.x += deltaX;
+            //here!!!!!!!!!
             CGFloat minX = CGRectGetMaxX(self.leftOverlayView.frame) + self.minLength * self.widthPerSecond;
-            CGFloat maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth;
+            CGFloat maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) - self.widthPerSecond*self.stackedTime  : CGRectGetWidth(self.frame) - self.thumbWidth - self.widthPerSecond*self.stackedTime ;
+            NSLog(@"%f", self.widthPerSecond*self.stackedTime);
+            NSLog(@"%f", self.widthPerSecond);
+            NSLog(@"%f", self.stackedTime);
+            NSLog(@"%f", maxX);
             if (newRightViewMidX - self.overlayWidth/2 < minX) {
                 newRightViewMidX = minX + self.overlayWidth/2;
             } else if (newRightViewMidX - self.overlayWidth/2 > maxX) {

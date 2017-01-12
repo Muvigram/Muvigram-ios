@@ -43,6 +43,10 @@
 // Custom width for thumb
 @property (assign, nonatomic) CGFloat thumbWidth;
 
+@property (assign, nonatomic) CGFloat stackedTime;
+
+
+
 @property (weak, nonatomic) IBOutlet id<ICGVideoTrimmerDelegate> delegate;
 
 - (instancetype)initWithAsset:(AVAsset *)asset;
