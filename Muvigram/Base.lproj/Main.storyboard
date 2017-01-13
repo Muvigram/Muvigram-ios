@@ -376,6 +376,16 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZt-lb-UWF">
                                 <rect key="frame" x="0.0" y="597" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Can't Insert Video Anymore!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wW1-Bb-OlR">
+                                        <rect key="frame" x="0.0" y="8" width="375" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y4D-DO-Smz">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="26"/>
@@ -410,6 +420,7 @@
                         <outlet property="resultVideoView" destination="y4D-DO-Smz" id="Z2a-c3-Zte"/>
                         <outlet property="timeControlView" destination="Rzk-VJ-BHI" id="HSa-Yk-dxT"/>
                         <outlet property="videoView" destination="3pe-9x-VzB" id="qcX-yd-8bL"/>
+                        <outlet property="warningLabel" destination="wW1-Bb-OlR" id="5mR-dX-h3J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qd-1n-nzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
