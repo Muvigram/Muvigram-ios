@@ -9,6 +9,13 @@
 import Foundation
 import MediaPlayer
 
-protocol MusicMvpView: Mvpview {
+@objc protocol MusicMvpView: Mvpview {
     func updateMusicWithTable()
+    @objc optional func setWaveformViewAsset(asset: AVAsset)
+    @objc optional func setWaveformViewPrecision()
+    @objc optional func setWaveformViewTimeRange(range: CMTimeRange)
+    @objc optional func setWaveformViewProgress(time: CMTime)
+    @objc optional func getWaveformViewTimeRangeStart() -> CMTime
+    @objc optional func getWaveformViewAssetDuration() -> CMTime
+    @objc optional func showMusicRangeAlert()
 }

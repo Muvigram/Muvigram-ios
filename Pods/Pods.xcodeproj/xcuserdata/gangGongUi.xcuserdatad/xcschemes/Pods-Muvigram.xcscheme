@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,11 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+<<<<<<< HEAD
                BlueprintIdentifier = "2AA87C04C814876154FA15FE44FD882F"
+=======
+               BlueprintIdentifier = "EF62F8B28BBBDD1B6EBE832F0466D310"
+>>>>>>> jeongyi
                BuildableName = "Pods_Muvigram.framework"
                BlueprintName = "Pods-Muvigram"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +49,11 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
+<<<<<<< HEAD
             BlueprintIdentifier = "2AA87C04C814876154FA15FE44FD882F"
+=======
+            BlueprintIdentifier = "EF62F8B28BBBDD1B6EBE832F0466D310"
+>>>>>>> jeongyi
             BuildableName = "Pods_Muvigram.framework"
             BlueprintName = "Pods-Muvigram"
             ReferencedContainer = "container:Pods.xcodeproj">

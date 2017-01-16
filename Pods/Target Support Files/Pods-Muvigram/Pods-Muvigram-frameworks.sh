@@ -84,8 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/CTAssetsPickerController/CTAssetsPickerController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ICGVideoTrimmer/ICGVideoTrimmer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Permission/Permission.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PopupDialog/PopupDialog.framework"
+<<<<<<< HEAD
+=======
+  install_framework "$BUILT_PRODUCTS_DIR/PureLayout/PureLayout.framework"
+>>>>>>> jeongyi
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SCWaveformView/SCWaveformView.framework"
@@ -93,8 +99,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SwinjectStoryboard/SwinjectStoryboard.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/CTAssetsPickerController/CTAssetsPickerController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ICGVideoTrimmer/ICGVideoTrimmer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Permission/Permission.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PopupDialog/PopupDialog.framework"
+<<<<<<< HEAD
+=======
+  install_framework "$BUILT_PRODUCTS_DIR/PureLayout/PureLayout.framework"
+>>>>>>> jeongyi
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SCWaveformView/SCWaveformView.framework"

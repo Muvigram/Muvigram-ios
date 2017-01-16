@@ -16,8 +16,9 @@ import RxCocoa
 import Swinject
 import SwinjectStoryboard
 import SCWaveformView
+import CTAssetsPickerController
 
-final class CameraViewController: UIViewController {
+final class CameraViewController: UIViewController, CTAssetsPickerControllerDelegate {
 
     @IBOutlet var musicSelectBtn: AlbumButton!
     @IBOutlet var cameraTopline: UIView!
@@ -53,6 +54,12 @@ final class CameraViewController: UIViewController {
     fileprivate var videoDiviceInput: AVCaptureDeviceInput!
     fileprivate var movieFileOutput: AVCaptureFileOutput?
     fileprivate var backgroundRecordingID: UIBackgroundTaskIdentifier?
+    
+    // VideoPicker  - jeongyi
+    let imagePicker = CTAssetsPickerController()
+    let assetsGridSelectedView = CTAssetsGridViewCell()
+    let assetsSelectionLabel = CTAssetSelectionLabel()
+    let videoInfo = VideosInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -337,6 +344,14 @@ final class CameraViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    @IBAction func accessLibraryAction(_ sender: Any) {
+        imagePicker.delegate = self
+        imagePicker.showsSelectionIndex = true
+        imagePicker.defaultAssetCollection = .smartAlbumVideos
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    
 }
 
 // Saving and merging video files.
@@ -587,4 +602,6 @@ extension CameraViewController: CameraMvpView {
     func setlibraryButtonImage(_ image: UIImage) {
         libraryBtn.setImage(image, for: .normal)
     }
+    
+    
 }
