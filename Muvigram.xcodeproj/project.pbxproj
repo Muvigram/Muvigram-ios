@@ -11,6 +11,8 @@
 		2B2CB2421E1B45A60034F219 /* ShareMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */; };
 		2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */; };
 		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
+		2B504EE81E273C6A00C7FD29 /* audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B504EE71E273C6A00C7FD29 /* audio.mp3 */; };
+		2B504EEA1E28611300C7FD29 /* MusicNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B504EE91E28611300C7FD29 /* MusicNavigationBar.swift */; };
 		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
 		2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */; };
 		2B6919621DEE98A7005EE1D7 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */; };
@@ -44,7 +46,6 @@
 		653ED1FD1E24BB6700271C78 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED1FC1E24BB6700271C78 /* AVFoundation.framework */; };
 		653ED1FF1E24BB6D00271C78 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED1FE1E24BB6D00271C78 /* AVKit.framework */; };
 		653ED2011E24BB7800271C78 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653ED2001E24BB7800271C78 /* MediaPlayer.framework */; };
-		653ED2031E24C14F00271C78 /* audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 653ED2021E24C14F00271C78 /* audio.mp3 */; };
 		C5C4C415CCAC91F11FF3CCF5 /* Pods_Muvigram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,8 @@
 		2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareMvpView.swift; sourceTree = "<group>"; };
 		2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumButton.swift; sourceTree = "<group>"; };
 		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
+		2B504EE71E273C6A00C7FD29 /* audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = audio.mp3; path = ../../../../Downloads/audio.mp3; sourceTree = "<group>"; };
+		2B504EE91E28611300C7FD29 /* MusicNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicNavigationBar.swift; sourceTree = "<group>"; };
 		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +92,6 @@
 		653ED1FC1E24BB6700271C78 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		653ED1FE1E24BB6D00271C78 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		653ED2001E24BB7800271C78 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		653ED2021E24C14F00271C78 /* audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = audio.mp3; path = ../../../../../Downloads/audio.mp3; sourceTree = "<group>"; };
 		7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muvigram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E532916B3091F97B301407B /* Pods-Muvigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muvigram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +172,7 @@
 		2B84A7AE1DEE6E7B001E0E14 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2B504EE71E273C6A00C7FD29 /* audio.mp3 */,
 				2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */,
 				2B84A7A01DEE6D8A001E0E14 /* Main.storyboard */,
 				2B9B6AC01E0277DF0020C06D /* Assets.xcassets */,
@@ -288,9 +291,9 @@
 			isa = PBXGroup;
 			children = (
 				653ED1F21E24B6F100271C78 /* VideosInfo.swift */,
-				653ED1F41E24B95B00271C78 /* MusicEditorViewController.swift */,
 				653ED1F61E24B9F900271C78 /* EditorViewController.swift */,
-				653ED2021E24C14F00271C78 /* audio.mp3 */,
+				653ED1F41E24B95B00271C78 /* MusicEditorViewController.swift */,
+				2B504EE91E28611300C7FD29 /* MusicNavigationBar.swift */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -368,10 +371,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B84A7A71DEE6D8A001E0E14 /* LaunchScreen.storyboard in Resources */,
+				2B504EE81E273C6A00C7FD29 /* audio.mp3 in Resources */,
 				2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */,
 				2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */,
 				2B84A7A21DEE6D8A001E0E14 /* Main.storyboard in Resources */,
-				653ED2031E24C14F00271C78 /* audio.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +451,7 @@
 				653ED1F31E24B6F100271C78 /* VideosInfo.swift in Sources */,
 				2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */,
 				2B84A7B51DEE700A001E0E14 /* MainPageViewController.swift in Sources */,
+				2B504EEA1E28611300C7FD29 /* MusicNavigationBar.swift in Sources */,
 				2B84A7991DEE6D8A001E0E14 /* AppDelegate.swift in Sources */,
 				2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */,
 				653ED1F51E24B95B00271C78 /* MusicEditorViewController.swift in Sources */,

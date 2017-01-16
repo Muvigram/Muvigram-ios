@@ -13,6 +13,7 @@ PODS:
     - Permission/Core
   - Permission/Photos (2.0.2):
     - Permission/Core
+  - PopupDialog (0.5.0)
   - PureLayout (3.0.2)
   - RxCocoa (3.0.1):
     - RxSwift (~> 3.0)
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - Permission/Microphone
   - Permission/Notifications
   - Permission/Photos
+  - PopupDialog (~> 0.5)
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
   - SCWaveformView
@@ -40,6 +42,7 @@ SPEC CHECKSUMS:
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   ICGVideoTrimmer: 1f54de0595af56af2a406f20cdb33c1c440d15cd
   Permission: c4e0890cabf0871acfc2700d45bde7d935b2559f
+  PopupDialog: 9890441b81105b9076757af2afe2b037be682f3e
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
@@ -47,6 +50,6 @@ SPEC CHECKSUMS:
   Swinject: 69a893192efa9f2cc44be79ef423d04d571b6af9
   SwinjectStoryboard: b52b45821a50386ef604c3cd098f8029a50a268d
 
-PODFILE CHECKSUM: 84609c3be33804a2dfadd7984e20401cb1dc2da0
+PODFILE CHECKSUM: e8114d760a6fd68b73a130fb073e8851aa360736
 
 COCOAPODS: 1.1.1

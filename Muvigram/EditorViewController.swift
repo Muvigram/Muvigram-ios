@@ -462,7 +462,7 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
             audioPlayer.delegate = self
             audioPlayer.setVolume(50, fadeDuration: 0)
             audioPlayer.prepareToPlay()
-        } catch let error {
+        } catch _ {
             print("그런 노래 없어요.(정색)")
         }
     }

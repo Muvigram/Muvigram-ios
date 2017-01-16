@@ -26,6 +26,8 @@ extension CameraViewController{
         if assets.count <= 5 {
             self.dismiss(animated: true, completion: nil)
             let musicViewController = self.storyboard?.instantiateViewController(withIdentifier: "myMusic") as! MusicEditorViewController
+            
+            
             musicViewController.videosInfo = videoInfo
             present(musicViewController, animated: true, completion: nil)
         }

@@ -17,6 +17,7 @@ pod 'Swinject', '2.0.0-beta.2'
 pod 'SwinjectStoryboard', '1.0.0-beta.2'
 pod 'CTAssetsPickerController',  '~> 3.3.0'
 pod 'ICGVideoTrimmer'
+pod 'PopupDialog', '~> 0.5'
 
   # Pods for Muvigram
 

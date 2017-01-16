@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CC322D055626512DA182202367D5193D'
-               BlueprintName = 'SwinjectStoryboard'
+               BlueprintIdentifier = '66CF4C648F2EE5EB3A31578630B6A904'
+               BlueprintName = 'ICGVideoTrimmer'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SwinjectStoryboard.framework'>
+               BuildableName = 'ICGVideoTrimmer.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

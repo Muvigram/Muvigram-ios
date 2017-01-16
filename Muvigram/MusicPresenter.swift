@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 import MediaPlayer
 import RxSwift
 
@@ -15,6 +16,12 @@ class MusicPresenter<T: MusicMvpView>: BasePresenter<T> {
     private let dataManager: DataManager
     private var allMusicProdcus = [MPMediaItem]()
     private var filteredMusicProducts = [MPMediaItem]()
+    private var musicUrl: URL?
+    private var isModifyModePlayerPlay: Bool = true
+    private var modifyModePlayer: AVPlayer?
+    private var musicInputTime: CMTime = kCMTimeZero
+    private var musicOutputTime: CMTime = CMTime(seconds: 15, preferredTimescale: 1)
+    private var periodicTimeToken: Any? = nil
     // Observer removal role
     private let bag = DisposeBag()
     
@@ -64,5 +71,83 @@ class MusicPresenter<T: MusicMvpView>: BasePresenter<T> {
             musicItemCell.bind(item: allMusicProdcus[indexPath.row])
         }
         return cell
+    }
+    
+    public func selectMusic(musicUrl: URL) {
+        self.musicUrl = musicUrl
+        self.view?.setWaveformViewAsset?(asset: AVAsset(url: musicUrl))
+        self.view?.setWaveformViewPrecision?()
+        var duration = CMTimeMakeWithSeconds( 1.0 * CMTimeGetSeconds((self.view!.getWaveformViewAssetDuration?())!), 100000)
+        self.view?.setWaveformViewTimeRange!(range: CMTimeRangeMake(CMTimeMakeWithSeconds(0, 10000), duration))
+        
+        var start = self.view!.getWaveformViewTimeRangeStart?()
+        duration = CMTime(seconds: 15, preferredTimescale: 1)
+        
+        let scwaveDuration = self.view!.getWaveformViewAssetDuration?()
+        
+        // Adjusting the start time
+        if CMTimeAdd(start!, duration) > scwaveDuration! {
+            start = CMTimeSubtract(scwaveDuration!, duration);
+        }
+        self.view?.setWaveformViewTimeRange!(range: CMTimeRangeMake(start!, duration))
+        self.view?.showMusicRangeAlert?()
+    }
+    
+    public func setModifyPlayerRange(_ range: CMTimeRange, end: CMTime) {
+        self.musicInputTime = range.start
+        self.musicOutputTime = range.end
+    }
+    
+    public func modifyPlayerPause() {
+        modifyModePlayer?.pause()
+        
+    }
+    
+    public func modifyPlayerRemoveTimeObserver() {
+        if let token = self.periodicTimeToken {
+            modifyModePlayer?.removeTimeObserver(token)
+            self.periodicTimeToken = nil
+        }
+    }
+    
+    public func modifyPlayerPlay() {
+        modifyModePlayer?.seek(to: self.musicInputTime, completionHandler: { _ in
+            self.modifyModePlayer?.play()
+        })
+    }
+    
+    public func musicSectionSelectionPlayback() {
+        DispatchQueue.global().async { [unowned self] in
+            print("musicSectionSelectionPlayback")
+            if let url = self.musicUrl {
+                self.modifyModePlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
+                self.modifyModePlayer?.seek(to: self.musicInputTime)
+                self.modifyModePlayer?.play()
+                
+                let actualMusicEndSec = CMTimeGetSeconds((self.modifyModePlayer?.currentItem?.asset.duration)!)
+                
+                self.modifyPlayerRemoveTimeObserver()
+                self.periodicTimeToken = self.modifyModePlayer?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 60), queue: DispatchQueue.main, using: { (time) in
+                    let currentMusicSec = CMTimeGetSeconds(time)
+                    let endMusicSec = CMTimeGetSeconds(self.musicOutputTime)
+                    
+                    if currentMusicSec >= endMusicSec || currentMusicSec >= actualMusicEndSec {
+                        if self.isModifyModePlayerPlay {
+                            self.isModifyModePlayerPlay = false
+                            self.view?.setWaveformViewProgress!(time: self.musicInputTime)
+                            self.modifyModePlayer?.pause()
+                            self.modifyModePlayer?.seek(to: self.musicInputTime) { _ in
+                                self.modifyModePlayer?.play()
+                                self.isModifyModePlayerPlay = true
+                            }
+                        }
+                    } else {
+                        self.view?.setWaveformViewProgress!(time: time)
+                    }
+                })
+            } else {
+                print("No music files")
+            }
+        }
     }
 }

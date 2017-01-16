@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CC322D055626512DA182202367D5193D'
-               BlueprintName = 'SwinjectStoryboard'
+               BlueprintIdentifier = 'FCAF9F620BAB5B7B9AE7184F66DEC923'
+               BlueprintName = 'CTAssetsPickerController'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SwinjectStoryboard.framework'>
+               BuildableName = 'CTAssetsPickerController.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
