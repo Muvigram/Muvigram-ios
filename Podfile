@@ -10,15 +10,12 @@ pod 'Permission/Notifications'
 pod 'Permission/MediaLibrary'
 pod ‘Permission/Microphone’
 pod ‘Permission/Photos’
+pod 'PopupDialog', '~> 0.5'
 pod 'RxSwift',    '~> 3.0'
 pod 'RxCocoa',    '~> 3.0'
 pod "SCWaveformView"
 pod 'Swinject', '2.0.0-beta.2'
 pod 'SwinjectStoryboard', '1.0.0-beta.2'
-pod 'CTAssetsPickerController',  '~> 3.3.0'
-pod 'ICGVideoTrimmer'
-pod 'PopupDialog', '~> 0.5'
-
   # Pods for Muvigram
 
 end

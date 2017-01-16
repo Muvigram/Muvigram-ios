@@ -4,21 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CTAssetsPickerController-CTAssetsPickerController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>CTAssetsPickerController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>ICGVideoTrimmer.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Permission.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,11 +15,6 @@
 			<false/>
 		</dict>
 		<key>PopupDialog.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>PureLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,57 +52,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2FFE4B56E8B7CEFEE8EA131FA47893AA</key>
+		<key>2AA87C04C814876154FA15FE44FD882F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>312E5E5D2CDA729646C782819D13B83B</key>
+		<key>42AC08FE9E10C137F8F4021AF00E6A0D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>66CF4C648F2EE5EB3A31578630B6A904</key>
+		<key>6D54B8E0A9A4A726BBC5B7ECBE115686</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7E29E34E1AE048F01CE2058CFDCBFEAC</key>
+		<key>7314B8E33849632FFB469E1BA3F44C64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BA55C17DFEC5D2C30339A2B23A85D7B</key>
+		<key>87A31618B4DC24B53EFA2FC73BC0A7E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>99838C3A8CF1A3B7064E98711D7E4807</key>
+		<key>C12DD440706E0566CBDED70BC788DC01</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BB38BD6442A58F21DE04648E8866253F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CC322D055626512DA182202367D5193D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EA9E13A3ABC07A834D324EDDBEAE639E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EF62F8B28BBBDD1B6EBE832F0466D310</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FCAF9F620BAB5B7B9AE7184F66DEC923</key>
+		<key>E664116794CFCA98E704788C4BB946CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

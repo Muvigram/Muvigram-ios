@@ -135,7 +135,10 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
             .bindNext { [unowned self] in
                 self.view?.partialRecordingComplete()
                 if self.isStackBarPassminimumRecordingCondition {
-                    self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: true)
+                    let time = DispatchTime.now() + 0.3
+                    DispatchQueue.main.asyncAfter(deadline: time) {
+                        self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: true)
+                    }
                 }
         }.addDisposableTo(bag)
     }

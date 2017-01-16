@@ -22,12 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DataManager(musicService: r.resolve(MusicService.self)!, videoService: r.resolve(VideoService.self)!)
             }.inObjectScope(.container)
         
-        container.register(MusicPresenter.self, name: "musicViewController") {r in
+        container.register(MusicPresenter.self) {r in
             MusicPresenter<MusicViewController>(dataManager: r.resolve(DataManager.self)!)
-        }
-        
-        container.register(MusicPresenter.self, name: "musicEditViewController") {r in
-            MusicPresenter<MusicEditorViewController>(dataManager: r.resolve(DataManager.self)!)
         }
         
         container.register(CameraPresenter.self) { r in
@@ -46,13 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         container.registerForStoryboard(MusicViewController.self) { r, c in
-            let presenter = r.resolve(MusicPresenter<MusicViewController>.self, name: "musicViewController")!
-            presenter.attachView(view: c)
-            c.presenter = presenter
-        }
-        
-        container.registerForStoryboard(MusicEditorViewController.self) { r, c in
-            let presenter = r.resolve(MusicPresenter<MusicEditorViewController>.self, name: "musicEditViewController")!
+            let presenter = r.resolve(MusicPresenter<MusicViewController>.self)!
             presenter.attachView(view: c)
             c.presenter = presenter
         }
@@ -94,13 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: bundle, container: container)
         return storyBoard.instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
     }
-    
-    func newMusicEditorViewControllerInstance() -> MusicEditorViewController {
-        let bundle = Bundle(for: LaunchViewController.self)
-        let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: bundle, container: container)
-        return storyBoard.instantiateViewController(withIdentifier: "myMusic") as! MusicEditorViewController
-    }
-
     
 }
 
