@@ -8,6 +8,6 @@
 
 import Foundation
 
-@objc protocol Mvpview: class {
+protocol Mvpview: class {
 
 }

@@ -1,6 +1,0 @@
-framework module ICGVideoTrimmer {
-  umbrella header "ICGVideoTrimmer-umbrella.h"
-
-  export *
-  module * { export * }
-}
