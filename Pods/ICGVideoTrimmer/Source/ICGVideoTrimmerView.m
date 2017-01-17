@@ -74,19 +74,8 @@
     return _minLength ?: 3;
 }
 
-- (CGFloat)stackedTime
-{
-    return _stackedTime ?: 0;
-}
-
-- (Boolean)isGestureEnd
-{
-    return _isGestureEnd ?: false;
-}
-
 - (void)resetSubviews
 {
-    _isGestureEnd = true;
     [self setBackgroundColor:[UIColor blackColor]];
 
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -149,15 +138,7 @@
     [self addSubview:self.leftOverlayView];
 
     // add right overlay view
-    //here
-//    CGFloat rightViewFrameX = CGRectGetWidth(self.frameView.frame) < CGRectGetWidth(self.frame) ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth; ////  self.widthPerSecond*self.stackedTime
-    CGFloat rightViewFrameX;
-    if ( CMTimeGetSeconds([self.asset duration]) <= 15-_stackedTime ){
-        rightViewFrameX= CGRectGetWidth(self.frameView.frame) < CGRectGetWidth(self.frame) ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth ;
-    }else {
-        rightViewFrameX= CGRectGetWidth(self.frameView.frame) < CGRectGetWidth(self.frame) ? CGRectGetMaxX(self.frameView.frame) - self.widthPerSecond*(CMTimeGetSeconds([self.asset duration])-(15-self.stackedTime)) : CGRectGetWidth(self.frame) - self.thumbWidth - self.widthPerSecond*self.stackedTime ;
-    }
-    
+    CGFloat rightViewFrameX = CGRectGetWidth(self.frameView.frame) < CGRectGetWidth(self.frame) ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth;
     self.rightOverlayView = [[UIView alloc] initWithFrame:CGRectMake(rightViewFrameX, 0, self.overlayWidth, CGRectGetHeight(self.frameView.frame))];
     if (self.rightThumbImage) {
         self.rightThumbView = [[ICGThumbView alloc] initWithFrame:CGRectMake(0, 0, self.thumbWidth, CGRectGetHeight(self.frameView.frame)) thumbImage:self.rightThumbImage];
@@ -188,16 +169,9 @@
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             self.leftStartPoint = [gesture locationInView:self];
-            self.isGestureEnd = true;
-            [self.delegate trimmerView:self isGestureEnd:true];
             break;
         case UIGestureRecognizerStateChanged:
         {
-            self.isGestureEnd = false;
-            [self.delegate trimmerView:self isGestureEnd:false];
-            if ( (self.stackedTime == 0 || (15-self.stackedTime)>CMTimeGetSeconds([self.asset duration]))  ){
-               
-            
             CGPoint point = [gesture locationInView:self];
             
             int deltaX = point.x - self.leftStartPoint.x;
@@ -205,137 +179,23 @@
             CGPoint center = self.leftOverlayView.center;
             
             CGFloat newLeftViewMidX = center.x += deltaX;;
-            //Here - left
             CGFloat maxWidth = CGRectGetMinX(self.rightOverlayView.frame) - (self.minLength * self.widthPerSecond);
-            NSLog(@"%f", CGRectGetMinX(self.rightOverlayView.frame));
             CGFloat newLeftViewMinX = newLeftViewMidX - self.overlayWidth/2;
             if (newLeftViewMinX < self.thumbWidth - self.overlayWidth) {
                 newLeftViewMidX = self.thumbWidth - self.overlayWidth + self.overlayWidth/2;
             } else if (newLeftViewMinX + self.overlayWidth > maxWidth) {
                 newLeftViewMidX = maxWidth - self.overlayWidth / 2;
             }
-            NSLog(@"%f", maxWidth);
-            NSLog(@"%f", newLeftViewMinX);
-            NSLog(@"%f", newLeftViewMidX);
             
             self.leftOverlayView.center = CGPointMake(newLeftViewMidX, self.leftOverlayView.center.y);
             self.leftStartPoint = point;
             [self updateBorderFrames];
             [self notifyDelegate];
-                
-            }else{
-                CGPoint point = [gesture locationInView:self];
-                
-                int deltaX = point.x - self.leftStartPoint.x;
-                
-                CGPoint center = self.leftOverlayView.center;
-                
-                CGFloat newLeftViewMidX = center.x += deltaX;;
-                //Here - left
-            
-                CGFloat newLeftViewMinX = CGRectGetMinX(self.leftOverlayView.frame);
-                CGFloat maxWidth = newLeftViewMinX - (15-self.stackedTime-1)*self.widthPerSecond;
-                
-                if (newLeftViewMinX < self.thumbWidth - self.overlayWidth) {
-                    newLeftViewMidX = self.thumbWidth - self.overlayWidth + self.overlayWidth/2;
-                } else if (newLeftViewMinX + self.overlayWidth > maxWidth) {
-                    newLeftViewMidX = maxWidth - self.overlayWidth / 2;
-                }
-                NSLog(@"%f", maxWidth);
-                NSLog(@"%f", newLeftViewMinX);
-                NSLog(@"%f", newLeftViewMidX);
-                
-                self.leftOverlayView.center = CGPointMake(newLeftViewMidX, self.leftOverlayView.center.y);
-                self.leftStartPoint = point;
-                [self updateBorderFrames];
-                [self notifyDelegate];
-            }
-            
-            
-//            CGPoint point2 = [gesture locationInView:self];
-//            
-//            int deltaX2 = point2.x - self.leftStartPoint.x;
-//            
-//            CGPoint center2 = self.leftOverlayView.center;
-//            
-//            CGFloat newLeftViewMidX = center2.x += deltaX2;;
-//            //Here
-//            CGFloat minX2 = CGRectGetMinX(self.rightOverlayView.frame) - ((15-self.stackedTime) * self.widthPerSecond);
-//            CGFloat maxX2 = CGRectGetMinX(self.rightOverlayView.frame) - (self.minLength * self.widthPerSecond); ;
-//            CGFloat newLeftViewMinX = minX2 - self.overlayWidth/2;
-//            if (newLeftViewMinX < self.thumbWidth - self.overlayWidth) {
-//                newLeftViewMidX = self.thumbWidth - self.overlayWidth + self.overlayWidth/2;
-//                //newLeftViewMidX = minX2 - self.overlayWidth/2;
-//                NSLog(@"11111 %s", "");
-//            } else if (newLeftViewMinX + self.overlayWidth > maxX2) {
-//                newLeftViewMidX = maxX2 - minX2 -self.overlayWidth / 2;
-//                NSLog(@"22222 %f", "");
-//            }
-//            
-//            // NSLog(@"%f", maxWidth);
-//            //NSLog(@"%f", newLeftViewMinX);
-//            NSLog(@"thumbWidth %f", self.thumbWidth);
-//            NSLog(@"minX2 %f", minX2);
-//            NSLog(@"maxX2 %f", maxX2);
-//            NSLog(@"overlayWidth %f", self.overlayWidth);
-//            NSLog(@"newLeftViewMidX %f", newLeftViewMidX);
-//            
-//            self.leftOverlayView.center = CGPointMake(newLeftViewMidX, self.leftOverlayView.center.y);
-//            self.leftStartPoint = point2;
-//            [self updateBorderFrames];
-//            [self notifyDelegate];
-//            
-//            if ( (self.stackedTime == 0 || (15-self.stackedTime)>CMTimeGetSeconds([self.asset duration])) == false ){
-//            }
-            
-            
-            
-            
-            //right
-//            CGPoint point = [gesture locationInView:self];
-//            
-//            int deltaX = point.x - self.rightStartPoint.x;
-//            
-//            CGPoint center = self.rightOverlayView.center;
-//            
-//            CGFloat newRightViewMidX = center.x += deltaX;
-//            //here!!!!!!!!! - right
-//            CGFloat minX = CGRectGetMaxX(self.leftOverlayView.frame) + self.minLength * self.widthPerSecond;
-//            CGFloat maxX = CGRectGetMaxX(self.leftOverlayView.frame) + (15-self.stackedTime)*self.widthPerSecond;
-//            //            if ( CMTimeGetSeconds([self.asset duration]) <= 15-_stackedTime ){
-//            //                maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth ;
-//            //            }else{
-//            //                maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) - self.widthPerSecond*(CMTimeGetSeconds([self.asset duration])-(15-self.stackedTime))  : CGRectGetWidth(self.frame) - self.thumbWidth - self.widthPerSecond*self.stackedTime ;
-//            //            }
-//            //            NSLog(@"%f", self.widthPerSecond*self.stackedTime);
-//            //            NSLog(@"%f", self.widthPerSecond);
-//            //            NSLog(@"%f", self.stackedTime);
-//            //            NSLog(@"%f", maxX);
-//            if (newRightViewMidX - self.overlayWidth/2 < minX) {
-//                newRightViewMidX = minX + self.overlayWidth/2;
-//            } else if (newRightViewMidX - self.overlayWidth/2 > maxX) {
-//                newRightViewMidX = maxX + self.overlayWidth/2;
-//            }
-//            
-//            self.rightOverlayView.center = CGPointMake(newRightViewMidX, self.rightOverlayView.center.y);
-//            self.rightStartPoint = point;
-//            [self updateBorderFrames];
-//            [self notifyDelegate];
-//            
-            
-            
-            
-            
             
             break;
         }
-        case UIGestureRecognizerStateEnded:
-            _isGestureEnd = true;
-            [self.delegate trimmerView:self isGestureEnd:true];
-            break;
             
         default:
-            _isGestureEnd = true;
             break;
     }
     
@@ -344,15 +204,12 @@
 
 - (void)moveRightOverlayView:(UIPanGestureRecognizer *)gesture
 {
-
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             self.rightStartPoint = [gesture locationInView:self];
-            _isGestureEnd = true;
             break;
         case UIGestureRecognizerStateChanged:
         {
-            _isGestureEnd = false;
             CGPoint point = [gesture locationInView:self];
             
             int deltaX = point.x - self.rightStartPoint.x;
@@ -360,18 +217,8 @@
             CGPoint center = self.rightOverlayView.center;
             
             CGFloat newRightViewMidX = center.x += deltaX;
-            //here!!!!!!!!! - right
             CGFloat minX = CGRectGetMaxX(self.leftOverlayView.frame) + self.minLength * self.widthPerSecond;
-            CGFloat maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth ;
-//            if ( CMTimeGetSeconds([self.asset duration]) <= 15-_stackedTime ){
-//                maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth ;
-//            }else{
-//                maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) - self.widthPerSecond*(CMTimeGetSeconds([self.asset duration])-(15-self.stackedTime))  : CGRectGetWidth(self.frame) - self.thumbWidth - self.widthPerSecond*self.stackedTime ;
-//            }
-//            NSLog(@"%f", self.widthPerSecond*self.stackedTime);
-//            NSLog(@"%f", self.widthPerSecond);
-//            NSLog(@"%f", self.stackedTime);
-//            NSLog(@"%f", maxX);
+            CGFloat maxX = CMTimeGetSeconds([self.asset duration]) <= self.maxLength + 0.5 ? CGRectGetMaxX(self.frameView.frame) : CGRectGetWidth(self.frame) - self.thumbWidth;
             if (newRightViewMidX - self.overlayWidth/2 < minX) {
                 newRightViewMidX = minX + self.overlayWidth/2;
             } else if (newRightViewMidX - self.overlayWidth/2 > maxX) {
@@ -383,72 +230,10 @@
             [self updateBorderFrames];
             [self notifyDelegate];
             
-            
-            NSLog(@"stackedTime %f", self.stackedTime);
-            
-            
-            
-            
-            
-            
-            //left
-            
-            
-            if ( (self.stackedTime == 0 || (15-self.stackedTime)>CMTimeGetSeconds([self.asset duration])) == false ){
-                
-            
-            CGPoint point2 = [gesture locationInView:self];
-            
-            int deltaX2 = point2.x - self.leftStartPoint.x;
-            
-            CGPoint center2 = self.leftOverlayView.center;
-            
-            CGFloat newLeftViewMidX = center2.x += deltaX2;;
-            //Here
-//            CGFloat minX2 = self.stackedTime * self.widthPerSecond;
-            CGFloat minX2 = CGRectGetMinX(self.rightOverlayView.frame) - ((15-self.stackedTime) * self.widthPerSecond);
-            CGFloat maxX2 = CGRectGetMinX(self.rightOverlayView.frame) - (self.minLength * self.widthPerSecond); ;
-            CGFloat newLeftViewMinX = maxX2 - minX2 -self.overlayWidth / 2;
-            if (newLeftViewMinX < self.thumbWidth - self.overlayWidth) {
-                newLeftViewMidX = self.thumbWidth - self.overlayWidth + self.overlayWidth/2;
-                NSLog(@"11111 %s", "");
-            } else if (newLeftViewMinX + self.overlayWidth > maxX2) {
-                newLeftViewMidX = minX2 -self.overlayWidth / 2;
-                NSLog(@"22222 %f", "");
-            }
-            
-           // NSLog(@"%f", maxWidth);
-            //NSLog(@"%f", newLeftViewMinX);
-            NSLog(@"thumbWidth %f", self.thumbWidth);
-            NSLog(@"minX2 %f", minX2);
-            NSLog(@"maxX2 %f", maxX2);
-            NSLog(@"overlayWidth %f", self.overlayWidth);
-            NSLog(@"newLeftViewMidX %f", newLeftViewMidX);
-            
-            self.leftOverlayView.center = CGPointMake(newLeftViewMidX, self.leftOverlayView.center.y);
-            self.leftStartPoint = point2;
-            [self updateBorderFrames];
-            [self notifyDelegate];
-
-            }
-            
-            
-            
-            
-            
-            
-            
-            
             break;
         }
-        case UIGestureRecognizerStateEnded:
-            _isGestureEnd = true;
-            NSLog(@"asdfasdfasdfasdfasdfasd %s", "");
-            break;
             
         default:
-            _isGestureEnd = true;
-            NSLog(@"sdf %s", "");
             break;
     }
 }

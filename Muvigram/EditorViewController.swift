@@ -12,8 +12,8 @@ import AVFoundation
 import ICGVideoTrimmer
 
 class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPlayerDelegate,
-                            UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
-
+UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
+    
     //model
     var videosInfo = VideosInfo()
     
@@ -60,13 +60,15 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
     let insertImageView = UIImageView(image: #imageLiteral(resourceName: "insert.png"))
     let cancelImageView = UIImageView(image: #imageLiteral(resourceName: "cancel.png"))
     let deleteButton = UIImageView(image: #imageLiteral(resourceName: "delete"))
-
+    
     @IBOutlet weak var homeView: UIView!
     @IBOutlet weak var doneView: UIView!
     @IBOutlet weak var cancelView: UIView!
     @IBOutlet weak var insertView: UIView!
     
     @IBOutlet weak var warningLabel: UILabel!
+    
+    var playerLayerHorizontal = AVPlayerLayer()
     
     
     override func viewDidLoad() {
@@ -114,6 +116,8 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         
     }
     
+    var currentPlayerLayer = AVPlayerLayer()
+    
     func addHomeAndDoneButton(){
         homeView.addSubview(homeImageView)
         doneView.addSubview(doneImageView)
@@ -129,24 +133,13 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         
         //첫번째 영상 붙이기, 만약에 가로 동영상이면 세로로!
         if containedVideoCount > 0 {
-            
-            resultPlayer = videosInfo.playerList[videosInfo.order[0]]
-            resultPlayer.seek(to: self.videosInfo.range[0].start)
-            resultPlayer.pause()
-            
-            playerLayer.player = resultPlayer
-            
-            playerLayer.setAffineTransform(CGAffineTransform.identity)
-            if videosInfo.isVertical[0] == false {
-                playerLayer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
-            }
-            
-            
-            playerLayer.frame = videoView.bounds
-            playerLayer.removeAllAnimations()
-            videoView.layer.addSublayer(playerLayer)
+            playerLayerList[0].player!.seek(to: self.videosInfo.range[0].start)
+            playerLayerList[0].player!.pause()
+          
+            videoView.layer.addSublayer(playerLayerList[0])
             
             audioPlayer.currentTime = TimeInterval(0)
+            currentPlayerLayer = playerLayerList[0]
         }
     }
     
@@ -163,9 +156,37 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
     //오디오가 끝나면? - resultVideo 에는 아무것도 없는데 audio playing 끝날시.
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
+        
         if isResultVideo {
+            
+            
+            if isResultVideoEnded {
+                currentPlayerLayer = playerLayerList[0]
+                currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
+                currentPlayerLayer.player!.pause()
+                self.count = 0
+                
+                self.videoView.layer.addSublayer(self.currentPlayerLayer)
+        
+            }else {
+                
+            }
+            
+            
+            
             videoView.addSubview(playButton)
             playButton.isHidden = false
+            
+//            currentPlayerLayer = playerLayerList[0]
+//            currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
+//            currentPlayerLayer.player!.pause()
+//            self.count = 0
+//
+//            self.videoView.layer.addSublayer(self.currentPlayerLayer)
+            
+
+            audioPlayer.currentTime = TimeInterval(0)
+            audioPlayer.pause()
         }
         
         //progress bar
@@ -173,6 +194,8 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         self.width = 0
         
         self.isResultVideoEnded = false
+        
+
     }
     
     //선택한 동영상 갯수 별 하단 탭의 갯수 할당
@@ -231,17 +254,13 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //resultPlayer initialize
         if containedVideoCount > 0 {
-            resultPlayer.seek(to: self.videosInfo.range[0].start)
-            resultPlayer.pause()
+            currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
+            currentPlayerLayer.player!.pause()
             
             audioPlayer.pause()
             timer.invalidate()
+            resultTimer.invalidate()
             
-            //progress bar initialize
-            if let token = timeObservationToken {
-                resultPlayer.removeTimeObserver(token)
-                timeObservationToken = nil
-            }
             self.progressBar.removeFromSuperview()
             self.width = 0
         }
@@ -250,16 +269,16 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         attachThumbnailProgressBar(indexPath.row)
         addInsertAndCancelButton()
     }
-
+    
     
     //썸네일 붙이기
     func attachThumbnailProgressBar(_ index:Int){
-    
+        
         //커런트 비디오 띄우기
         self.index = index
         isResultVideo = false
         count = 0
-    
+        
         player = videosInfo.playerList[index]
         playerLayer.player = player
         
@@ -284,29 +303,23 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         trimmerView.trackerColor = UIColor.darkGray
         trimmerView.themeColor = UIColor(red:1.00, green:0.68, blue:0.29, alpha:1.0)
         trimmerView.minLength = 1.0
-        trimmerView.maxLength = 15 // ->남은초로 바꿔주기
+        trimmerView.maxLength = 15-stackedTime // ->남은초로 바꿔주기
         trimmerView.frame = bottomLabelView.bounds
         trimmerView.resetSubviews()
         
         bottomLabelView.addSubview(trimmerView)
         
-//        //progress bar
-//        if let token = timeObservationToken {
-//            resultPlayer.removeTimeObserver(token)
-//            timeObservationToken = nil
-//        }
-//        self.progressBar.removeFromSuperview()
-//        self.width = 0
         
         //current video 끝날시
         NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying(note:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         
     }
-
+    
     
     var count = 0
     var width = 0.0
     var timer = Timer()
+    var resultTimer = Timer()
     
     //재생, 일시정지
     func touchVideoAction(_ sender:UITapGestureRecognizer){
@@ -317,7 +330,8 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
                 
                 audioPlayer.pause()
                 playButton.isHidden = false
-                resultPlayer.pause()
+                currentPlayerLayer.player!.pause()
+                resultTimer.invalidate()
                 
             }else if audioPlayer.isPlaying == false {
                 
@@ -327,80 +341,9 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
                 print(isResultVideoEnded)
                 
                 if isResultVideoEnded == false {
-                    resultPlayer.play()
-                    //리절트 비디오 다음 아이템 이어서 재생하기 - 여기서 느려진다, 쓰레드가 여러개 생겨서? - sync문제
-                    timeObservationToken = resultPlayer.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.1, 100), queue: DispatchQueue.main, using: {(CMTime) -> Void in
-                        
-                        print(self.resultPlayer.currentTime())
-                        
-                        var tempItem = AVPlayerItem(url: self.videosInfo.videoURL[self.videosInfo.order[0]] as URL)
-                        if self.count != self.containedVideoCount - 1 {
-                            tempItem = AVPlayerItem(url: self.videosInfo.videoURL[self.videosInfo.order[self.count+1]] as URL)
-                        }
-                        
-                        if self.resultPlayer.currentTime() >= self.videosInfo.range[self.count].end{
-                            
-                            self.playerLayer.removeFromSuperlayer()
-                            self.playerLayer.setAffineTransform(CGAffineTransform.identity)
-                            self.resultPlayer.replaceCurrentItem(with: tempItem)
-                            
-                            if self.count == self.containedVideoCount - 1{
-                                
-                                //self.resultPlayer.replaceCurrentItem(with: tempItem)
-                                self.resultPlayer.seek(to: self.videosInfo.range[0].start)
-                                self.resultPlayer.pause()
-                                self.count = 0
-                                
-                                //self.playerLayer.removeFromSuperlayer()
-                                //self.playerLayer.setAffineTransform(CGAffineTransform.identity)
-                                if self.videosInfo.isVertical[self.videosInfo.order[self.count]] == false {
-                                    self.playerLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
-                                }
-                                self.playerLayer.frame = self.videoView.bounds
-                                self.playerLayer.removeAllAnimations()
-                                self.videoView.layer.addSublayer(self.playerLayer)
-                                
-                                print("마지막입니다요~")
-                                if self.stackedTime <= 14 {
-                                    self.isResultVideoEnded = true
-                                }else{
-                                    self.isResultVideoEnded = false
-                                }
-                                
-                            }else {
-                                self.count = self.count + 1
-                                
-                                
-                                //self.playerLayer.removeFromSuperlayer()
-                                //self.playerLayer.setAffineTransform(CGAffineTransform.identity)
-                                if self.videosInfo.isVertical[self.videosInfo.order[self.count]] == false {
-                                    self.playerLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
-                                }
-                                self.playerLayer.frame = self.videoView.bounds
-                                self.playerLayer.removeAllAnimations()
-                                self.videoView.layer.addSublayer(self.playerLayer)
-                                
-                                
-                                
-                                
-                                //self.resultPlayer.replaceCurrentItem(with: tempItem)
-                                self.resultPlayer.seek(to: self.videosInfo.range[self.count].start)
-                                
-                                //self.playerLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform.identity)
-                                //if self.videosInfo.isVertical[self.videosInfo.order[self.count]] == false {
-                                //    self.playerLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
-                                //}
-                                
-                                
-                                
-                                
-                                
-                                
-                                self.resultPlayer.play()
-                                print("다음걸로 넘어갈게요~")
-                            }
-                        }
-                    })
+                    currentPlayerLayer.player!.play()
+                    
+                    resultTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.playResult), userInfo: nil, repeats: true)
                 }
                 
             }
@@ -422,17 +365,63 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
                 playButton.isHidden = true
                 startPlaybackTimeChecker()
                 
-                //current video play 끝나면 정지
-                player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.1, 10), queue: DispatchQueue.main, using: {(CMTime) -> Void in
-                    if self.player.currentTime() >= CMTimeMakeWithSeconds(Float64(self.endTime), self.player.currentTime().timescale){
-                        self.player.seek(to: kCMTimeZero)
-                        self.player.pause()
-                        self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
-                        self.audioPlayer.pause()
-                    }
-                })
+ 
             }
         }
+    }
+    
+    func playResult(){
+        
+        print(currentPlayerLayer.player!.currentTime())
+        
+        if CGFloat(audioPlayer.currentTime) >= soundEndList[count] {
+            
+            currentPlayerLayer.player!.pause()
+            currentPlayerLayer.removeFromSuperlayer()
+            print(audioPlayer.currentTime)
+            print(soundEndList[count])
+            
+            //여김미댜
+            if self.count == self.containedVideoCount-1 {
+                
+                
+                print("마지막입니다요~")
+                print(count)
+                if self.stackedTime <= 14 {
+                    self.isResultVideoEnded = true
+                }else{
+                    self.isResultVideoEnded = false
+                }
+                
+                if isResultVideoEnded {
+                    
+                }else {
+                    currentPlayerLayer = playerLayerList[0]
+                    currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
+                    currentPlayerLayer.player!.pause()
+                    self.count = 0
+                    
+                    self.videoView.layer.addSublayer(self.currentPlayerLayer)
+
+                }
+                resultTimer.invalidate()
+                
+                
+            }else {
+                count = count + 1
+                print(count)
+                
+                currentPlayerLayer = playerLayerList[count]
+                self.videoView.layer.addSublayer(currentPlayerLayer)
+               
+                currentPlayerLayer.player!.seek(to: self.videosInfo.range[self.count].start)
+    
+                currentPlayerLayer.player!.play()
+                print("다음걸로 넘어갈게요~")
+                
+            }
+        }
+
     }
     
     var progressBar = UIView()
@@ -470,6 +459,9 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
     var temp:Int = 0
     var stackedTime:CGFloat = 0.0
     var durationList:[CGFloat] = []
+    var playerLayerList:[AVPlayerLayer] = []
+    var soundStartList:[CGFloat] = []
+    var soundEndList:[CGFloat] = []
     
     //인서트 버튼 눌렀을 때
     func touchInsertBtnAction(_ sender:UITapGestureRecognizer){
@@ -481,7 +473,7 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         let startCMTime = CMTimeMakeWithSeconds(startFloat, player.currentTime().timescale)
         let endCMTime = CMTimeMakeWithSeconds(endFloat, player.currentTime().timescale)
         let timeRange = CMTimeRange(start: startCMTime, end: endCMTime)
-
+        
         //현재 진행중인 플레이어 stop
         player.pause()
         playerLayer.removeFromSuperlayer()
@@ -496,7 +488,6 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         print(videosInfo.order)
         print(videosInfo.range)
         
-        addHomeAndDoneButton()
         trimmerView.removeFromSuperview()
         print("inserted!")
         
@@ -520,6 +511,20 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         resultVideoView.addSubview(allocatedView)
         temp = temp + bar
         
+        //playerLayer 생성
+        var tempPlayerLayer = AVPlayerLayer(player: videosInfo.playerList[index])
+        tempPlayerLayer.player = videosInfo.playerList[index]
+        if videosInfo.isVertical[index] == false {
+            tempPlayerLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
+        }
+        tempPlayerLayer.frame = self.videoView.bounds
+        tempPlayerLayer.removeAllAnimations()
+        playerLayerList.append(tempPlayerLayer)
+
+        //음악에 맞게 초 입력
+        soundStartList.append(stackedTime)
+        print("stackedTIme \(stackedTime)")
+        
         //남은 초 표시
         stackedTime += self.endTime - self.startTime
         durationList.append(self.endTime - self.startTime)
@@ -528,9 +533,14 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
             warningLabel.isHidden = false
         }else{
             timeControlView.text = "\(15-stackedTime)"
-            trimmerView.stackedTime = stackedTime
+//            trimmerView.stackedTime = stackedTime
         }
         
+        //음악에 맞게 초 입력
+        soundEndList.append(stackedTime)
+        print("stackedTIme \(stackedTime)")
+        
+        addHomeAndDoneButton()
     }
     
     //캔슬 버튼 눌렀을 때
@@ -559,10 +569,9 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         
         //video initialize
         if videosInfo.order.count > 0 {
-            let tempItem = AVPlayerItem(url: videosInfo.videoURL[videosInfo.order[0]] as URL)
-            resultPlayer.replaceCurrentItem(with: tempItem)
-            resultPlayer.seek(to: videosInfo.range[0].start)
-            resultPlayer.pause()
+            currentPlayerLayer = playerLayerList[0]
+            currentPlayerLayer.player!.seek(to: videosInfo.range[0].start)
+            currentPlayerLayer.player!.pause()
         }else{
             //resultPlayer를 널로 처리해야함
             //playerLayer.removeFromSuperlayer()
@@ -591,7 +600,7 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
                 deleteButton.frame = CGRect(x: allocatedViews.last!.frame.width-20, y: 5, width: 15, height: 15)
                 allocatedViews.last!.addSubview(deleteButton)
             }
-
+            
             
             print(videosInfo.order)
             print(videosInfo.range)
@@ -607,10 +616,7 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         }
         
         print("contained video : \(containedVideoCount)")
-        if let token = timeObservationToken {
-            resultPlayer.removeTimeObserver(token)
-            timeObservationToken = nil
-        }
+        resultTimer.invalidate()
         
     }
     
@@ -659,24 +665,25 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         player.seek(to: CMTimeMakeWithSeconds(Float64(self.startTime), 600))
         player.pause()
         audioPlayer.pause()
-      
-        //트리머에서 손 때면 음악들리게하라
-        if trimmerView.isGestureEnd {
-            self.player.play()
-            self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
-            self.audioPlayer.play()
-            self.startPlaybackTimeChecker()
-        }
+        
+        //처음에는 음악 들려야함
+//        if trimmerView.isGestureEnd {
+//            self.player.play()
+//            self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
+//            self.audioPlayer.play()
+//            self.startPlaybackTimeChecker()
+//        }
     }
     
-    func trimmerView(_ trimmerView: ICGVideoTrimmerView!, isGestureEnd end: Bool) {
-        if end == true {
-            self.player.play()
-            self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
-            self.audioPlayer.play()
-            self.startPlaybackTimeChecker()
-        }
-    }
+    //gesture에 따라 음악 들리고 안들리고
+//    func trimmerView(_ trimmerView: ICGVideoTrimmerView!, isGestureEnd end: Bool) {
+//        if end == true {
+//            self.player.play()
+//            self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
+//            self.audioPlayer.play()
+//            self.startPlaybackTimeChecker()
+//        }
+//    }
     
     func playerDidFinishPlaying(note: Notification){
         self.player.seek(to: kCMTimeZero)
@@ -690,5 +697,5 @@ class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }

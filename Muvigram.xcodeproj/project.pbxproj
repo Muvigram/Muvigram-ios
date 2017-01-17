@@ -11,7 +11,6 @@
 		2B2CB2421E1B45A60034F219 /* ShareMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */; };
 		2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */; };
 		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
-		2B504EE81E273C6A00C7FD29 /* audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B504EE71E273C6A00C7FD29 /* audio.mp3 */; };
 		2B504EEA1E28611300C7FD29 /* MusicNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B504EE91E28611300C7FD29 /* MusicNavigationBar.swift */; };
 		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
 		2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */; };
@@ -37,6 +36,7 @@
 		2BAD083B1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */; };
 		2BE87BBC1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */; };
 		2BE87BBE1E1A09D00006F962 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBD1E1A09D00006F962 /* VideoService.swift */; };
+		6514DB341E2DD6BB002B3002 /* audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6514DB331E2DD6BB002B3002 /* audio.mp3 */; };
 		653ED1EF1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1EE1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift */; };
 		653ED1F31E24B6F100271C78 /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1F21E24B6F100271C78 /* VideosInfo.swift */; };
 		653ED1F51E24B95B00271C78 /* MusicEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1F41E24B95B00271C78 /* MusicEditorViewController.swift */; };
@@ -55,7 +55,6 @@
 		2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareMvpView.swift; sourceTree = "<group>"; };
 		2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumButton.swift; sourceTree = "<group>"; };
 		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
-		2B504EE71E273C6A00C7FD29 /* audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = audio.mp3; path = ../../../../Downloads/audio.mp3; sourceTree = "<group>"; };
 		2B504EE91E28611300C7FD29 /* MusicNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicNavigationBar.swift; sourceTree = "<group>"; };
 		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithMusicPlay.swift; sourceTree = "<group>"; };
 		2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithVideoThumbnail.swift; sourceTree = "<group>"; };
 		2BE87BBD1E1A09D00006F962 /* VideoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		6514DB331E2DD6BB002B3002 /* audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = audio.mp3; path = ../../../../../Downloads/audio.mp3; sourceTree = "<group>"; };
 		653ED1EE1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewControllerWithVideoPicker.swift; sourceTree = "<group>"; };
 		653ED1F21E24B6F100271C78 /* VideosInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInfo.swift; sourceTree = "<group>"; };
 		653ED1F41E24B95B00271C78 /* MusicEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicEditorViewController.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 		2B84A7AE1DEE6E7B001E0E14 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				2B504EE71E273C6A00C7FD29 /* audio.mp3 */,
+				6514DB331E2DD6BB002B3002 /* audio.mp3 */,
 				2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */,
 				2B84A7A01DEE6D8A001E0E14 /* Main.storyboard */,
 				2B9B6AC01E0277DF0020C06D /* Assets.xcassets */,
@@ -371,7 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B84A7A71DEE6D8A001E0E14 /* LaunchScreen.storyboard in Resources */,
-				2B504EE81E273C6A00C7FD29 /* audio.mp3 in Resources */,
+				6514DB341E2DD6BB002B3002 /* audio.mp3 in Resources */,
 				2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */,
 				2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */,
 				2B84A7A21DEE6D8A001E0E14 /* Main.storyboard in Resources */,
