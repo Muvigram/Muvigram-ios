@@ -108,7 +108,11 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         cancelImageView.addGestureRecognizer(gestureCancel)
         
         let gestureDelete = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.deleteVideoAction(_:)))
-        homeImageView.addGestureRecognizer(gestureDelete)
+//        homeImageView.addGestureRecognizer(gestureDelete)
+        resultVideoView.addGestureRecognizer(gestureDelete)
+        
+        let gestureHome = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.goHomeAction(_:)))
+        homeImageView.addGestureRecognizer(gestureHome)
         
         //재생 일시정지
         let gestureVideoTouch = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.touchVideoAction(_:)))
@@ -394,8 +398,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 }
                 
                 if isResultVideoEnded {
-                    
+                    currentPlayerLayer.removeFromSuperlayer()
                 }else {
+                    print("멈춤!")
                     currentPlayerLayer = playerLayerList[0]
                     currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
                     currentPlayerLayer.player!.pause()
@@ -413,10 +418,10 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 
                 currentPlayerLayer = playerLayerList[count]
                 self.videoView.layer.addSublayer(currentPlayerLayer)
-               
+            
                 currentPlayerLayer.player!.seek(to: self.videosInfo.range[self.count].start)
-    
                 currentPlayerLayer.player!.play()
+                
                 print("다음걸로 넘어갈게요~")
                 
             }
@@ -575,6 +580,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         }else{
             //resultPlayer를 널로 처리해야함
             //playerLayer.removeFromSuperlayer()
+            currentPlayerLayer.removeFromSuperlayer()
         }
         isResultVideoEnded = false
         count = 0
@@ -593,6 +599,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
             
             videosInfo.order.removeLast()
             videosInfo.range.removeLast()
+            playerLayerList.removeLast()
+            soundEndList.removeLast()
+            soundStartList.removeLast()
             
             allocatedViews.popLast()?.removeFromSuperview()
             
@@ -618,6 +627,14 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         print("contained video : \(containedVideoCount)")
         resultTimer.invalidate()
         
+    }
+    
+    //홈으로
+    func goHomeAction(_ sender:UITapGestureRecognizer){
+        let alert = UIAlertController(title: "Alert", message: "wanna go home?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func startPlaybackTimeChecker(){
