@@ -517,7 +517,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         temp = temp + bar
         
         //playerLayer 생성
-        var tempPlayerLayer = AVPlayerLayer(player: videosInfo.playerList[index])
+        let tempPlayerLayer = AVPlayerLayer(player: videosInfo.playerList[index])
         tempPlayerLayer.player = videosInfo.playerList[index]
         if videosInfo.isVertical[index] == false {
             tempPlayerLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
