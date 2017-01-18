@@ -711,11 +711,17 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
         self.audioPlayer.pause()
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // 비디오 편집 완료 -> 공유화면 이동
+    // @videoUrlArray 병합할 비디오의 urlArray
+    // @musicTimeStampArray 병합할 음악의 TimeStampArray
+    // @musicUrl -> 병합할 음악의 url
+    // 비디오가 n개일 경우 병합할 음악의 TimeStamp는 n + 1 개 입니다.
+    func videoEditingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime], musicUrl: URL) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let shardViewController = appDelegate.newShareViewControllerInstance()
+        shardViewController.videoUrlArray = videoUrlArray
+        shardViewController.musicTimeStampArray = musicTimeStampArray
+        shardViewController.musicUrl = musicUrl
+        self.present(shardViewController, animated: true, completion: nil)
     }
-    
 }
