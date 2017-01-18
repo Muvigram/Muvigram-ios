@@ -4,12 +4,37 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CTAssetsPickerController-CTAssetsPickerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>CTAssetsPickerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ICGVideoTrimmer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Permission.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-Muvigram.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PopupDialog.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PureLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,32 +72,57 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>21A8CC04DFC071ADE7BC3761A96A48CF</key>
+		<key>2FFE4B56E8B7CEFEE8EA131FA47893AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F1D0FE63C20D64E3446B7B7BD047771</key>
+		<key>312E5E5D2CDA729646C782819D13B83B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>75E6A2CCAD7256AFE27CE629C5326555</key>
+		<key>66CF4C648F2EE5EB3A31578630B6A904</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9A89C2962A62AB2125A833695931B72F</key>
+		<key>7E29E34E1AE048F01CE2058CFDCBFEAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B76AC97AD7F6B27C3EA37FCBB6895CC9</key>
+		<key>8BA55C17DFEC5D2C30339A2B23A85D7B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA696A962E93BAC1A8C6CA4A0D1DAD7F</key>
+		<key>99838C3A8CF1A3B7064E98711D7E4807</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB38BD6442A58F21DE04648E8866253F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC322D055626512DA182202367D5193D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA9E13A3ABC07A834D324EDDBEAE639E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF62F8B28BBBDD1B6EBE832F0466D310</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCAF9F620BAB5B7B9AE7184F66DEC923</key>
 		<dict>
 			<key>primary</key>
 			<true/>
