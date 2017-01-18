@@ -35,6 +35,9 @@ class MusicEditorViewController: UITableViewController {
         // Search bar settings
         viewInitialization()
         
+        // Temporary invalid
+        skipButton.isEnabled = false
+        
         let skipButtonEvent = skipButton.rx.controlEvent([
             UIControlEvents.touchUpInside])
         presenter.skipButtonEvent(event: skipButtonEvent)
