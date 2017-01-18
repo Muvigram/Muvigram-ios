@@ -9,6 +9,8 @@
 import UIKit
 import PopupDialog
 import SCWaveformView
+import RxSwift
+import RxCocoa
 
 class MusicEditorViewController: UITableViewController {
 
@@ -17,10 +19,11 @@ class MusicEditorViewController: UITableViewController {
     fileprivate var resultSerchController = UISearchController()
     fileprivate var searchActive: Bool = false
     fileprivate var isScwaveScroll : Bool = false
+    fileprivate var scwaveScrollView: SCScrollableWaveformView!
     
     @IBOutlet var searchViewContrainr: UIView!
-    
-    fileprivate var scwaveScrollView: SCScrollableWaveformView!
+    @IBOutlet var skipButton: UIButton!
+    @IBOutlet var backButton: UIButton!
     
     // @inject
     public var presenter: MusicPresenter<MusicEditorViewController>!
@@ -31,6 +34,13 @@ class MusicEditorViewController: UITableViewController {
         presenter.loadMusics()
         // Search bar settings
         viewInitialization()
+        
+        let skipButtonEvent = skipButton.rx.controlEvent([
+            UIControlEvents.touchUpInside])
+        presenter.skipButtonEvent(event: skipButtonEvent)
+        
+        let backButtonEvent = backButton.rx.controlEvent([UIControlEvents.touchUpInside])
+        presenter.backButtonEvent(event: backButtonEvent)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,19 +74,8 @@ class MusicEditorViewController: UITableViewController {
         self.resultSerchController.isActive = false
     }
     
-    @IBAction func clickBackButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil);
-    }
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "editorSegue"){
-            let vc = segue.destination as! EditorViewController
-            vc.videosInfo = videosInfo
-        }
     }
 }
 
@@ -164,19 +163,34 @@ extension MusicEditorViewController: MusicMvpView {
         return scwaveScrollView.waveformView.asset.duration
     }
     
+    func dismissController() {
+        dismiss(animated: true, completion: nil);
+    }
+    
+    func movetoVideoEditerViewController(musicInputTime: CMTime, musicOutputTime: CMTime, musicUrl: URL?) {
+        let controller =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VideoEditerViewController") as! EditorViewController
+        controller.musicInputTime = musicInputTime
+        controller.musicOutputTime = musicOutputTime
+        controller.musicFileurl = musicUrl
+        controller.videosInfo = videosInfo
+        present(controller, animated: true, completion: nil)
+    }
+    
     func showMusicRangeAlert() {
         isScwaveScroll = true
+        func stoppingAndworkingWithMusic() {
+            self.presenter.modifyPlayerRemoveTimeObserver()
+            self.presenter.modifyPlayerPause();
+            self.isScwaveScroll = false
+        }
         let alertController = UIAlertController(title: "\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         alertController.view.addSubview(scwaveScrollView)
         let somethingAction = UIAlertAction(title: "OK", style: .default, handler: {(alert: UIAlertAction!) in
-            self.presenter.modifyPlayerRemoveTimeObserver()
-            self.presenter.modifyPlayerPause();
-            self.isScwaveScroll = false
+            stoppingAndworkingWithMusic()
+            self.presenter.moveToVideoEditorController()
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(alert: UIAlertAction!) in
-            self.presenter.modifyPlayerRemoveTimeObserver()
-            self.presenter.modifyPlayerPause();
-            self.isScwaveScroll = false
+            stoppingAndworkingWithMusic()
         })
         alertController.addAction(somethingAction)
         alertController.addAction(cancelAction)

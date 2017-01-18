@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import ICGVideoTrimmer
+import MediaPlayer
 
 class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPlayerDelegate,
 UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
@@ -49,7 +50,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     @IBOutlet weak var resultVideoView: UIView!
     @IBOutlet weak var timeControlView: UILabel!
     
-    
     //newwww
     
     var collectionView:UICollectionView!
@@ -65,11 +65,14 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     @IBOutlet weak var doneView: UIView!
     @IBOutlet weak var cancelView: UIView!
     @IBOutlet weak var insertView: UIView!
-    
     @IBOutlet weak var warningLabel: UILabel!
     
     var playerLayerHorizontal = AVPlayerLayer()
     
+    // gonini
+    var musicInputTime: CMTime?
+    var musicOutputTime: CMTime?
+    var musicFileurl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()

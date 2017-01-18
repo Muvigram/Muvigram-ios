@@ -10,6 +10,7 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 import RxSwift
+import RxCocoa
 
 class MusicPresenter<T: MusicMvpView>: BasePresenter<T> {
     
@@ -58,6 +59,24 @@ class MusicPresenter<T: MusicMvpView>: BasePresenter<T> {
             (($0.title?.range(of: searchController.searchBar.text!)) != nil )
         }
         self.view?.updateMusicWithTable()
+    }
+    
+    public func skipButtonEvent(event: ControlEvent<Void>) {
+        event.debounce(0.3, scheduler: MainScheduler.instance)
+            . bindNext { [unowned self] in
+                self.moveToVideoEditorController()
+        }.addDisposableTo(bag)
+    }
+    
+    public func backButtonEvent(event: ControlEvent<Void>) {
+        event.debounce(0.3, scheduler: MainScheduler.instance)
+            . bindNext { [unowned self] in
+                self.view?.dismissController!()
+            }.addDisposableTo(bag)
+    }
+    
+    public func moveToVideoEditorController() {
+        self.view?.movetoVideoEditerViewController!(musicInputTime: self.musicInputTime, musicOutputTime: self.musicOutputTime, musicUrl: self.musicUrl)
     }
     
     // Bind an item in the music list to a cell.
@@ -118,7 +137,6 @@ class MusicPresenter<T: MusicMvpView>: BasePresenter<T> {
     
     public func musicSectionSelectionPlayback() {
         DispatchQueue.global().async { [unowned self] in
-            print("musicSectionSelectionPlayback")
             if let url = self.musicUrl {
                 self.modifyModePlayer = AVPlayer(playerItem: AVPlayerItem(url: url))
                 self.modifyModePlayer?.seek(to: self.musicInputTime)

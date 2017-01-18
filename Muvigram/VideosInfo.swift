@@ -16,6 +16,5 @@ class VideosInfo {
     var playerList:[AVPlayer] = []
     var order:[Int] = []
     var range:[CMTimeRange] = []
-    
     var isVertical:[Bool] = []
 }

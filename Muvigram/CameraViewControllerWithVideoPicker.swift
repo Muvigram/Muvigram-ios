@@ -17,16 +17,12 @@ extension CameraViewController{
         print("\(assets.count)")
         
         videoInfo.videoCount = assets.count
-        
         guard let videos = assets as? [PHAsset] else { return }
-        
         videoInfo.videoList = videos
-        
         
         if assets.count <= 5 {
             self.dismiss(animated: true, completion: nil)
             let musicViewController = self.storyboard?.instantiateViewController(withIdentifier: "myMusic") as! MusicEditorViewController
-            
             
             musicViewController.videosInfo = videoInfo
             present(musicViewController, animated: true, completion: nil)
@@ -37,7 +33,6 @@ extension CameraViewController{
         //내가 바로 쓰레드, 하나씩 들어온다. - 여기서 인덱스가 꼬이는 것 같다.
         func convertToURLAsset(_ avAsset: AVAsset?) {
             semaphore.wait()
-            
             guard let urlAsset = avAsset as? AVURLAsset else{
                 return
             }
@@ -67,8 +62,6 @@ extension CameraViewController{
                 }
             })
         }
-        
-        
     }
     
     //최대 갯수 5개
@@ -89,6 +82,4 @@ extension CameraViewController{
             return false
         }
     }
-
-    
 }

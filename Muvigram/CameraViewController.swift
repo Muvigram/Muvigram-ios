@@ -81,7 +81,6 @@ final class CameraViewController: UIViewController, CTAssetsPickerControllerDele
         // Stop recording
         let recordButtonRecordingStopEvent = recordBtn.rx.controlEvent(
             [UIControlEvents.touchUpInside, UIControlEvents.touchDragOutside,UIControlEvents.touchCancel, UIControlEvents.touchUpOutside])
-        
         presenter.recordButtonStopRecordEvent(event: recordButtonRecordingStopEvent)
         
         // Start recording
@@ -600,6 +599,4 @@ extension CameraViewController: CameraMvpView {
     func setlibraryButtonImage(_ image: UIImage) {
         libraryBtn.setImage(image, for: .normal)
     }
-    
-    
 }
