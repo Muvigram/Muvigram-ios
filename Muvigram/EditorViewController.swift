@@ -466,14 +466,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     //음악 재생
     func playSound(){
-        do {
-            audioPlayer = try AVPlayer(url: musicFileurl!)
-//            let url = Bundle.main.url(forResource: "audio", withExtension: "mp3")!
-//            audioPlayer = try AVAudioPlayer(contentsOf: url)
-      
-        } catch _ {
-            print("그런 노래 없어요.(정색)")
-        }
+        audioPlayer = AVPlayer(url: musicFileurl!)
     }
     
     var temp:Int = 0

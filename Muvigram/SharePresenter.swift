@@ -81,7 +81,7 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                             print(error.localizedDescription)
                     },
                         onCompleted: {
-                            let instagramURL = URL(string: "instagram://media")
+                            let instagramURL = URL(string: "instagram://camera")
                             if UIApplication.shared.canOpenURL(instagramURL!) {
                                 UIApplication.shared.open(instagramURL!)
                             }

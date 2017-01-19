@@ -8,66 +8,100 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>CTAssetsPickerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>ICGVideoTrimmer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
 		</dict>
 		<key>Permission.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>Pods-Muvigram.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>PopupDialog.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>PureLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>RxCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>RxSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>SCWaveformView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 		<key>Swinject.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>SwinjectStoryboard.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>12</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>06C232EE1BD0E4ACF45B6B1ED4D74E2D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0E16A07F0094017DC178447EF19E3185</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +116,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>45406FF03C189356B9B344F01331B065</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>66CF4C648F2EE5EB3A31578630B6A904</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>738E7902D1568342CC035D45D3969DED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7995C587137C1180C2F6AB887783CB29</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +161,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C5DEB665FC319AEA755688583DDDD305</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CC322D055626512DA182202367D5193D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D15161A017A6F1AFAD6432BFA643F6CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D29BC724E38864F1BCFBD9E13EDDB9F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
