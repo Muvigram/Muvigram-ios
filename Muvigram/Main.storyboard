@@ -370,7 +370,7 @@
                                 <rect key="frame" x="0.0" y="128" width="375" height="63"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="avc-dR-JPw" id="5DW-yX-7sD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8W-nO-j4g">
@@ -566,6 +566,11 @@
                                 <rect key="frame" x="309" y="84" width="50" height="50"/>
                                 <state key="normal" image="save"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiw-92-kwr">
+                                <rect key="frame" x="169" y="318" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="gram"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -580,6 +585,7 @@
                     </view>
                     <connections>
                         <outlet property="homeButton" destination="5jZ-Io-ijw" id="tEr-Zf-97o"/>
+                        <outlet property="instagramShareButton" destination="tiw-92-kwr" id="2tD-Oe-794"/>
                         <outlet property="saveButton" destination="tLg-UK-u0X" id="xti-Ab-5MV"/>
                     </connections>
                 </viewController>
