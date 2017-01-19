@@ -176,6 +176,7 @@ extension MusicEditorViewController: MusicMvpView {
         controller.musicOutputTime = musicOutputTime
         controller.musicFileurl = musicUrl
         controller.videosInfo = videosInfo
+        controller.dismissFunc = dismissController
         present(controller, animated: true, completion: nil)
     }
     

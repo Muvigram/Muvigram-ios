@@ -13,6 +13,7 @@ extension CameraViewController{
     
     //click Done Button
     func assetsPickerController(_ picker: CTAssetsPickerController!, didFinishPickingAssets assets: [Any]!) {
+    
         print("done!!!!!!!!!")
         print("\(assets.count)")
         
@@ -66,12 +67,14 @@ extension CameraViewController{
     
     //최대 갯수 5개
     func assetsPickerController(_ picker: CTAssetsPickerController!, shouldSelect asset: PHAsset!) -> Bool {
+        print("\(asset.sourceType)")
         return (picker.selectedAssets.count < 5)
     }
     
-    //비디오(3분내)만 선택 되게
+    //비디오 선택 조건
     func assetsPickerController(_ picker: CTAssetsPickerController!, shouldEnable asset: PHAsset!) -> Bool {
-        if(asset.mediaType == .video){
+        
+        if(asset.mediaType == .video && asset.sourceType != .typeCloudShared){
             let duration = asset.duration
             var isSatisfied = false
             if asset.pixelWidth * 9 == asset.pixelHeight * 16 || asset.pixelWidth * 16 == asset.pixelHeight * 9 {
@@ -82,4 +85,7 @@ extension CameraViewController{
             return false
         }
     }
+    
+    
+    
 }

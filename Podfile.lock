@@ -2,6 +2,7 @@ PODS:
   - CTAssetsPickerController (3.3.1):
     - PureLayout (~> 3.0.0)
   - ICGVideoTrimmer (1.1)
+  - MBProgressHUD (1.0.0)
   - Permission/Camera (2.0.2):
     - Permission/Core
   - Permission/Core (2.0.2)
@@ -26,6 +27,7 @@ PODS:
 DEPENDENCIES:
   - CTAssetsPickerController (~> 3.3.0)
   - ICGVideoTrimmer
+  - MBProgressHUD (~> 1.0.0)
   - Permission/Camera
   - Permission/MediaLibrary
   - Permission/Microphone
@@ -41,6 +43,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   ICGVideoTrimmer: 1f54de0595af56af2a406f20cdb33c1c440d15cd
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Permission: c4e0890cabf0871acfc2700d45bde7d935b2559f
   PopupDialog: 9890441b81105b9076757af2afe2b037be682f3e
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
@@ -50,6 +53,6 @@ SPEC CHECKSUMS:
   Swinject: 69a893192efa9f2cc44be79ef423d04d571b6af9
   SwinjectStoryboard: b52b45821a50386ef604c3cd098f8029a50a268d
 
-PODFILE CHECKSUM: e8114d760a6fd68b73a130fb073e8851aa360736
+PODFILE CHECKSUM: 51e7c79710cb71f0920d7d704555c88b2435687b
 
 COCOAPODS: 1.1.1
