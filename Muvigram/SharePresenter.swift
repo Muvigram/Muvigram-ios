@@ -47,14 +47,14 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
     }
     
     internal func homeButtonClickEvent(event: ControlEvent<Void>) {
-        event.debounce(0.5, scheduler: MainScheduler.instance)
+        event.debounce(0.2, scheduler: MainScheduler.instance)
             .bindNext {
                 self.view?.dimissShareViewController()
         }.addDisposableTo(bag)
     }
  
     internal func saveButtonClickEvent(event: ControlEvent<Void>) {
-        event.debounce(0.5, scheduler: MainScheduler.instance)
+        event.debounce(0.2, scheduler: MainScheduler.instance)
              .bindNext { [unowned self] in
                 self.dataManager.saveVideoWithUrl(url: self.videoUrl)
                     .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
@@ -68,6 +68,28 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                     })
                     .addDisposableTo(self.bag)
         }.addDisposableTo(bag)
+    }
+    
+    internal func instagramButtonClickEvent(event: ControlEvent<Void>) {
+        event.debounce(0.2, scheduler: MainScheduler.instance)
+            .bindNext {
+                self.dataManager.saveVideoWithUrl(url: self.videoUrl)
+                    .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(
+                        onError: { error in
+                            print(error.localizedDescription)
+                    },
+                        onCompleted: {
+                            let instagramURL = URL(string: "instagram://media")
+                            if UIApplication.shared.canOpenURL(instagramURL!) {
+                                UIApplication.shared.open(instagramURL!)
+                            }
+                            self.view?.dimissShareViewController()
+                    })
+                    .addDisposableTo(self.bag)
+            }.addDisposableTo(bag)
+        
     }
     
     internal func removeVideoWithPaths(videoUrlArray: [URL]) {

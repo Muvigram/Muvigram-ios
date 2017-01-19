@@ -15,13 +15,13 @@ class ShareViewController: UIViewController {
     var videoUrlArray: [URL]!
     var musicTimeStampArray: [CMTime]!
     var musicUrl: URL!
-
     var player: AVPlayer?
     
     // @inject
     public var presenter: SharePresenter<ShareViewController>!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet var instagramShareButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,9 @@ class ShareViewController: UIViewController {
         
         let homeButtonEvent = homeButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.homeButtonClickEvent(event: homeButtonEvent)
+        
+        let instagramButtonEvent = instagramShareButton.rx.controlEvent(UIControlEvents.touchUpInside)
+        presenter.instagramButtonClickEvent(event: instagramButtonEvent)
         
     }
     
