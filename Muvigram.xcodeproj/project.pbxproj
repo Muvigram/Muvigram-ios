@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B2CB2401E1B44980034F219 /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB23F1E1B44980034F219 /* SharePresenter.swift */; };
 		2B2CB2421E1B45A60034F219 /* ShareMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */; };
+		2B2F3FD51E2F06D600D19600 /* audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F3FD41E2F06D600D19600 /* audio.mp3 */; };
+		2B2F3FD91E2F2C4100D19600 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F3FD81E2F2C4100D19600 /* Main.storyboard */; };
 		2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */; };
 		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
 		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
@@ -55,6 +57,8 @@
 		186FD50051A8B5BCE5B10245 /* Pods-Muvigram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muvigram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram.debug.xcconfig"; sourceTree = "<group>"; };
 		2B2CB23F1E1B44980034F219 /* SharePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
 		2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareMvpView.swift; sourceTree = "<group>"; };
+		2B2F3FD41E2F06D600D19600 /* audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = audio.mp3; path = ../../../../Downloads/audio.mp3; sourceTree = "<group>"; };
+		2B2F3FD81E2F2C4100D19600 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumButton.swift; sourceTree = "<group>"; };
 		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
 		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
