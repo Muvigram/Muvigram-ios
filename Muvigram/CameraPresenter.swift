@@ -63,7 +63,7 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     // A Bool variable that determines whether to start
     // recording when the user presses the button in succession
     private var isbuttonPressed: Bool = false
-
+    
     internal func viewDidLoad() {
         self.musicUrl = URL(fileURLWithPath: mp3Path!)
         let recordingItem = AVPlayerItem(url: musicUrl!)
@@ -82,7 +82,7 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
                                                                    musicTimeStampArray: &self.musicTimeStampArray)
         }
     }
-
+    
     internal func capture(didFinishRecordingToOutputFileAt outputFileURL: URL!) {
         // Saved shot path
         videoUrlArray.append(outputFileURL)
@@ -104,40 +104,43 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
     internal func recordButtonStopRecordEvent(event: ControlEvent<Void>){
         event
             .filter({
-            self.isbuttonPressed = false
-            if self.recordingModePlayer?.timeControlStatus == .playing {
-                self.view?.recordButtonEnabled(enabled: false)
-                let curRecordedTime = CMTimeGetSeconds(self.recordingModePlayer!.currentTime()) - CMTimeGetSeconds(self.musicTimeStampArray.last!)
-                let cumulativeDuration = CMTimeGetSeconds((self.recordingModePlayer?.currentTime())!) - CMTimeGetSeconds(self.musicTimeStampArray.first!)
-                
-                if cumulativeDuration > 14.0 {
-                    let time = DispatchTime.now() + 15.0 - cumulativeDuration
-                    DispatchQueue.main.asyncAfter(deadline: time) {
-                        self.isCompleateRecored = true
+                self.isbuttonPressed = false
+                if self.recordingModePlayer?.timeControlStatus == .playing {
+                    self.view?.recordButtonEnabled(enabled: false)
+                    let curRecordedTime = CMTimeGetSeconds(self.recordingModePlayer!.currentTime()) - CMTimeGetSeconds(self.musicTimeStampArray.last!)
+                    let cumulativeDuration = CMTimeGetSeconds((self.recordingModePlayer?.currentTime())!) - CMTimeGetSeconds(self.musicTimeStampArray.first!)
+                    
+                    if cumulativeDuration > 14.0 {
+                        let time = DispatchTime.now() + 15.0 - cumulativeDuration
+                        DispatchQueue.main.asyncAfter(deadline: time) {
+                            self.isCompleateRecored = true
+                            self.stopMusic()
+                            self.stackBarStop()
+                        }
+                    } else if curRecordedTime < 1.0 {
+                        let time = DispatchTime.now() + 1.0 - curRecordedTime
+                        DispatchQueue.main.asyncAfter(deadline: time) {
+                            self.stopMusic()
+                            self.stackBarStop()
+                        }
+                    } else {
                         self.stopMusic()
                         self.stackBarStop()
                     }
-                } else if curRecordedTime < 1.0 {
-                    let time = DispatchTime.now() + 1.0 - curRecordedTime
-                    DispatchQueue.main.asyncAfter(deadline: time) {
-                        self.stopMusic()
-                        self.stackBarStop()
-                    }
-                } else {
-                    self.stopMusic()
-                    self.stackBarStop()
+                    return true
                 }
-                return true
-            }
-            return false
+                return false
             })
             .debounce(1.0, scheduler: MainScheduler.instance)
             .bindNext { [unowned self] in
                 self.view?.partialRecordingComplete()
                 if self.isStackBarPassminimumRecordingCondition {
-                    self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: true)
+                    let time = DispatchTime.now() + 0.3
+                    DispatchQueue.main.asyncAfter(deadline: time) {
+                        self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: true)
+                    }
                 }
-        }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     internal func recordButtonStartRecordEvent(event: ControlEvent<Void>) {
@@ -147,7 +150,7 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
                 return true
             }
             return false
-            })
+        })
             .debounce(0.3, scheduler: MainScheduler.instance)
             .bindNext{
                 if self.isbuttonPressed {
@@ -160,32 +163,32 @@ class CameraPresenter<T: CameraMvpView>: BasePresenter<T> {
                     self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: false)
                     
                 }
-        }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     internal func musicSelectButtonEvent(event: ControlEvent<Void>) {
         event.debounce(0.3, scheduler: MainScheduler.instance)
-             .bindNext{ [unowned self] in
+            .bindNext{ [unowned self] in
                 self.view?.moveToMusicViewController()
-             }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     internal func audioEditButtonEvent(event: ControlEvent<Void>) {
         event.debounce(0.3, scheduler: MainScheduler.instance)
-             .bindNext{
+            .bindNext{
                 self.view?.scrollExclusiveOr(false)
                 self.view?.controllerViewisHidden(true, isRecord: false)
                 self.musicSectionSelectionPlayback()
-             }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     internal func videoEditComplateButtonEvent(event: ControlEvent<Void>) {
         event.debounce(0.3, scheduler: MainScheduler.instance)
-             .bindNext{
+            .bindNext{
                 self.view?.videoRecordingFinalized(videoUrlArray: self.videoUrlArray,
                                                    musicTimeStampArray: self.musicTimeStampArray,
                                                    musicUrl: self.musicUrl!)
-             }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     internal func isVidioFileUrlEmpty() -> Bool {

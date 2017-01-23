@@ -35,14 +35,14 @@ extension CameraPresenter where T:CameraMvpView {
         // Change the position and shape of the pop button according to the position of the gauge
         let availableSpaceforPlacing: CGFloat = 20
         if stackCurredCoord.x <= availableSpaceforPlacing {
-             self.view?.popButtonPositionChangeWithStackBarStatus(
-             buttonImage: self.stackImageRight, buttonPosition: CGRect(x: stackCurredCoord.x , y: stackCurredCoord.y + 5, width: 40, height: 40))
+            self.view?.popButtonPositionChangeWithStackBarStatus(
+                buttonImage: self.stackImageRight, buttonPosition: CGRect(x: stackCurredCoord.x , y: stackCurredCoord.y + 5, width: 40, height: 40))
         } else if stackCurredCoord.x + availableSpaceforPlacing >= width {
-             self.view?.popButtonPositionChangeWithStackBarStatus(
-             buttonImage: self.stackImageLeft, buttonPosition: CGRect(x: stackCurredCoord.x - 40, y: stackCurredCoord.y + 5, width: 40, height: 40))
+            self.view?.popButtonPositionChangeWithStackBarStatus(
+                buttonImage: self.stackImageLeft, buttonPosition: CGRect(x: stackCurredCoord.x - 40, y: stackCurredCoord.y + 5, width: 40, height: 40))
         } else {
-             self.view?.popButtonPositionChangeWithStackBarStatus(
-             buttonImage: self.stackImage, buttonPosition: CGRect(x: stackCurredCoord.x - availableSpaceforPlacing , y: stackCurredCoord.y + 5, width: 40, height: 40))
+            self.view?.popButtonPositionChangeWithStackBarStatus(
+                buttonImage: self.stackImage, buttonPosition: CGRect(x: stackCurredCoord.x - availableSpaceforPlacing , y: stackCurredCoord.y + 5, width: 40, height: 40))
         }
         self.view?.popButtonHidden(status: false)
     }
@@ -58,7 +58,6 @@ extension CameraPresenter where T:CameraMvpView {
         self.view?.controllerViewisHidden(false, isRecord: false)
     }
     internal func minimumRecordingtimeComplete() {
-        self.view?.videoEditComplateButtonEnableWithStackBarStatus(status: true)
         self.isStackBarPassminimumRecordingCondition = true
     }
     
