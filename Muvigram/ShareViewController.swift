@@ -18,6 +18,8 @@ class ShareViewController: UIViewController {
     var musicUrl: URL!
     var player: AVPlayer?
     
+    fileprivate var periodicTimeToken: Any? = nil
+    
     // @inject
     public var presenter: SharePresenter<ShareViewController>!
     @IBOutlet weak var saveButton: UIButton!
@@ -42,7 +44,14 @@ class ShareViewController: UIViewController {
     
     deinit {
         print("deinit")
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        modifyPlayerRemoveTimeObserver()
+    }
+    
+    private func modifyPlayerRemoveTimeObserver() {
+        if let token = self.periodicTimeToken {
+            self.player?.removeTimeObserver(token)
+            self.periodicTimeToken = nil
+        }
     }
     
     @IBAction func homeClick(_ sender: Any) {
@@ -56,6 +65,7 @@ extension ShareViewController: ShareMvpView {
     // Called when encodeVideofileForMargins () is finished
     func playVideo(mergedVideofileUrl: URL?) {
         
+        
         if let videofileUrl = mergedVideofileUrl {
             player = AVPlayer(url: videofileUrl)
             let playerLayer = AVPlayerLayer(player: player)
@@ -64,10 +74,17 @@ extension ShareViewController: ShareMvpView {
             
             self.view.layer.insertSublayer(playerLayer, at: 0)
             player?.play()
-            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem, queue: nil) { [unowned self] _  in
-                self.player?.seek(to: kCMTimeZero)
-                self.player?.play()
-            }
+            
+            let timeResolution: Int32 = 60000000
+            
+            // Repeat until the last time so that the logo is not exposed
+            let videoDuratoin = AVURLAsset(url: videofileUrl, options: nil).duration - CMTime(seconds: 1.3, preferredTimescale: timeResolution)
+            self.periodicTimeToken = self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, timeResolution), queue: DispatchQueue.main, using: { (time) in
+                if time >= videoDuratoin {
+                    self.player?.seek(to: kCMTimeZero)
+                    self.player?.play()
+                }
+            })
         }
     }
     
