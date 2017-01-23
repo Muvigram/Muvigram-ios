@@ -55,7 +55,9 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
  
     internal func saveButtonClickEvent(event: ControlEvent<Void>) {
         event.debounce(0.2, scheduler: MainScheduler.instance)
-             .bindNext { [unowned self] in
+            .bindNext { [unowned self] in
+                let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
+                indicator.startAnimating()
                 self.dataManager.saveVideoWithUrl(url: self.videoUrl)
                     .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
                     .observeOn(MainScheduler.instance)
@@ -64,10 +66,12 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                             print(error.localizedDescription)
                     },
                         onCompleted: {
-                            print("completed")
+                            indicator.stopAnimating()
+                            contrainer.removeFromSuperview()
+                            self.view?.showCompleteDialog()
                     })
                     .addDisposableTo(self.bag)
-        }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     internal func instagramButtonClickEvent(event: ControlEvent<Void>) {
