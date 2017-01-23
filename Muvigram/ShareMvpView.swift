@@ -18,4 +18,6 @@ protocol ShareMvpView: Mvpview {
     func dimissShareViewController()
     
     func showCompleteDialog()
+    
+    func showShareSheet(videoUrl: URL)
 }

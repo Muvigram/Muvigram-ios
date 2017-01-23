@@ -24,7 +24,8 @@ class ShareViewController: UIViewController {
     public var presenter: SharePresenter<ShareViewController>!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet var instagramShareButton: UIButton!
+    @IBOutlet var shareButton: UIButton!
+    //@IBOutlet var instagramShareButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +37,12 @@ class ShareViewController: UIViewController {
         
         let homeButtonEvent = homeButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.homeButtonClickEvent(event: homeButtonEvent)
-        
+        /*
         let instagramButtonEvent = instagramShareButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.instagramButtonClickEvent(event: instagramButtonEvent)
-        
+        */
+        let shareButtonEvent = shareButton.rx.controlEvent(UIControlEvents.touchUpInside)
+        presenter.shareButtonClickEvent(event: shareButtonEvent)
     }
     
     deinit {
@@ -58,7 +61,6 @@ class ShareViewController: UIViewController {
         presenter = nil
         dimissShareViewController()
     }
-    
 }
 
 extension ShareViewController: ShareMvpView {
@@ -123,5 +125,10 @@ extension ShareViewController: ShareMvpView {
     
     func showCompleteDialog() {
         self.present(PopupDialog(title: "Save is complete.", message: ""), animated: true, completion: nil)
+    }
+    
+    func showShareSheet(videoUrl: URL) {
+        let activityViewController = UIActivityViewController(activityItems: [videoUrl], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
 }

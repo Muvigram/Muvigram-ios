@@ -74,7 +74,7 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
             }.addDisposableTo(bag)
     }
     
-    internal func instagramButtonClickEvent(event: ControlEvent<Void>) {
+    /*internal func instagramButtonClickEvent(event: ControlEvent<Void>) {
         event.debounce(0.2, scheduler: MainScheduler.instance)
             .bindNext {
                 self.dataManager.saveVideoWithUrl(url: self.videoUrl)
@@ -93,7 +93,13 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                     })
                     .addDisposableTo(self.bag)
             }.addDisposableTo(bag)
-        
+    }*/
+    
+    internal func shareButtonClickEvent(event: ControlEvent<Void>) {
+        event.debounce(0.2, scheduler: MainScheduler.instance)
+            .bindNext {
+                self.view?.showShareSheet(videoUrl: self.videoUrl)
+        }.addDisposableTo(bag)
     }
     
     internal func removeVideoWithPaths(videoUrlArray: [URL]) {

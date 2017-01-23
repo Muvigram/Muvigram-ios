@@ -115,9 +115,9 @@ class VideoService {
                         
                         let duration = CMTime(seconds: CMTimeGetSeconds(musicTimeStampArray[idx+1]) - CMTimeGetSeconds(musicTimeStampArray[idx]), preferredTimescale: 2000000000)
                         
-                        let assetTrackVedio = tracks.first!
+                        let assetTrackVideo = tracks.first!
                         try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, duration),
-                                                       of: assetTrackVedio, at: insertTime)
+                                                       of: assetTrackVideo, at: insertTime)
                         
                         // When music is not selected, use the video tone.
                         if musicUrl.path != silenceMp3Path {
@@ -139,21 +139,21 @@ class VideoService {
             
             // 로고 추가
             do {
-                let logoVideoUrl = Bundle.main.url(forResource: "logo_video", withExtension: "mov")
+                let logoVideoUrl = Bundle.main.url(forResource: "logo_video", withExtension: "mov")!
+                let logoAsset = AVURLAsset(url: logoVideoUrl)
+                let assetTrackLogoVideo = logoAsset.tracks(withMediaType: AVMediaTypeVideo).first!
                 
-                if let logoVideoUrl = logoVideoUrl {
-                    let logoAsset = AVURLAsset(url: logoVideoUrl)
-                    let assetTrackLogoVedio = logoAsset.tracks(withMediaType: AVMediaTypeVideo).first!
-                    
-                    try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
-                                                   of: assetTrackLogoVedio, at: insertTime)
-                    
-                }
+                try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
+                                               of: assetTrackLogoVideo, at: insertTime)
+                
+                let assetTrackLogoAudio = logoAsset.tracks(withMediaType: AVMediaTypeAudio).first!
+                 
+                 try trackAudio.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
+                 of: assetTrackLogoAudio, at: insertTime)
+               
             } catch {
                 print("mergeVideoFile insertLogoVideo error")
             }
-            
-            
             
             // 병합한 비디오가 쓰여질 경로 지정
             let combinedVideoName = UUID().uuidString
