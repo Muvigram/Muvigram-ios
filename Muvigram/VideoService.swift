@@ -104,6 +104,7 @@ class VideoService {
             // the timing of recording without selecting music and the timing of not recording.
             let silenceMp3Path = Bundle.main.path(forResource: "Silence_15_sec", ofType: "mp3")
             
+            
             for (idx, videoUrl) in videoUrlArray.enumerated() {
                 let videoAsset = AVURLAsset(url: videoUrl)
                 let tracks = videoAsset.tracks(withMediaType: AVMediaTypeVideo)
@@ -135,6 +136,24 @@ class VideoService {
                     }
                 }
             }
+            
+            // 로고 추가
+            do {
+                let logoVideoUrl = Bundle.main.url(forResource: "logo_video", withExtension: "mov")
+                
+                if let logoVideoUrl = logoVideoUrl {
+                    let logoAsset = AVURLAsset(url: logoVideoUrl)
+                    let assetTrackLogoVedio = logoAsset.tracks(withMediaType: AVMediaTypeVideo).first!
+                    
+                    try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
+                                                   of: assetTrackLogoVedio, at: insertTime)
+                    
+                }
+            } catch {
+                print("mergeVideoFile insertLogoVideo error")
+            }
+            
+            
             
             // 병합한 비디오가 쓰여질 경로 지정
             let combinedVideoName = UUID().uuidString

@@ -13,6 +13,7 @@
 		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
 		2B4CE4111E30A3EE006898C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4CE4101E30A3EE006898C4 /* Main.storyboard */; };
 		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
+		2B627DD51E359CD4007488D8 /* logo_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2B627DD41E359CD4007488D8 /* logo_video.mov */; };
 		2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */; };
 		2B6919621DEE98A7005EE1D7 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */; };
 		2B6919641DEE98C2005EE1D7 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6919631DEE98C2005EE1D7 /* MusicViewController.swift */; };
@@ -58,6 +59,7 @@
 		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
 		2B4CE4101E30A3EE006898C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../Downloads/Main.storyboard; sourceTree = "<group>"; };
 		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		2B627DD41E359CD4007488D8 /* logo_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = logo_video.mov; path = ../../../logo_video.mov; sourceTree = "<group>"; };
 		2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		2B6919631DEE98C2005EE1D7 /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		2B84A7AE1DEE6E7B001E0E14 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2B627DD41E359CD4007488D8 /* logo_video.mov */,
 				2B4CE4101E30A3EE006898C4 /* Main.storyboard */,
 				2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */,
 				2B9B6AC01E0277DF0020C06D /* Assets.xcassets */,
@@ -377,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B84A7A71DEE6D8A001E0E14 /* LaunchScreen.storyboard in Resources */,
+				2B627DD51E359CD4007488D8 /* logo_video.mov in Resources */,
 				2B4CE4111E30A3EE006898C4 /* Main.storyboard in Resources */,
 				2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */,
 				2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */,
