@@ -74,8 +74,14 @@
     return _minLength ?: 3;
 }
 
+- (Boolean)isGestureEnd
+{
+    return _isGestureEnd ?: false;
+}
+
 - (void)resetSubviews
 {
+    _isGestureEnd = true;
     [self setBackgroundColor:[UIColor blackColor]];
 
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -169,9 +175,13 @@
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             self.leftStartPoint = [gesture locationInView:self];
+            self.isGestureEnd = true;
+            [self.delegate trimmerView:self isGestureEnd:true];
             break;
         case UIGestureRecognizerStateChanged:
         {
+            self.isGestureEnd = false;
+            [self.delegate trimmerView:self isGestureEnd:false];
             CGPoint point = [gesture locationInView:self];
             
             int deltaX = point.x - self.leftStartPoint.x;
@@ -195,7 +205,13 @@
             break;
         }
             
+        case UIGestureRecognizerStateEnded:
+            _isGestureEnd = true;
+            [self.delegate trimmerView:self isGestureEnd:true];
+            break;
+            
         default:
+            _isGestureEnd = true;
             break;
     }
     
@@ -207,9 +223,14 @@
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             self.rightStartPoint = [gesture locationInView:self];
+            _isGestureEnd = true;
+            [self.delegate trimmerView:self isGestureEnd:true];
             break;
         case UIGestureRecognizerStateChanged:
         {
+            _isGestureEnd = false;
+            [self.delegate trimmerView:self isGestureEnd:false];
+            
             CGPoint point = [gesture locationInView:self];
             
             int deltaX = point.x - self.rightStartPoint.x;
@@ -233,7 +254,13 @@
             break;
         }
             
+        case UIGestureRecognizerStateEnded:
+            _isGestureEnd = true;
+            [self.delegate trimmerView:self isGestureEnd:true];
+            break;
+            
         default:
+            _isGestureEnd = true;
             break;
     }
 }

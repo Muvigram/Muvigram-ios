@@ -42,6 +42,7 @@
 
 // Custom width for thumb
 @property (assign, nonatomic) CGFloat thumbWidth;
+@property (assign, nonatomic) Boolean isGestureEnd;
 
 @property (weak, nonatomic) IBOutlet id<ICGVideoTrimmerDelegate> delegate;
 
@@ -60,5 +61,7 @@
 @protocol ICGVideoTrimmerDelegate <NSObject>
 
 - (void)trimmerView:(ICGVideoTrimmerView *)trimmerView didChangeLeftPosition:(CGFloat)startTime rightPosition:(CGFloat)endTime;
+
+- (void)trimmerView:(ICGVideoTrimmerView *)trimmerView isGestureEnd:(Boolean)gestureEnd;
 
 @end

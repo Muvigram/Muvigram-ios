@@ -15,6 +15,8 @@ import MBProgressHUD
 
 class EditorViewController: UIViewController, ICGVideoTrimmerDelegate, AVAudioPlayerDelegate,
 UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
+
+
     
     //model
     var videosInfo = VideosInfo()
@@ -117,19 +119,19 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         cancelImageView.addGestureRecognizer(gestureCancel)
         
         let gestureDelete = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.deleteVideoAction(_:)))
-//        homeImageView.addGestureRecognizer(gestureDelete)
         resultVideoView.addGestureRecognizer(gestureDelete)
         
         let gestureHome = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.goHomeAction(_:)))
         homeImageView.addGestureRecognizer(gestureHome)
         
+        let gestureDone = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.doneAction(_:)))
+        doneImageView.addGestureRecognizer(gestureDone)
+        
         //재생 일시정지
         let gestureVideoTouch = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.touchVideoAction(_:)))
         videoView.addGestureRecognizer(gestureVideoTouch)
         
-        //current video 끝날시
-        NotificationCenter.default.addObserver(self, selector: #selector(self.audioPlayerDidFinishPlaying(note:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: audioPlayer.currentItem)
-        
+    
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -171,14 +173,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         doneImageView.removeFromSuperview()
         
         isResultVideo = false
-    }
-    
-    //오디오가 끝나면? - resultVideo 에는 아무것도 없는데 audio playing 끝날시.
-    func audioPlayerDidFinishPlaying(note: Notification) {
-        
-        
-
-
     }
     
     //선택한 동영상 갯수 별 하단 탭의 갯수 할당
@@ -303,6 +297,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     var width = 0.0
     var timer = Timer()
     var resultTimer = Timer()
+    var token:Any?
     
     //재생, 일시정지
     func touchVideoAction(_ sender:UITapGestureRecognizer){
@@ -311,13 +306,19 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         if isResultVideo && containedVideoCount>0 {
             if audioPlayer.timeControlStatus == .playing {
                 
+                print("멈춤")
                 audioPlayer.pause()
                 playButton.isHidden = false
                 currentPlayerLayer.player!.pause()
                 resultTimer.invalidate()
+                if let timetoken = token {
+                    audioPlayer.removeTimeObserver(timetoken)
+                    token = nil
+                }
                 
             }else if audioPlayer.timeControlStatus != .playing {
                 
+                print("시작")
                 audioPlayer.play()
                 playButton.isHidden = true
                 timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.makeProgressBar), userInfo: nil, repeats: true)
@@ -330,9 +331,10 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 }
                 
                 //오디오 언제 끝나는지 감시
-                audioPlayer.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 10), queue: DispatchQueue.main, using: { (CMTime) in
+                token = audioPlayer.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 10), queue: DispatchQueue.main, using: { (CMTime) in
                     if self.audioPlayer.currentTime() >= self.musicOutputTime! {
                         self.resultTimer.invalidate()
+                        print("오디오 끝!")
                         
                         self.currentPlayerLayer.player?.pause()
                         self.currentPlayerLayer.removeFromSuperlayer()
@@ -381,13 +383,12 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 
             }else if player.timeControlStatus == .paused {
                 // TODO -- 여기서 문제가 생기는거 같습니당
-                player.seek(to: CMTimeMakeWithSeconds(Float64(startTime), 1))
+                player.seek(to: CMTimeMakeWithSeconds(Float64(startTime), 1000000000))
                 player.play()
-                audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1))
+                audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
                 audioPlayer.play()
                 playButton.isHidden = true
                 startPlaybackTimeChecker()
-
             }
         }
     }
@@ -477,16 +478,23 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     var soundEndList:[CMTime] = []
     var barList:[Int] = []
     
+    var finalURLList:[URL] = []
+    var finalMusicTimeStamp:[CMTime] = []
+    
     //인서트 버튼 눌렀을 때
     func touchInsertBtnAction(_ sender:UITapGestureRecognizer){
         
+        //비디오에 대한 정보
         let startFloat = Float64(startTime)
         let endFloat = Float64(endTime)
         let duration = endFloat - startFloat
         
-        let startCMTime = CMTimeMakeWithSeconds(startFloat, player.currentTime().timescale)
-        let endCMTime = CMTimeMakeWithSeconds(endFloat, player.currentTime().timescale)
+        let startCMTime = CMTimeMakeWithSeconds(startFloat, 1000000000)
+        let endCMTime = CMTimeMakeWithSeconds(endFloat, 1000000000)
         let timeRange = CMTimeRange(start: startCMTime, end: endCMTime)
+        
+        //오디오에 대한 정보
+        
         
         //현재 진행중인 플레이어 stop
         player.pause()
@@ -498,6 +506,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         
         videosInfo.order.append(self.index)
         videosInfo.range.append(timeRange)
+        finalURLList.append(videosInfo.videoURL[index] as URL)
         
         print(videosInfo.order)
         print(videosInfo.range)
@@ -538,7 +547,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         playerLayerList.append(tempPlayerLayer)
 
         //음악에 맞게 초 입력
-        soundStartList.append(musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1))
+        soundStartList.append(musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
         print("stackedTIme \(stackedTime)")
         
         //남은 초 표시
@@ -553,7 +562,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         }
         
         //음악에 맞게 초 입력
-        soundEndList.append(musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1))
+        soundEndList.append(musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
         print("stackedTIme \(stackedTime)")
         
         addHomeAndDoneButton()
@@ -621,6 +630,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
             playerLayerList.removeLast()
             soundEndList.removeLast()
             soundStartList.removeLast()
+            finalURLList.removeLast()
             
             allocatedViews.popLast()?.removeFromSuperview()
             temp = temp - barList.popLast()!
@@ -671,6 +681,16 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         self.present(alert, animated: true, completion: nil)
     }
     
+    //다했따아
+    func doneAction(_ sender:UITapGestureRecognizer){
+        
+        if containedVideoCount > 0 {
+            finalMusicTimeStamp = soundStartList
+            finalMusicTimeStamp.append(soundEndList.last!)
+            videoEditingFinalized(videoUrlArray: finalURLList, musicTimeStampArray: finalMusicTimeStamp, musicUrl: musicFileurl!)
+        }
+    }
+    
     
     func startPlaybackTimeChecker(){
         stopPlayBackTimeChecker()
@@ -700,7 +720,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         videoPlayBackPosition = pos
         let time = CMTimeMakeWithSeconds(Float64(videoPlayBackPosition), player.currentTime().timescale)
         player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
-        audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1))
+        audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), player.currentTime().timescale))
     }
     
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
@@ -714,33 +734,34 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         print("\(self.startTime) :  \(self.endTime)")
         print(Float64(self.startTime))
         
-        player.seek(to: CMTimeMakeWithSeconds(Float64(self.startTime), 600))
+        player.seek(to: CMTimeMakeWithSeconds(Float64(self.startTime), 1000000000))
         player.pause()
         audioPlayer.pause()
         
         //처음에는 음악 들려야함
-//        if trimmerView.isGestureEnd {
-//            self.player.play()
-//            self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
-//            self.audioPlayer.play()
-//            self.startPlaybackTimeChecker()
-//        }
+        if trimmerView.isGestureEnd && startTime >= 0{
+            self.player.play()
+            self.audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
+            self.audioPlayer.play()
+            self.startPlaybackTimeChecker()
+        }
     }
     
     //gesture에 따라 음악 들리고 안들리고
-//    func trimmerView(_ trimmerView: ICGVideoTrimmerView!, isGestureEnd end: Bool) {
-//        if end == true {
-//            self.player.play()
-//            self.audioPlayer.currentTime = TimeInterval(self.stackedTime)
-//            self.audioPlayer.play()
-//            self.startPlaybackTimeChecker()
-//        }
-//    }
+    func trimmerView(_ trimmerView: ICGVideoTrimmerView!, isGestureEnd end: Bool) {
+        if end == true {
+            self.player.play()
+            self.audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
+            self.audioPlayer.play()
+            self.startPlaybackTimeChecker()
+        }
+    }
+
     
     func playerDidFinishPlaying(note: Notification){
         self.player.seek(to: kCMTimeZero)
         self.player.pause()
-        self.audioPlayer.seek(to: musicInputTime!+CMTimeMakeWithSeconds(Float64(stackedTime), 1))
+        self.audioPlayer.seek(to: musicInputTime!+CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
         self.audioPlayer.pause()
     }
     // 비디오 편집 완료 -> 공유화면 이동
