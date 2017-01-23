@@ -100,9 +100,14 @@ class VideoService {
             let audios = audeoAsset.tracks(withMediaType: AVMediaTypeAudio)
             let assetTrackAudio = audios.first!
             
+            // Compare the URL of the selected music file with the URL of the silent file and distinguish between 
+            // the timing of recording without selecting music and the timing of not recording.
+            let silenceMp3Path = Bundle.main.path(forResource: "Silence_15_sec", ofType: "mp3")
+            
             for (idx, videoUrl) in videoUrlArray.enumerated() {
                 let videoAsset = AVURLAsset(url: videoUrl)
                 let tracks = videoAsset.tracks(withMediaType: AVMediaTypeVideo)
+                let videoAudios = videoAsset.tracks(withMediaType: AVMediaTypeAudio)
                 
                 if tracks.count > 0 {
                     do {
@@ -113,12 +118,15 @@ class VideoService {
                         try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, duration),
                                                        of: assetTrackVedio, at: insertTime)
                         
-                        try trackAudio.insertTimeRange(CMTimeRangeMake(musicTimeStampArray[idx], duration),
-                                                       of: assetTrackAudio, at: insertTime)
-                        
-                        print("idx -> \(idx)")
-                        print("music time ->   #1       \(CMTimeGetSeconds(duration))")
-                        print("video time ->   #3       \(CMTimeGetSeconds(duration))")
+                        // When music is not selected, use the video tone.
+                        if musicUrl.path != silenceMp3Path {
+                            try trackAudio.insertTimeRange(CMTimeRangeMake(musicTimeStampArray[idx], duration),
+                                                           of: assetTrackAudio, at: insertTime)
+                        } else {
+                            let assetTrackAudio = videoAudios.first!
+                            try trackAudio.insertTimeRange(CMTimeRangeMake(kCMTimeZero, videoAsset.duration),
+                                                           of: assetTrackAudio, at: insertTime)
+                        }
                         
                         // 병합 시작 위치 갱신
                         insertTime = CMTimeAdd(insertTime, duration)
