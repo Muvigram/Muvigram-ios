@@ -20,4 +20,6 @@ protocol ShareMvpView: Mvpview {
     func showCompleteDialog()
     
     func showShareSheet(videoUrl: URL)
+    
+    func enabledSaveButton(isEnabled: Bool)
 }

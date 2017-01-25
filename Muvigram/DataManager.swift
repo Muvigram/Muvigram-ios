@@ -11,6 +11,7 @@ import MediaPlayer
 import UIKit
 import RxSwift
 
+
 class DataManager {
     
     private let musicService: MusicService
@@ -52,5 +53,7 @@ class DataManager {
     public func deleteVideofilesTemporary(videoUrlArray: inout [URL], musicTimeStampArray: inout [CMTime], player: inout AVPlayer) {
         videoService.deleteVideofilesTemporary(&videoUrlArray , &musicTimeStampArray, &player)
     }
+    
+ 
     
 }

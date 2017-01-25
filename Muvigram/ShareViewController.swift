@@ -37,12 +37,18 @@ class ShareViewController: UIViewController {
         
         let homeButtonEvent = homeButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.homeButtonClickEvent(event: homeButtonEvent)
-        /*
-        let instagramButtonEvent = instagramShareButton.rx.controlEvent(UIControlEvents.touchUpInside)
-        presenter.instagramButtonClickEvent(event: instagramButtonEvent)
-        */
+        
         let shareButtonEvent = shareButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.shareButtonClickEvent(event: shareButtonEvent)
+        
+        /*
+         let instagramButtonEvent = instagramShareButton.rx.controlEvent(UIControlEvents.touchUpInside)
+         presenter.instagramButtonClickEvent(event: instagramButtonEvent)
+         */
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        player?.play()
     }
     
     deinit {
@@ -58,7 +64,6 @@ class ShareViewController: UIViewController {
     }
     
     @IBAction func homeClick(_ sender: Any) {
-        presenter = nil
         dimissShareViewController()
     }
 }
@@ -66,7 +71,6 @@ class ShareViewController: UIViewController {
 extension ShareViewController: ShareMvpView {
     // Called when encodeVideofileForMargins () is finished
     func playVideo(mergedVideofileUrl: URL?) {
-        
         
         if let videofileUrl = mergedVideofileUrl {
             player = AVPlayer(url: videofileUrl)
@@ -120,6 +124,9 @@ extension ShareViewController: ShareMvpView {
     }
     
     func dimissShareViewController() {
+        self.player?.pause()
+        self.player = nil
+        presenter = nil
         self.dismiss(animated: true, completion: nil);
     }
     
@@ -130,5 +137,9 @@ extension ShareViewController: ShareMvpView {
     func showShareSheet(videoUrl: URL) {
         let activityViewController = UIActivityViewController(activityItems: [videoUrl], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
+    }
+    
+    func enabledSaveButton(isEnabled: Bool) {
+        saveButton.isEnabled = isEnabled
     }
 }

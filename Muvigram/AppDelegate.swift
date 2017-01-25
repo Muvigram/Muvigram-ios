@@ -101,6 +101,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return storyBoard.instantiateViewController(withIdentifier: "myMusic") as! MusicEditorViewController
     }
 
-    
 }
 

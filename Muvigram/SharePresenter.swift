@@ -11,6 +11,7 @@ import AVFoundation
 import UIKit
 import RxCocoa
 import RxSwift
+import Photos
 
 class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
 
@@ -26,7 +27,6 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
     internal func encodeVideofileForMargins(videoUrlArray: [URL],
                                           musicTimeStampArray: [CMTime],
                                           musicUrl: URL) {
-        
         let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
         indicator.startAnimating()
         self.dataManager.encodeVideofileForMargins(videoUrlArray: videoUrlArray,
@@ -56,50 +56,36 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
     internal func saveButtonClickEvent(event: ControlEvent<Void>) {
         event.debounce(0.2, scheduler: MainScheduler.instance)
             .bindNext { [unowned self] in
-                let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
-                indicator.startAnimating()
-                self.dataManager.saveVideoWithUrl(url: self.videoUrl)
-                    .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(
-                        onError: { error in
-                            print(error.localizedDescription)
-                    },
-                        onCompleted: {
-                            indicator.stopAnimating()
-                            contrainer.removeFromSuperview()
-                            self.view?.showCompleteDialog()
-                    })
-                    .addDisposableTo(self.bag)
+                self.saveVideoWithURL() {
+                    self.view?.showCompleteDialog()
+                }
             }.addDisposableTo(bag)
     }
-    
-    /*internal func instagramButtonClickEvent(event: ControlEvent<Void>) {
-        event.debounce(0.2, scheduler: MainScheduler.instance)
-            .bindNext {
-                self.dataManager.saveVideoWithUrl(url: self.videoUrl)
-                    .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(
-                        onError: { error in
-                            print(error.localizedDescription)
-                    },
-                        onCompleted: {
-                            let instagramURL = URL(string: "instagram://camera")
-                            if UIApplication.shared.canOpenURL(instagramURL!) {
-                                UIApplication.shared.open(instagramURL!)
-                            }
-                            self.view?.dimissShareViewController()
-                    })
-                    .addDisposableTo(self.bag)
-            }.addDisposableTo(bag)
-    }*/
     
     internal func shareButtonClickEvent(event: ControlEvent<Void>) {
         event.debounce(0.2, scheduler: MainScheduler.instance)
             .bindNext {
+                //self.view?.enabledSaveButton(isEnabled: false)
                 self.view?.showShareSheet(videoUrl: self.videoUrl)
+                
         }.addDisposableTo(bag)
+    }
+    
+    private func saveVideoWithURL(completionHandler: (() -> Void)?) {
+        let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
+        indicator.startAnimating()
+        self.dataManager.saveVideoWithUrl(url: self.videoUrl)
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
+            .observeOn(MainScheduler.instance)
+            .subscribe(
+                onError: { error in
+                    print(error.localizedDescription)
+                },
+                onCompleted: {
+                    indicator.stopAnimating()
+                    contrainer.removeFromSuperview()
+                    completionHandler?()
+                }).addDisposableTo(self.bag)
     }
     
     internal func removeVideoWithPaths(videoUrlArray: [URL]) {
@@ -110,4 +96,24 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
         }
     }
     
+    /*internal func instagramButtonClickEvent(event: ControlEvent<Void>) {
+     event.debounce(0.2, scheduler: MainScheduler.instance)
+     .bindNext {
+     self.dataManager.saveVideoWithUrl(url: self.videoUrl)
+     .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
+     .observeOn(MainScheduler.instance)
+     .subscribe(
+     onError: { error in
+     print(error.localizedDescription)
+     },
+     onCompleted: {
+     let instagramURL = URL(string: "instagram://camera")
+     if UIApplication.shared.canOpenURL(instagramURL!) {
+     UIApplication.shared.open(instagramURL!)
+     }
+     self.view?.dimissShareViewController()
+     })
+     .addDisposableTo(self.bag)
+     }.addDisposableTo(bag)
+     }*/
 }
