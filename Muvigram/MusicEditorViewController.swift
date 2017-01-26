@@ -101,6 +101,10 @@ extension MusicEditorViewController: CmTimeDelegate {
         scwaveScrollView.showsHorizontalScrollIndicator = false
         scwaveScrollView.bounces = false
         
+        scwaveScrollView.waveformView.progressColor = UIColor(red: CGFloat(0.816), green: CGFloat(0.157), blue:
+            CGFloat(0.306), alpha: CGFloat(1.00))
+        scwaveScrollView.waveformView.normalColor = UIColor(red: CGFloat(0.878), green: CGFloat(0.878), blue: CGFloat(0.878), alpha: CGFloat(1.00))
+        
         self.resultSerchController = UISearchController(searchResultsController: nil)
         self.resultSerchController.searchResultsUpdater = self
         
