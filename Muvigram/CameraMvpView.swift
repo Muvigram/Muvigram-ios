@@ -26,6 +26,8 @@ protocol CameraMvpView: Mvpview {
     
     func musicAlbumImageReplace(albumImage: UIImage)
     
+    func scwaveInfoMusicTitleReplace(text: String)
+    
     func stackingStartWithStackBar(time: Float64)
     
     func stackingStopWithStackBar()

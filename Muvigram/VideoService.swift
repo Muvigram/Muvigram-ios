@@ -200,50 +200,45 @@ class VideoService {
             // 로고 추가
             let logoVideoUrl = Bundle.main.url(forResource: "logo_videofhd", withExtension: "mov")!
             let standardCGsize = self.resolutionSizeForLocalVideo(url: videoUrlArray.first!)!
-            
             self.rewritingVideofileByResolutionChange(originalVideoUrl: logoVideoUrl, width: Int(standardCGsize.width), height: Int(standardCGsize.height)) { rewritenUrl, error in
-                if let _ = rewritenUrl {
-                    do {
-                        
-                        let testSize =  self.resolutionSizeForLocalVideo(url: logoVideoUrl)
-                        print("\(testSize?.width)")
-                        print("\(testSize?.height)")
-                        
-                        let logoAsset = AVAsset(url: logoVideoUrl)
-                        let assetTrackLogoVideo = logoAsset.tracks(withMediaType: AVMediaTypeVideo).first!
-                        
-                        try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
-                                                       of: assetTrackLogoVideo, at: insertTime)
-                        try trackAudio.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
-                                                       of: assetTrackLogoVideo, at: insertTime)
-                    } catch {
-                        observableOfUrl.on(Event.error(NSError(domain: "mergeVideoFile insertLogoVideo error", code: 404, userInfo: nil)))
-                    }
+                do {
                     
-                    // 병합한 비디오가 쓰여질 경로 지정
-                    let combinedVideoName = UUID().uuidString
-                    let combinedVideoFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((combinedVideoName as NSString).appendingPathExtension("mov")!)
-                    let combinedVideoUrl = URL(fileURLWithPath: combinedVideoFilePath)
+                    let testSize =  self.resolutionSizeForLocalVideo(url: logoVideoUrl)
+                    print("\(testSize?.width)")
+                    print("\(testSize?.height)")
                     
-                    // 병합한 비디오 쓰기
-                    if let exportSession = AVAssetExportSession(asset: compostion, presetName: AVAssetExportPresetHighestQuality){
-                        exportSession.outputURL = combinedVideoUrl
-                        exportSession.outputFileType = AVFileTypeMPEG4
-                        exportSession.exportAsynchronously(completionHandler: {
-                            switch exportSession.status {
-                            case .failed, .cancelled:
-                                observableOfUrl.on(Event.error(exportSession.error!))
-                                break
-                            default:
-                                // 병합한 비디오파일을 쓰는 것에 성공하였다면 완료 호출
-                                observableOfUrl.on(Event.next(combinedVideoUrl))
-                                // 임시 파일 삭제
-                                observableOfUrl.onCompleted()
-                            }
-                        })
-                    }
-                } else {
-                    observableOfUrl.on(Event.error(error!))
+                    let logoAsset = AVAsset(url: logoVideoUrl)
+                    let assetTrackLogoVideo = logoAsset.tracks(withMediaType: AVMediaTypeVideo).first!
+                    
+                    try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
+                                                   of: assetTrackLogoVideo, at: insertTime)
+                    try trackAudio.insertTimeRange(CMTimeRangeMake(kCMTimeZero, logoAsset.duration),
+                                                   of: assetTrackLogoVideo, at: insertTime)
+                } catch {
+                    observableOfUrl.on(Event.error(NSError(domain: "mergeVideoFile insertLogoVideo error", code: 404, userInfo: nil)))
+                }
+                
+                // 병합한 비디오가 쓰여질 경로 지정
+                let combinedVideoName = UUID().uuidString
+                let combinedVideoFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((combinedVideoName as NSString).appendingPathExtension("mov")!)
+                let combinedVideoUrl = URL(fileURLWithPath: combinedVideoFilePath)
+                
+                // 병합한 비디오 쓰기
+                if let exportSession = AVAssetExportSession(asset: compostion, presetName: AVAssetExportPresetHighestQuality){
+                    exportSession.outputURL = combinedVideoUrl
+                    exportSession.outputFileType = AVFileTypeMPEG4
+                    exportSession.exportAsynchronously(completionHandler: {
+                        switch exportSession.status {
+                        case .failed, .cancelled:
+                            observableOfUrl.on(Event.error(exportSession.error!))
+                            break
+                        default:
+                            // 병합한 비디오파일을 쓰는 것에 성공하였다면 완료 호출
+                            observableOfUrl.on(Event.next(combinedVideoUrl))
+                            // 임시 파일 삭제
+                            observableOfUrl.onCompleted()
+                        }
+                    })
                 }
             }
             return Disposables.create()

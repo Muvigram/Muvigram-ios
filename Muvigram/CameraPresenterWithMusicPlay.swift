@@ -30,6 +30,10 @@ extension CameraPresenter where T:CameraMvpView {
             self.view?.musicAlbumImageReplace(albumImage: UIImage(named: "noAlbumArt")!)
         }
         
+        if let title = item.albumTitle {
+            self.view?.scwaveInfoMusicTitleReplace(text: title)
+        } 
+        
         musicUrl = item.assetURL
         recordingModePlayer = AVPlayer(playerItem: AVPlayerItem(url: musicUrl!))
         

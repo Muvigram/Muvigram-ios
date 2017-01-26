@@ -31,7 +31,11 @@ final class CameraViewController: UIViewController, CTAssetsPickerControllerDele
     @IBOutlet var libraryBtn: UIButton!
     @IBOutlet var cameraToplineView: UIView!
     @IBOutlet var scwaveScrollView: SCScrollableWaveformView!
-    @IBOutlet var testBtn: UIButton!
+    @IBOutlet var scwaveCloseBtn: UIButton!
+    @IBOutlet var scwaveInformationView: UIView!
+    @IBOutlet var scwaveInfoAlbumCoverimageview: UIImageView!
+    @IBOutlet var scwaveInfoMusicTitle: UILabel!
+    
     let stackViewPopBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 34, height: 40))
     
     // @inject
@@ -133,10 +137,14 @@ final class CameraViewController: UIViewController, CTAssetsPickerControllerDele
         view.addSubview(stackViewPopBtn)
         
         // SCWaveScrollView Settings
-        testBtn.isHidden = true
+        scwaveCloseBtn.isHidden = true
+        scwaveInformationView.isHidden = true
         scwaveScrollView.isHidden = true
         scwaveScrollView.showsVerticalScrollIndicator = false
         scwaveScrollView.showsHorizontalScrollIndicator = false
+        scwaveScrollView.waveformView.progressColor = UIColor(red: CGFloat(0.816), green: CGFloat(0.157), blue:
+            CGFloat(0.306), alpha: CGFloat(1.00))
+        scwaveScrollView.waveformView.normalColor = UIColor(red: CGFloat(0.878), green: CGFloat(0.878), blue: CGFloat(0.878), alpha: CGFloat(1.00))
         scwaveScrollView.bounces = false
         scwaveScrollView.delegate = self
         scwaveScrollView.cmDelegate = self
@@ -441,6 +449,11 @@ extension CameraViewController: CameraMvpView {
     
     func musicAlbumImageReplace(albumImage: UIImage) {
         musicSelectBtn.albumImage = albumImage
+        scwaveInfoAlbumCoverimageview.image = albumImage
+    }
+    
+    func scwaveInfoMusicTitleReplace(text: String) {
+        scwaveInfoMusicTitle.text = text
     }
     
     func recordButtonSendActionTouchUpInside() {
@@ -553,14 +566,16 @@ extension CameraViewController: CameraMvpView {
             self.recordBtn.isHidden = true
             self.stackBar.isHidden = true
             self.scwaveScrollView.isHidden = false
-            self.testBtn.isHidden = false
+            self.scwaveCloseBtn.isHidden = false
+            self.scwaveInformationView.isHidden = false
         } else if !hidden, !isRecord {
             // Complete section selection
             commonViewHidden(false)
             self.recordBtn.isHidden = false
             self.stackBar.isHidden = false
             self.scwaveScrollView.isHidden = true
-            self.testBtn.isHidden = true
+            self.scwaveCloseBtn.isHidden = true
+            self.scwaveInformationView.isHidden = true
         } else {
             // Complete Record
             commonViewHidden(false)
