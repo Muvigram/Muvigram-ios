@@ -17,7 +17,8 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
 
     private let dataManager: DataManager
     private let bag = DisposeBag()
-    private var videoUrl: URL!
+    private var mergedVideoUrl: URL!
+    private var mergedVideoUrlforSharing: URL!
     
     // @inject
     init(dataManager: DataManager) {
@@ -29,19 +30,34 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
                                           musicUrl: URL) {
         let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
         indicator.startAnimating()
+        
+        //video without logo
         self.dataManager.encodeVideofileForMargins(videoUrlArray: videoUrlArray,
                                                    musicTimeStampArray: musicTimeStampArray,
-                                                   musicUrl: musicUrl)
+                                                   musicUrl: musicUrl, isAddingLogo: false)
             .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { encodeVideourl in
-                self.videoUrl = encodeVideourl
+                self.mergedVideoUrl = encodeVideourl
                 self.view?.playVideo(mergedVideofileUrl: encodeVideourl)
             }, onError: { error in
                 print(error)
             }, onCompleted: {
                 indicator.stopAnimating()
                 contrainer.removeFromSuperview()
+            }).addDisposableTo(bag)
+        
+        //video with logo
+        self.dataManager.encodeVideofileForMargins(videoUrlArray: videoUrlArray,
+                                                   musicTimeStampArray: musicTimeStampArray,
+                                                   musicUrl: musicUrl, isAddingLogo: true)
+            .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { mergedVideoUrlforSharing in
+                self.mergedVideoUrlforSharing = mergedVideoUrlforSharing
+            }, onError: { error in
+                print(error)
+            }, onCompleted: {
                 self.removeVideoWithPaths(videoUrlArray: videoUrlArray)
             }).addDisposableTo(bag)
     }
@@ -66,15 +82,14 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
         event.debounce(0.2, scheduler: MainScheduler.instance)
             .bindNext {
                 //self.view?.enabledSaveButton(isEnabled: false)
-                self.view?.showShareSheet(videoUrl: self.videoUrl)
-                
+                self.view?.showShareSheet(videoUrl: self.mergedVideoUrlforSharing)
         }.addDisposableTo(bag)
     }
     
     private func saveVideoWithURL(completionHandler: (() -> Void)?) {
         let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!
         indicator.startAnimating()
-        self.dataManager.saveVideoWithUrl(url: self.videoUrl)
+        self.dataManager.saveVideoWithUrl(url: self.mergedVideoUrlforSharing)
             .subscribeOn(SerialDispatchQueueScheduler(qos: .default))
             .observeOn(MainScheduler.instance)
             .subscribe(
@@ -89,7 +104,7 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
     }
     
     internal func removeVideoWithPaths(videoUrlArray: [URL]) {
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [unowned self] in
             for url in videoUrlArray {
                 self.dataManager.removeVideoWithPath(atPath: url.path)
             }

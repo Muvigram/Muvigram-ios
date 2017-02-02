@@ -123,13 +123,13 @@ extension MusicEditorViewController: CmTimeDelegate {
         }
     }
     
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) { //OK
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if isScwaveScroll {
             self.presenter.modifyPlayerPause()
         }
     }
     
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { //OK
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if isScwaveScroll {
             self.presenter.modifyPlayerPlay()
         }

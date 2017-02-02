@@ -85,7 +85,4 @@ extension CameraViewController{
             return false
         }
     }
-    
-    
-    
 }

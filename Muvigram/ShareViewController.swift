@@ -84,7 +84,7 @@ extension ShareViewController: ShareMvpView {
             let timeResolution: Int32 = 60000000
             
             // Repeat until the last time so that the logo is not exposed
-            let videoDuratoin = AVURLAsset(url: videofileUrl, options: nil).duration - CMTime(seconds: 1.3, preferredTimescale: timeResolution)
+            let videoDuratoin = AVURLAsset(url: videofileUrl, options: nil).duration
             self.periodicTimeToken = self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, timeResolution), queue: DispatchQueue.main, using: { (time) in
                 if time >= videoDuratoin {
                     self.player?.seek(to: kCMTimeZero)

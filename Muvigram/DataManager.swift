@@ -37,8 +37,8 @@ class DataManager {
     
     public func encodeVideofileForMargins(videoUrlArray: [URL],
                                           musicTimeStampArray: [CMTime],
-                                          musicUrl: URL) -> Observable<URL> {
-        return videoService.encodeVideofileForMargins(videoUrlArray, musicTimeStampArray, musicUrl)
+                                          musicUrl: URL, isAddingLogo: Bool) -> Observable<URL> {
+        return videoService.encodeVideofileForMargins(videoUrlArray, musicTimeStampArray, musicUrl, isAddingLogo)
     }
     
     public func clearUnnecessaryfilesForMusicAndVideo(videoUrlArray: inout [URL], musicTimeStampArray: inout [CMTime]) {
