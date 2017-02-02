@@ -355,6 +355,11 @@ final class CameraViewController: UIViewController, CTAssetsPickerControllerDele
         imagePicker.delegate = self
         imagePicker.showsSelectionIndex = true
         imagePicker.defaultAssetCollection = .smartAlbumVideos
+        
+        //let option = PHFetchOptions()
+        //option.predicate = NSPredicate(format: "sourcetype='%d'", PHAssetSourceType.typeUserLibrary.rawValue)
+        //imagePicker.assetsFetchOptions = option
+        
         present(imagePicker, animated: true, completion: nil)
     }
     

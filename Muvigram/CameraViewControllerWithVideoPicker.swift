@@ -13,7 +13,7 @@ extension CameraViewController{
     
     //click Done Button
     func assetsPickerController(_ picker: CTAssetsPickerController!, didFinishPickingAssets assets: [Any]!) {
-    
+        
         print("done!!!!!!!!!")
         print("\(assets.count)")
         
@@ -22,7 +22,9 @@ extension CameraViewController{
         videoInfo.videoList = videos
         
         if assets.count <= 5 {
-            self.dismiss(animated: true, completion: nil)
+            
+            self.imagePicker.dismiss(animated: true, completion: nil)
+            //self.dismiss(animated: true, completion: nil)
             let musicViewController = self.storyboard?.instantiateViewController(withIdentifier: "myMusic") as! MusicEditorViewController
             
             musicViewController.videosInfo = videoInfo
@@ -67,14 +69,21 @@ extension CameraViewController{
     
     //최대 갯수 5개
     func assetsPickerController(_ picker: CTAssetsPickerController!, shouldSelect asset: PHAsset!) -> Bool {
-        print("\(asset.sourceType)")
         return (picker.selectedAssets.count < 5)
+    }
+    
+    func assetsPickerController(_ picker: CTAssetsPickerController!, didSelect asset: PHAsset!) {
+        PHImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: {(avAsset, _, _) in
+            if avAsset == nil {
+                picker.deselect(asset)
+            }
+        })
     }
     
     //비디오 선택 조건
     func assetsPickerController(_ picker: CTAssetsPickerController!, shouldEnable asset: PHAsset!) -> Bool {
         
-        if(asset.mediaType == .video && asset.sourceType != .typeCloudShared){
+        if(asset.mediaType == .video ){
             let duration = asset.duration
             var isSatisfied = false
             if asset.pixelWidth * 9 == asset.pixelHeight * 16 || asset.pixelWidth * 16 == asset.pixelHeight * 9 {
@@ -85,4 +94,5 @@ extension CameraViewController{
             return false
         }
     }
+    
 }
