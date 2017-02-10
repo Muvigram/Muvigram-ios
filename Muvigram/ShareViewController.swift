@@ -24,7 +24,7 @@ class ShareViewController: UIViewController {
     public var presenter: SharePresenter<ShareViewController>!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet var shareButton: UIButton!
+    //@IBOutlet var shareButton: UIButton!
     //@IBOutlet var instagramShareButton: UIButton!
     
     override func viewDidLoad() {
@@ -38,8 +38,8 @@ class ShareViewController: UIViewController {
         let homeButtonEvent = homeButton.rx.controlEvent(UIControlEvents.touchUpInside)
         presenter.homeButtonClickEvent(event: homeButtonEvent)
         
-        let shareButtonEvent = shareButton.rx.controlEvent(UIControlEvents.touchUpInside)
-        presenter.shareButtonClickEvent(event: shareButtonEvent)
+        //let shareButtonEvent = shareButton.rx.controlEvent(UIControlEvents.touchUpInside)
+        //presenter.shareButtonClickEvent(event: shareButtonEvent)
         
         /*
          let instagramButtonEvent = instagramShareButton.rx.controlEvent(UIControlEvents.touchUpInside)
@@ -85,10 +85,15 @@ extension ShareViewController: ShareMvpView {
             
             // Repeat until the last time so that the logo is not exposed
             let videoDuratoin = AVURLAsset(url: videofileUrl, options: nil).duration
+            var videoRepeatcheck = true
+            
             self.periodicTimeToken = self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, timeResolution), queue: DispatchQueue.main, using: { (time) in
-                if time >= videoDuratoin {
-                    self.player?.seek(to: kCMTimeZero)
-                    self.player?.play()
+                if time >= videoDuratoin, videoRepeatcheck {
+                    videoRepeatcheck = false
+                    self.player?.seek(to: kCMTimeZero) { _ in
+                        self.player?.play()
+                        videoRepeatcheck = true
+                    }
                 }
             })
         }
@@ -136,7 +141,16 @@ extension ShareViewController: ShareMvpView {
     
     func showShareSheet(videoUrl: URL) {
         let activityViewController = UIActivityViewController(activityItems: [videoUrl], applicationActivities: nil)
-        present(activityViewController, animated: true, completion: nil)
+        activityViewController.setValue("Video", forKey: "subject")
+        
+        if #available(iOS 9.0, *) {
+            activityViewController.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList, UIActivityType.assignToContact, UIActivityType.copyToPasteboard, UIActivityType.mail, UIActivityType.message, UIActivityType.openInIBooks, UIActivityType.postToTencentWeibo, UIActivityType.postToVimeo, UIActivityType.postToWeibo, UIActivityType.print]
+        } else {
+            // Fallback on earlier versions
+            activityViewController.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList, UIActivityType.assignToContact, UIActivityType.copyToPasteboard, UIActivityType.mail, UIActivityType.message, UIActivityType.postToTencentWeibo, UIActivityType.postToVimeo, UIActivityType.postToWeibo, UIActivityType.print ]
+        }
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     func enabledSaveButton(isEnabled: Bool) {

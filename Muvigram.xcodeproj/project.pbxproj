@@ -12,7 +12,7 @@
 		2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */; };
 		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
 		2B4CE4111E30A3EE006898C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4CE4101E30A3EE006898C4 /* Main.storyboard */; };
-		2B51D7751E35E94A004F11E6 /* logo_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2B51D7741E35E94A004F11E6 /* logo_video.mov */; };
+		2B5490FD1E4CE4CD005F4585 /* logo_videofhd2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2B5490FC1E4CE4CD005F4585 /* logo_videofhd2.mov */; };
 		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
 		2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */; };
 		2B6919621DEE98A7005EE1D7 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */; };
@@ -34,7 +34,6 @@
 		2BAD08371E10D66A004F94BE /* CameraMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08361E10D66A004F94BE /* CameraMvpView.swift */; };
 		2BAD08391E10ED90004F94BE /* CameraPresenterWithStackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD08381E10ED90004F94BE /* CameraPresenterWithStackbar.swift */; };
 		2BAD083B1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */; };
-		2BBD33E31E38F3AF00467D0C /* logo_videofhd.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2BBD33E21E38F3AF00467D0C /* logo_videofhd.mov */; };
 		2BE87BBC1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */; };
 		2BE87BBE1E1A09D00006F962 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87BBD1E1A09D00006F962 /* VideoService.swift */; };
 		653ED1EF1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653ED1EE1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift */; };
@@ -59,7 +58,7 @@
 		2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumButton.swift; sourceTree = "<group>"; };
 		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
 		2B4CE4101E30A3EE006898C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../Downloads/Main.storyboard; sourceTree = "<group>"; };
-		2B51D7741E35E94A004F11E6 /* logo_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = logo_video.mov; sourceTree = "<group>"; };
+		2B5490FC1E4CE4CD005F4585 /* logo_videofhd2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = logo_videofhd2.mov; sourceTree = "<group>"; };
 		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		2B6919611DEE98A7005EE1D7 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +82,6 @@
 		2BAD08361E10D66A004F94BE /* CameraMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMvpView.swift; sourceTree = "<group>"; };
 		2BAD08381E10ED90004F94BE /* CameraPresenterWithStackbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithStackbar.swift; sourceTree = "<group>"; };
 		2BAD083A1E111FC8004F94BE /* CameraPresenterWithMusicPlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithMusicPlay.swift; sourceTree = "<group>"; };
-		2BBD33E21E38F3AF00467D0C /* logo_videofhd.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = logo_videofhd.mov; sourceTree = "<group>"; };
 		2BE87BBB1E19F74A0006F962 /* CameraPresenterWithVideoThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPresenterWithVideoThumbnail.swift; sourceTree = "<group>"; };
 		2BE87BBD1E1A09D00006F962 /* VideoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
 		653ED1EE1E24B3BB00271C78 /* CameraViewControllerWithVideoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewControllerWithVideoPicker.swift; sourceTree = "<group>"; };
@@ -181,8 +179,7 @@
 		2B84A7AE1DEE6E7B001E0E14 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				2BBD33E21E38F3AF00467D0C /* logo_videofhd.mov */,
-				2B51D7741E35E94A004F11E6 /* logo_video.mov */,
+				2B5490FC1E4CE4CD005F4585 /* logo_videofhd2.mov */,
 				2B4CE4101E30A3EE006898C4 /* Main.storyboard */,
 				2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */,
 				2B9B6AC01E0277DF0020C06D /* Assets.xcassets */,
@@ -391,9 +388,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B84A7A71DEE6D8A001E0E14 /* LaunchScreen.storyboard in Resources */,
-				2B51D7751E35E94A004F11E6 /* logo_video.mov in Resources */,
-				2BBD33E31E38F3AF00467D0C /* logo_videofhd.mov in Resources */,
 				2B4CE4111E30A3EE006898C4 /* Main.storyboard in Resources */,
+				2B5490FD1E4CE4CD005F4585 /* logo_videofhd2.mov in Resources */,
 				2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */,
 				2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */,
 			);
@@ -638,7 +634,7 @@
 				2B84A7AA1DEE6D8A001E0E14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		2B84A7AB1DEE6D8A001E0E14 /* Build configuration list for PBXNativeTarget "Muvigram" */ = {
 			isa = XCConfigurationList;
@@ -647,7 +643,7 @@
 				2B84A7AD1DEE6D8A001E0E14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

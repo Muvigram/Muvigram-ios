@@ -47,7 +47,10 @@ class LaunchViewController: UIViewController {
             requestAccess(.mediaLibrary, title: "mediaLibrary") {
                 requestAccess(.microphone, title: "microphone") {
                     requestAccess(.photos, title: "photos") {
-                        DispatchQueue.main.async { self.present(self.mainViewController, animated: true, completion: nil) }
+                        let delay = DispatchTime.now() + 1
+                        DispatchQueue.main.asyncAfter(deadline: delay) {
+                            self.present(self.mainViewController, animated: true, completion: nil)
+                        }
                     }
                 }
             }

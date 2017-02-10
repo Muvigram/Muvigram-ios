@@ -221,7 +221,7 @@ class VideoService {
             
             if isAddingLogo {
                 // 로고 추가
-                let logoVideoUrl = Bundle.main.url(forResource: "logo_videofhd", withExtension: "mov")!
+                let logoVideoUrl = Bundle.main.url(forResource: "logo_videofhd2", withExtension: "mov")!
                 
                 do {
                     let logoAsset = AVAsset(url: logoVideoUrl)
