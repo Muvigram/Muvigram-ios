@@ -18,6 +18,8 @@ class ShareViewController: UIViewController {
     var musicUrl: URL!
     var player: AVPlayer?
     
+    var dismissFunc: (() -> Void)?
+    
     fileprivate var periodicTimeToken: Any? = nil
     
     // @inject
@@ -28,8 +30,10 @@ class ShareViewController: UIViewController {
     //@IBOutlet var instagramShareButton: UIButton!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        self.dismissFunc!()
+        super.viewDidLoad()
+
         self.presenter.encodeVideofileForMargins(videoUrlArray: videoUrlArray, musicTimeStampArray: musicTimeStampArray, musicUrl: musicUrl)
         
         let saveButtonEvent = saveButton.rx.controlEvent(UIControlEvents.touchUpInside)

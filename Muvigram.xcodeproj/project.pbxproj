@@ -11,7 +11,6 @@
 		2B2CB2421E1B45A60034F219 /* ShareMvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */; };
 		2B37AC9E1DF697F00020FB64 /* AlbumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */; };
 		2B3CA77A1DEFF72600430EF7 /* StackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA7791DEFF72600430EF7 /* StackBar.swift */; };
-		2B4CE4111E30A3EE006898C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4CE4101E30A3EE006898C4 /* Main.storyboard */; };
 		2B51D7751E35E94A004F11E6 /* logo_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2B51D7741E35E94A004F11E6 /* logo_video.mov */; };
 		2B61ADCE1E124C5D00AB09D8 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */; };
 		2B65F0041DF555B40090F005 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */; };
@@ -49,6 +48,7 @@
 		65C47BD01E3042A90028B71A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C47BCF1E3042A90028B71A /* Foundation.framework */; };
 		65C47BD21E3042B10028B71A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C47BD11E3042B10028B71A /* UIKit.framework */; };
 		65C47BD41E3042B90028B71A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C47BD31E3042B90028B71A /* CoreGraphics.framework */; };
+		65DEE86C1E43211D007554AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65DEE86B1E43211D007554AE /* Main.storyboard */; };
 		C5C4C415CCAC91F11FF3CCF5 /* Pods_Muvigram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +58,6 @@
 		2B2CB2411E1B45A60034F219 /* ShareMvpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareMvpView.swift; sourceTree = "<group>"; };
 		2B37AC9D1DF697F00020FB64 /* AlbumButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumButton.swift; sourceTree = "<group>"; };
 		2B3CA7791DEFF72600430EF7 /* StackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackBar.swift; sourceTree = "<group>"; };
-		2B4CE4101E30A3EE006898C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../Downloads/Main.storyboard; sourceTree = "<group>"; };
 		2B51D7741E35E94A004F11E6 /* logo_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = logo_video.mov; sourceTree = "<group>"; };
 		2B61ADCD1E124C5D00AB09D8 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		2B65F0031DF555B40090F005 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +97,7 @@
 		65C47BCF1E3042A90028B71A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65C47BD11E3042B10028B71A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		65C47BD31E3042B90028B71A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		65DEE86B1E43211D007554AE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7B8838E2716221AEA1AB4DA8 /* Pods_Muvigram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muvigram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E532916B3091F97B301407B /* Pods-Muvigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muvigram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muvigram/Pods-Muvigram.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,8 +183,8 @@
 			children = (
 				2BBD33E21E38F3AF00467D0C /* logo_videofhd.mov */,
 				2B51D7741E35E94A004F11E6 /* logo_video.mov */,
-				2B4CE4101E30A3EE006898C4 /* Main.storyboard */,
 				2B9D1D2F1E0376AB00270A11 /* Silence_15_sec.mp3 */,
+				65DEE86B1E43211D007554AE /* Main.storyboard */,
 				2B9B6AC01E0277DF0020C06D /* Assets.xcassets */,
 				2B84A7A51DEE6D8A001E0E14 /* LaunchScreen.storyboard */,
 			);
@@ -393,7 +393,7 @@
 				2B84A7A71DEE6D8A001E0E14 /* LaunchScreen.storyboard in Resources */,
 				2B51D7751E35E94A004F11E6 /* logo_video.mov in Resources */,
 				2BBD33E31E38F3AF00467D0C /* logo_videofhd.mov in Resources */,
-				2B4CE4111E30A3EE006898C4 /* Main.storyboard in Resources */,
+				65DEE86C1E43211D007554AE /* Main.storyboard in Resources */,
 				2B9B6AC11E0277DF0020C06D /* Assets.xcassets in Resources */,
 				2B9D1D301E0376AB00270A11 /* Silence_15_sec.mp3 in Resources */,
 			);

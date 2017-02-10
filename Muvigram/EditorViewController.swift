@@ -25,15 +25,12 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     var player = AVPlayer()
     var resultPlayer = AVPlayer()
     var audioPlayer = AVPlayer()
-    
     var playerLayer = AVPlayerLayer()
-    //    let playButton = UIImageView(image: #imageLiteral(resourceName: "play_button"))
     
     //about Time..
     var startTime:CGFloat = 0.0
     var endTime:CGFloat = 0.0
     var videoPlayBackPosition:CGFloat = 0.0
-    
     var playbackTimeCheckerTimer:Timer!
     
     //dynamic view
@@ -43,7 +40,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     //etc.
     var index:Int = 0
     var isResultVideo:Bool = true
-    var isResultVideoEnded:Bool = true
     var containedVideoCount = 0
     var bar:Int = 0
     var timeObservationToken:Any?
@@ -69,16 +65,15 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     @IBOutlet weak var insertView: UIView!
     @IBOutlet weak var warningLabel: UILabel!
     
-    var playerLayerHorizontal = AVPlayerLayer()
-    
     // gonini
     var musicInputTime: CMTime?
     var musicOutputTime: CMTime?
     var musicFileurl: URL?
     var dismissFunc: (() -> Void)?
     
-    
     override func viewDidLoad() {
+        
+                self.dismissFunc!()
         super.viewDidLoad()
         
         warningLabel.isHidden = true
@@ -93,11 +88,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         doneImageView.isUserInteractionEnabled = true
         insertImageView.isUserInteractionEnabled = true
         cancelImageView.isUserInteractionEnabled = true
-        
-        //재생버튼 붙임 - resultVideo가 없더라도 audio play 하기 위함
-        //        playButton.frame = CGRect(x: 126, y: 122, width: 123, height: 123)
-        //        videoView.addSubview(playButton)
-        //        playButton.isHidden = false
         
         //우선은 resultVideo 에 focus,
         //index - 0 인 currentVideo 보여줌
@@ -123,8 +113,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         
         let gestureDone = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.doneAction(_:)))
         doneImageView.addGestureRecognizer(gestureDone)
-        
-        //재생 일시정지
+
         let gestureVideoTouch = UITapGestureRecognizer(target: self, action: #selector(EditorViewController.touchVideoAction(_:)))
         videoView.addGestureRecognizer(gestureVideoTouch)
         
@@ -149,7 +138,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         cancelImageView.removeFromSuperview()
         
         playerLayer.removeFromSuperlayer()
-        isResultVideoEnded = false
         isResultVideo = true
         
         count = 0
@@ -270,11 +258,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         playerLayer.removeAllAnimations()
         videoView.layer.addSublayer(playerLayer)
         
-        //플레이버튼
-        //        playButton.frame = CGRect(x: 126, y: 122, width: 123, height: 123)
-        //        videoView.addSubview(playButton)
-        //        playButton.isHidden = false
-        
         //썸네일 붙이기
         trimmerView.asset = AVAsset(url: videosInfo.videoURL[index] as URL)
         trimmerView.delegate = self
@@ -292,7 +275,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying(note:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         
     }
-    
     
     var count = 0
     var width = 0.0
@@ -324,58 +306,11 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.makeProgressBar), userInfo: nil, repeats: true)
                 
                 currentPlayerLayer.player!.play()
+                currentPlayerLayer.player!.isMuted = true
                 
                 resultTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.playResult), userInfo: nil, repeats: true)
                 
-                //오디오 언제 끝나는지 감시
-                //                audioToken = audioPlayer.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 10), queue: DispatchQueue.main, using: { (CMTime) in
-                //                    print("audio time \(self.audioPlayer.currentTime().value)")
-                //                    print("outpu time \(self.musicOutputTime!.value)")
-                //                    if self.audioPlayer.currentTime() >= self.musicOutputTime! {
-                //                        self.resultTimer.invalidate()
-                //                        print("오디오 끝!")
-                //
-                //                        self.currentPlayerLayer.player?.pause()
-                //                        self.currentPlayerLayer.removeFromSuperlayer()
-                //                        print("지웠따")
-                //                        self.isResultVideoEnded = true
-                //
-                //                        if let timetoken = self.audioToken {
-                //                            self.audioPlayer.removeTimeObserver(timetoken)
-                //                            self.audioToken = nil
-                //                        }
-                //
-                //
-                //                        //요기
-                //                        if self.isResultVideo {
-                //
-                //                            if self.isResultVideoEnded {
-                //                                self.currentPlayerLayer = self.playerLayerList[0]
-                //                                self.currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
-                //                                self.currentPlayerLayer.player!.pause()
-                //                                self.count = 0
-                //
-                //                                self.videoView.layer.addSublayer(self.currentPlayerLayer)
-                //
-                //                            }else {
-                //
-                //                            }
-                //
-                ////                            self.videoView.addSubview(self.playButton)
-                ////                            self.playButton.isHidden = false
-                //
-                //                            self.audioPlayer.seek(to: self.musicInputTime!)
-                //                            self.audioPlayer.pause()
-                //                        }
-                //
-                //                        //progress bar
-                //                        self.progressBar.removeFromSuperview()
-                //                        self.width = 0
-                //
-                //                        self.isResultVideoEnded = false
-                //
-                //                    }
-                //                })
+
                 
             }
             //커렌트 비디오 재생
@@ -387,6 +322,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 
             }else if player.timeControlStatus == .paused {
                 player.seek(to: CMTimeMakeWithSeconds(Float64(startTime), 1000000000))
+                player.isMuted = true
                 player.play()
                 audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
                 audioPlayer.play()
@@ -395,8 +331,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         }
     }
     
-    
-    
     func playResult(){
         
         var tempPlayerlayer = AVPlayerLayer()
@@ -404,14 +338,8 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         print("enddd time \(soundEndList[count].value)")
         if count == containedVideoCount-1 {
             tempPlayerlayer = AVPlayerLayer(layer: playerLayerList[0])
-            //tempPlayerlayer = playerLayerList[0]
-            //tempPlayerlayer.player!.seek(to: self.videosInfo.range[0].start)
-            //tempPlayerlayer.player!.pause()
         }else{
             playerLayerList[count+1].player!.seek(to: self.videosInfo.range[self.count+1].start)
-            //tempPlayerlayer = AVPlayerLayer(layer: playerLayerList[count+1])
-            //tempPlayerlayer = playerLayerList[count+1]
-            //tempPlayerlayer.player!.seek(to: self.videosInfo.range[self.count+1].start)
         }
         
         if audioPlayer.currentTime() >= soundEndList[count] {
@@ -423,8 +351,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
             if self.count == self.containedVideoCount-1 {
                 
                 currentPlayerLayer = playerLayerList[0]
-                //currentPlayerLayer = tempPlayerlayer
-                //currentPlayerLayer = AVPlayerLayer(layer: tempPlayerlayer)
                 currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
                 
                 self.videoView.layer.addSublayer(self.currentPlayerLayer)
@@ -439,18 +365,13 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 self.width = 0
                 
             }else {
-                
                 count = count + 1
                 print(count)
-                
-                //currentPlayerLayer = tempPlayerlayer
-                //currentPlayerLayer = AVPlayerLayer(layer: tempPlayerlayer)
+
                 currentPlayerLayer = playerLayerList[count]
-                //currentPlayerLayer.player!.seek(to: self.videosInfo.range[self.count].start)
-                
+                currentPlayerLayer.player!.isMuted = true
                 currentPlayerLayer.player!.play()
                 self.videoView.layer.addSublayer(currentPlayerLayer)
-                
             }
         }
         
@@ -540,7 +461,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         
         //playerLayer 생성
         let tempPlayerLayer = AVPlayerLayer(player: videosInfo.playerList[index])
-        tempPlayerLayer.player = videosInfo.playerList[index]
+        tempPlayerLayer.player = AVPlayer(url: videosInfo.videoURL[index] as URL)
         if videosInfo.isVertical[index] == false {
             tempPlayerLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
         }
@@ -557,8 +478,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         durationList.append(self.endTime - self.startTime)
         if stackedTime > 14 {
             warningLabel.isHidden = false
-        }else{
-            //            trimmerView.stackedTime = stackedTime
         }
         
         //음악에 맞게 초 입력
@@ -566,7 +485,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         print("stackedTIme \(stackedTime)")
         
         addHomeAndDoneButton()
-        
         
         //팝업 띄우기
         let hud = MBProgressHUD.showAdded(to: videoView, animated: true)
@@ -590,8 +508,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     //삭제 기능
     func deleteVideoAction(_ sender:UITapGestureRecognizer){
-        
-        isResultVideoEnded = false
+    
         count = 0
         
         //프로그레스바 initialize
@@ -642,7 +559,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 allocatedViews.last!.addSubview(deleteButton)
             }
             
-            
             print(videosInfo.order)
             print(videosInfo.range)
             print(allocatedViews)
@@ -650,14 +566,12 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
             warningLabel.isHidden = true
             
         }else{
-            
             //비디오 없을때 팝업 뜨게
             let hud = MBProgressHUD.showAdded(to: videoView, animated: true)
             hud.mode = .text
             hud.label.text = "no video to delete"
             hud.removeFromSuperViewOnHide = true
             hud.hide(animated: true, afterDelay: 2)
-            
         }
         
         if videosInfo.order.count == 0 {
@@ -696,14 +610,19 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     //다했따아
     func doneAction(_ sender:UITapGestureRecognizer){
-        
+
         if containedVideoCount > 0 {
             finalMusicTimeStamp = soundStartList
             finalMusicTimeStamp.append(soundEndList.last!)
+        
             videoEditingFinalized(videoUrlArray: finalURLList, musicTimeStampArray: finalMusicTimeStamp, musicUrl: musicFileurl!)
         }
     }
     
+    func dismissController() {
+        dismiss(animated: true, completion: nil);
+    }
+ 
     
     func startPlaybackTimeChecker(){
         stopPlayBackTimeChecker()
@@ -752,6 +671,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         //처음에는 음악 들려야함
         if trimmerView.isGestureEnd && startTime >= 0{
             self.player.play()
+            self.player.isMuted = true
             self.audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
             self.audioPlayer.play()
             self.startPlaybackTimeChecker()
@@ -762,6 +682,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, isGestureEnd end: Bool) {
         if end == true {
             self.player.play()
+            self.player.isMuted = true
             self.audioPlayer.seek(to: musicInputTime! + CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
             self.audioPlayer.play()
             self.startPlaybackTimeChecker()
@@ -775,6 +696,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func playerDidFinishPlaying(note: Notification){
         player.seek(to: CMTimeMakeWithSeconds(Float64(self.startTime), 1000000000))
         self.player.play()
+        self.player.isMuted = true
         self.audioPlayer.seek(to: musicInputTime!+CMTimeMakeWithSeconds(Float64(stackedTime), 1000000000))
         self.audioPlayer.play()
         startPlaybackTimeChecker()
@@ -785,11 +707,13 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     // @musicUrl -> 병합할 음악의 url
     // 비디오가 n개일 경우 병합할 음악의 TimeStamp는 n + 1 개 입니다.
     func videoEditingFinalized(videoUrlArray: [URL], musicTimeStampArray: [CMTime], musicUrl: URL) {
+  
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let shardViewController = appDelegate.newShareViewControllerInstance()
         shardViewController.videoUrlArray = videoUrlArray
         shardViewController.musicTimeStampArray = musicTimeStampArray
         shardViewController.musicUrl = musicUrl
+        shardViewController.dismissFunc = dismissController
         self.present(shardViewController, animated: true, completion: nil)
     }
 }

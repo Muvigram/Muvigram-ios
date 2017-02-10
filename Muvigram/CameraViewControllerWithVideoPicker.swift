@@ -8,13 +8,13 @@
 
 import Foundation
 import CTAssetsPickerController
+import MBProgressHUD
 
 extension CameraViewController{
     
     //click Done Button
     func assetsPickerController(_ picker: CTAssetsPickerController!, didFinishPickingAssets assets: [Any]!) {
-        
-        print("done!!!!!!!!!")
+
         print("\(assets.count)")
         
         videoInfo.videoCount = assets.count
@@ -65,6 +65,10 @@ extension CameraViewController{
                 }
             })
         }
+        
+        for asset in videos {
+            picker.deselect(asset)
+        }
     }
     
     //최대 갯수 5개
@@ -74,10 +78,39 @@ extension CameraViewController{
     
     func assetsPickerController(_ picker: CTAssetsPickerController!, didSelect asset: PHAsset!) {
         PHImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: {(avAsset, _, _) in
-            if avAsset == nil {
-                picker.deselect(asset)
+            //print(avAsset)
+
+            if avAsset == nil{
+                
+                DispatchQueue.main.async {
+                    picker.deselect(asset)
+                    //팝업 띄우기
+                    let hud = MBProgressHUD.showAdded(to: picker.view, animated: true)
+                    hud.mode = .text
+                    hud.label.text = "not support icloud"
+                    hud.removeFromSuperViewOnHide = true
+                    hud.hide(animated: true, afterDelay: 1)
+                }
+                
+            }
+            
+            guard let urlAsset = avAsset as? AVURLAsset else{
+                return
+            }
+            let ext = urlAsset.url.pathExtension
+            if ext.isEqual("mp4"){
+                DispatchQueue.main.async {
+                    picker.deselect(asset)
+                    let hud = MBProgressHUD.showAdded(to: picker.view, animated: true)
+                    hud.mode = .text
+                    hud.label.text = "not support mp4"
+                    hud.removeFromSuperViewOnHide = true
+                    hud.hide(animated: true, afterDelay: 1)
+                }
             }
         })
+
+        //picker.deselect(asset)
     }
     
     //비디오 선택 조건
