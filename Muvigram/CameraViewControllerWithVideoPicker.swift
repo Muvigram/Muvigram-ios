@@ -79,7 +79,7 @@ extension CameraViewController{
     func assetsPickerController(_ picker: CTAssetsPickerController!, didSelect asset: PHAsset!) {
         PHImageManager.default().requestAVAsset(forVideo: asset, options: nil, resultHandler: {(avAsset, _, _) in
             //print(avAsset)
-
+            
             if avAsset == nil{
                 
                 DispatchQueue.main.async {
@@ -98,7 +98,7 @@ extension CameraViewController{
                 return
             }
             let ext = urlAsset.url.pathExtension
-
+            
             if ext.isEqual("mp4"){
                 DispatchQueue.main.async {
                     picker.deselect(asset)
@@ -109,6 +109,20 @@ extension CameraViewController{
                     hud.hide(animated: true, afterDelay: 1)
                 }
             }
+            
+            guard let track = avAsset?.tracks(withMediaType: AVMediaTypeVideo).first else{ return }
+            let size = track.naturalSize.applying(track.preferredTransform)
+            if fabs(size.width) > 2000 {
+                DispatchQueue.main.async {
+                    picker.deselect(asset)
+                    let hud = MBProgressHUD.showAdded(to: picker.view, animated: true)
+                    hud.mode = .text
+                    hud.label.text = "not support 4K"
+                    hud.removeFromSuperViewOnHide = true
+                    hud.hide(animated: true, afterDelay: 1)
+                }
+            }
+            print(CGSize(width: fabs(size.width), height: fabs(size.height)))
             
         })
 

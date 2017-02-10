@@ -615,6 +615,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
             finalMusicTimeStamp.append(soundEndList.last!)
         
             videoEditingFinalized(videoUrlArray: finalURLList, musicTimeStampArray: finalMusicTimeStamp, musicUrl: musicFileurl!)
+            self.deinitVideoInfo()
         }
     }
     
