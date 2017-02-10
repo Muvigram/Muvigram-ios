@@ -333,11 +333,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     func playResult(){
         
-        var tempPlayerlayer = AVPlayerLayer()
-        
-        print("enddd time \(soundEndList[count].value)")
+        print("enddd ttempPlayerlayerime \(soundEndList[count].value)")
         if count == containedVideoCount-1 {
-            tempPlayerlayer = AVPlayerLayer(layer: playerLayerList[0])
+
         }else{
             playerLayerList[count+1].player!.seek(to: self.videosInfo.range[self.count+1].start)
         }
@@ -354,7 +352,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 currentPlayerLayer.player!.seek(to: self.videosInfo.range[0].start)
                 
                 self.videoView.layer.addSublayer(self.currentPlayerLayer)
-                
                 
                 audioPlayer.seek(to: musicInputTime!)
                 audioPlayer.pause()

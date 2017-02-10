@@ -31,7 +31,7 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        self.dismissFunc!()
+        self.dismissFunc?()
         super.viewDidLoad()
 
         self.presenter.encodeVideofileForMargins(videoUrlArray: videoUrlArray, musicTimeStampArray: musicTimeStampArray, musicUrl: musicUrl)
