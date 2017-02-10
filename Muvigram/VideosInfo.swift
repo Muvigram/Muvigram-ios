@@ -10,11 +10,21 @@ import Foundation
 import CTAssetsPickerController
 
 class VideosInfo {
-    var videoCount:Int = 0
-    var videoList:[PHAsset] = []
-    var videoURL:[NSURL] = []
-    var playerList:[AVPlayer] = []
-    var order:[Int] = []
-    var range:[CMTimeRange] = []
-    var isVertical:[Bool] = []
+    var videoCount:Int
+    var videoList:[PHAsset]
+    var videoURL:[NSURL]
+    var playerList:[AVPlayer]
+    var order:[Int]
+    var range:[CMTimeRange]
+    var isVertical:[Bool]
+    
+    init(){
+        videoCount = 0
+        videoList = []
+        videoURL = []
+        playerList = []
+        order = []
+        range = []
+        isVertical = []
+    }
 }
