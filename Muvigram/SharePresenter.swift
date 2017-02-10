@@ -72,19 +72,21 @@ class SharePresenter<T: ShareMvpView>: BasePresenter<T> {
     internal func saveButtonClickEvent(event: ControlEvent<Void>) {
         event.debounce(0.2, scheduler: MainScheduler.instance)
             .bindNext { [unowned self] in
-                self.saveVideoWithURL() {
-                    self.view?.showCompleteDialog()
-                }
+                self.view?.showShareSheet(videoUrl: self.mergedVideoUrlforSharing)
+                    //self.saveVideoWithURL() {
+                    //self.view?.showCompleteDialog()
+                    //}
             }.addDisposableTo(bag)
     }
     
+    /*
     internal func shareButtonClickEvent(event: ControlEvent<Void>) {
         event.debounce(0.2, scheduler: MainScheduler.instance)
             .bindNext {
                 //self.view?.enabledSaveButton(isEnabled: false)
                 self.view?.showShareSheet(videoUrl: self.mergedVideoUrlforSharing)
         }.addDisposableTo(bag)
-    }
+    }*/
     
     private func saveVideoWithURL(completionHandler: (() -> Void)?) {
         let (indicator, contrainer) = (self.view?.createActivityIndicatory(uiView: (self.view as! ShareViewController).view))!

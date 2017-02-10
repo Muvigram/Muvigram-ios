@@ -30,7 +30,7 @@ extension CameraPresenter where T:CameraMvpView {
             self.view?.musicAlbumImageReplace(albumImage: UIImage(named: "noAlbumArt")!)
         }
         
-        if let title = item.albumTitle {
+        if let title = item.title {
             self.view?.scwaveInfoMusicTitleReplace(text: title)
         } 
         
