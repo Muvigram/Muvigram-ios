@@ -73,7 +73,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     override func viewDidLoad() {
         
-                self.dismissFunc!()
+        self.dismissFunc!()
         super.viewDidLoad()
         
         warningLabel.isHidden = true
@@ -612,6 +612,8 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func doneAction(_ sender:UITapGestureRecognizer){
 
         if containedVideoCount > 0 {
+            audioPlayer.pause()
+            
             finalMusicTimeStamp = soundStartList
             finalMusicTimeStamp.append(soundEndList.last!)
         

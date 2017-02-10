@@ -98,6 +98,7 @@ extension CameraViewController{
                 return
             }
             let ext = urlAsset.url.pathExtension
+
             if ext.isEqual("mp4"){
                 DispatchQueue.main.async {
                     picker.deselect(asset)
@@ -108,6 +109,7 @@ extension CameraViewController{
                     hud.hide(animated: true, afterDelay: 1)
                 }
             }
+            
         })
 
         //picker.deselect(asset)
@@ -116,7 +118,7 @@ extension CameraViewController{
     //비디오 선택 조건
     func assetsPickerController(_ picker: CTAssetsPickerController!, shouldEnable asset: PHAsset!) -> Bool {
         
-        if(asset.mediaType == .video ){
+        if(asset.mediaType == .video && asset.mediaSubtypes != .videoHighFrameRate){
             let duration = asset.duration
             var isSatisfied = false
             if asset.pixelWidth * 9 == asset.pixelHeight * 16 || asset.pixelWidth * 16 == asset.pixelHeight * 9 {

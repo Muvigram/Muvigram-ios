@@ -31,9 +31,10 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        self.dismissFunc!()
-        super.viewDidLoad()
 
+        super.viewDidLoad()
+        self.dismissFunc?()
+        
         self.presenter.encodeVideofileForMargins(videoUrlArray: videoUrlArray, musicTimeStampArray: musicTimeStampArray, musicUrl: musicUrl)
         
         let saveButtonEvent = saveButton.rx.controlEvent(UIControlEvents.touchUpInside)
