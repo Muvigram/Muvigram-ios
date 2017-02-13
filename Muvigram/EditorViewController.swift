@@ -289,7 +289,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
         if isResultVideo && containedVideoCount>0 {
             if audioPlayer.timeControlStatus == .playing {
                 
-                print("멈춤")
                 audioPlayer.pause()
                 currentPlayerLayer.player!.pause()
                 resultTimer.invalidate()
@@ -299,8 +298,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 }
                 
             }else if audioPlayer.timeControlStatus != .playing {
-                
-                print("시작")
+
                 audioPlayer.play()
                 //playButton.isHidden = true
                 timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.makeProgressBar), userInfo: nil, repeats: true)
@@ -309,9 +307,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
                 currentPlayerLayer.player!.isMuted = true
                 
                 resultTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.playResult), userInfo: nil, repeats: true)
-                
-
-                
+             
             }
             //커렌트 비디오 재생
         }else if isResultVideo == false{
@@ -332,8 +328,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     }
     
     func playResult(){
-        
-        print("enddd ttempPlayerlayerime \(soundEndList[count].value)")
+    
         if count == containedVideoCount-1 {
 
         }else{
@@ -344,7 +339,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
             
             currentPlayerLayer.player!.pause()
             currentPlayerLayer.removeFromSuperlayer()
-            print("지웠따")
             
             if self.count == self.containedVideoCount-1 {
                 
